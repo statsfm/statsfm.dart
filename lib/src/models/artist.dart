@@ -36,3 +36,14 @@ class ArtistSimple extends Object {
   @JsonKey(name: 'name')
   late String name;
 }
+
+@JsonSerializable(createToJson: false)
+class TopArtist extends TopObject {
+  TopArtist();
+
+  factory TopArtist.fromJson(Map<String, dynamic> json) =>
+      _$TopArtistFromJson(json);
+
+  @JsonKey(name: 'artist')
+  late Artist artist;
+}

@@ -35,3 +35,48 @@ class Track extends Object {
   @JsonKey(name: 'externalIds')
   late ExternalIds? externalIds;
 }
+
+@JsonSerializable(createToJson: false)
+class CurrentlyStreamingTrack extends Object {
+  CurrentlyStreamingTrack();
+
+  factory CurrentlyStreamingTrack.fromJson(Map<String, dynamic> json) =>
+      _$CurrentlyStreamingTrackFromJson(json);
+
+  @JsonKey(name: 'date')
+  late DateTime date;
+
+  @JsonKey(name: 'progressMs')
+  late int progressMs;
+
+  @JsonKey(name: 'deviceName')
+  late String? deviceName;
+
+  @JsonKey(name: 'track')
+  late Track track;
+}
+
+@JsonSerializable(createToJson: false)
+class RecentlyStreamedTrack extends Object {
+  RecentlyStreamedTrack();
+
+  factory RecentlyStreamedTrack.fromJson(Map<String, dynamic> json) =>
+      _$RecentlyStreamedTrackFromJson(json);
+
+  @JsonKey(name: 'endTime')
+  late DateTime endTime;
+
+  @JsonKey(name: 'track')
+  late Track track;
+}
+
+@JsonSerializable(createToJson: false)
+class TopTrack extends TopObject {
+  TopTrack();
+
+  factory TopTrack.fromJson(Map<String, dynamic> json) =>
+      _$TopTrackFromJson(json);
+
+  @JsonKey(name: 'track')
+  late Track track;
+}

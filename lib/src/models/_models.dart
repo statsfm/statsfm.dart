@@ -7,5 +7,7 @@ part 'album.dart';
 part 'artist.dart';
 part 'error.dart';
 part 'external_ids.dart';
+part 'stream.dart';
+part 'top.dart';
 part 'track.dart';
 part 'user.dart';

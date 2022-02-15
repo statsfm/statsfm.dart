@@ -2,7 +2,7 @@ part of statsfm.models;
 
 @JsonSerializable(createToJson: false)
 class Album extends AlbumSimple {
-  Album(); // also tried Album._();
+  Album();
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
 
@@ -30,7 +30,7 @@ class Album extends AlbumSimple {
 
 @JsonSerializable(createToJson: false)
 class AlbumSimple extends Object {
-  AlbumSimple(); // also tried AlbumSimple._();
+  AlbumSimple();
 
   factory AlbumSimple.fromJson(Map<String, dynamic> json) =>
       _$AlbumSimpleFromJson(json);
@@ -44,4 +44,15 @@ class AlbumSimple extends Object {
 
   @JsonKey(name: 'image')
   late String image;
+}
+
+@JsonSerializable(createToJson: false)
+class TopAlbum extends TopObject {
+  TopAlbum();
+
+  factory TopAlbum.fromJson(Map<String, dynamic> json) =>
+      _$TopAlbumFromJson(json);
+
+  @JsonKey(name: 'album')
+  late Album album;
 }

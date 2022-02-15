@@ -7,7 +7,7 @@ class Me extends EndpointBase {
   Me(StatsfmApiBase api) : super(api);
 
   Future<UserPublic> get() async {
-    var jsonString = await _api._get(_path);
+    final String jsonString = await _api._get(_path);
     var map = json.decode(jsonString);
 
     return UserPublic.fromJson(map['item']);
