@@ -19,3 +19,12 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+test.dart
+
+# Generated code
+*.inject.dart
+*.inject.summary
+*.g.dart
+
+.DS_Store

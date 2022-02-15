@@ -1,0 +1,16 @@
+name: statsfm
+description: Official Stats.fm Dart package
+version: 0.1.0
+homepage: https://github.com/statsfm/statsfm.dart
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  http: ^0.13.4
+  json_annotation: ^4.4.0
+  oauth2: ^2.0.0
+
+dev_dependencies:
+  build_runner: ^2.1.7
+  json_serializable: ^6.1.4
