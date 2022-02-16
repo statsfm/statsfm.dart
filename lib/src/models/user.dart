@@ -39,7 +39,10 @@ class UserPublic extends Object {
   @JsonKey(name: 'hasImported')
   late bool hasImported;
 
-  @JsonKey(name: 'orderBy')
+  @JsonKey(name: 'syncEnabled')
+  late bool syncEnabled;
+
+  @JsonKey(name: 'orderBy', defaultValue: OrderBySetting.PLATFORM)
   late OrderBySetting orderBy;
 
   @JsonKey(name: 'privacySettings')
@@ -92,9 +95,11 @@ class UserImport extends Object {
   late String? name;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class UserPrivacySettings extends Object {
   UserPrivacySettings();
+
+  Map<String, dynamic> toJson() => _$UserPrivacySettingsToJson(this);
 
   factory UserPrivacySettings.fromJson(Map<String, dynamic> json) =>
       _$UserPrivacySettingsFromJson(json);
@@ -127,9 +132,12 @@ class UserPrivacySettings extends Object {
   late bool streamStats;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class UserProfile extends Object {
   UserProfile();
+
+  Map<String, dynamic> toJson(UserProfile instance) =>
+      _$UserProfileToJson(instance);
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
@@ -138,5 +146,16 @@ class UserProfile extends Object {
   late String bio;
 
   @JsonKey(name: 'pronouns')
-  late String pronouns;
+  late String? pronouns;
+}
+
+@JsonSerializable(createToJson: false)
+class TopUser extends TopObject {
+  TopUser();
+
+  factory TopUser.fromJson(Map<String, dynamic> json) =>
+      _$TopUserFromJson(json);
+
+  @JsonKey(name: 'user')
+  late UserPublic user;
 }

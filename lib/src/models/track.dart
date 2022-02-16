@@ -8,7 +8,7 @@ class Track extends Object {
 
   /// The Statsfm id for the track.
   @JsonKey(name: 'id')
-  late String id;
+  late int id;
 
   @JsonKey(name: 'name')
   late String name;
@@ -45,6 +45,9 @@ class CurrentlyStreamingTrack extends Object {
 
   @JsonKey(name: 'date')
   late DateTime date;
+
+  @JsonKey(name: 'isPlaying', defaultValue: false)
+  late bool isPlaying;
 
   @JsonKey(name: 'progressMs')
   late int progressMs;

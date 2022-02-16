@@ -31,7 +31,7 @@ class ArtistSimple extends Object {
 
   /// The Statsfm id for the artist.
   @JsonKey(name: 'id')
-  late String id;
+  late int id;
 
   @JsonKey(name: 'name')
   late String name;

@@ -6,50 +6,58 @@ class Artists extends EndpointBase {
 
   Artists(StatsfmApiBase api) : super(api);
 
-  Future<Artist> get(String artistId) async {
+  Future<Artist> get(int artistId) async {
     var jsonString = await _api._get('$_path/$artistId');
     var map = json.decode(jsonString);
 
     return Artist.fromJson(map['item']);
   }
 
-  Future<Iterable<Track>> topTracks(int artistId) async {
-    var jsonString = await _api._get('$_path/$artistId/top/tracks');
-    var map = json.decode(jsonString);
-
-    var topTracks = map['items'] as Iterable<dynamic>;
-    return topTracks.map((m) => Track.fromJson(m));
-  }
-
-  Future<Iterable<Track>> topAlbums(int artistId) async {
-    var jsonString = await _api._get('$_path/$artistId/top/tracks');
-    var map = json.decode(jsonString);
-
-    var topTracks = map['items'] as Iterable<dynamic>;
-    return topTracks.map((m) => Track.fromJson(m));
-  }
-
-  Future<Iterable<Artist>> related(int artistId) async {
-    var jsonString = await _api._get('$_path/$artistId/related');
-    var map = json.decode(jsonString);
-
-    var relatedArtists = map['items'] as Iterable<dynamic>;
-    return relatedArtists.map((m) => Artist.fromJson(m));
-  }
-
-  Future<Iterable<Artist>> list(Iterable<int> artistIds) async {
+  Future<List<Artist>> list(Iterable<int> artistIds) async {
     var jsonString = await _api._get('$_path/list?ids=${artistIds.join(',')}');
     var map = json.decode(jsonString);
 
     var artistsMap = map['items'] as Iterable<dynamic>;
-    return artistsMap.map((m) => Artist.fromJson(m));
+    return artistsMap.map((m) => Artist.fromJson(m)).toList();
   }
 
-  Future<Iterable<Album>> albums(String artistId) async {
+  Future<List<Track>> tracks(int artistId) async {
+    var jsonString = await _api._get('$_path/$artistId/tracks');
+    var map = json.decode(jsonString);
+
+    var topTracks = map['items'] as Iterable<dynamic>;
+    return topTracks.map((m) => Track.fromJson(m)).toList();
+  }
+
+  Future<List<Track>> topTracks(int artistId) async {
+    var jsonString = await _api._get('$_path/$artistId/tracks/top');
+    var map = json.decode(jsonString);
+
+    var topTracks = map['items'] as Iterable<dynamic>;
+    return topTracks.map((m) => Track.fromJson(m)).toList();
+  }
+
+  Future<List<Album>> albums(int artistId) async {
     var jsonString = await _api._get('$_path/$artistId/albums');
     var map = json.decode(jsonString);
 
     var artistsMap = map['items'] as Iterable<dynamic>;
-    return artistsMap.map((m) => Album.fromJson(m));
+    return artistsMap.map((m) => Album.fromJson(m)).toList();
+  }
+
+  Future<List<Track>> topAlbums(int artistId) async {
+    var jsonString = await _api._get('$_path/$artistId/albums/top');
+    var map = json.decode(jsonString);
+
+    var topTracks = map['items'] as Iterable<dynamic>;
+    return topTracks.map((m) => Track.fromJson(m)).toList();
+  }
+
+  Future<List<Artist>> related(int artistId) async {
+    var jsonString = await _api._get('$_path/$artistId/related');
+    var map = json.decode(jsonString);
+
+    var relatedArtists = map['items'] as Iterable<dynamic>;
+    return relatedArtists.map((m) => Artist.fromJson(m)).toList();
   }
 }

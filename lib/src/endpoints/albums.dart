@@ -6,26 +6,26 @@ class Albums extends EndpointBase {
 
   Albums(StatsfmApiBase api) : super(api);
 
-  Future<Album> get(String albumId) async {
+  Future<Album> get(int albumId) async {
     var jsonString = await _get('$_path/$albumId');
     var map = json.decode(jsonString);
 
     return Album.fromJson(map['item']);
   }
 
-  Future<Iterable<Album>> list(Iterable<int> albumIds) async {
+  Future<List<Album>> list(Iterable<int> albumIds) async {
     var jsonString = await _get('$_path?ids=${albumIds.join(',')}');
     var map = json.decode(jsonString);
 
-    var artistsMap = map['items'] as Iterable<dynamic>;
-    return artistsMap.map((m) => Album.fromJson(m));
+    var albumsMap = map['items'] as Iterable<dynamic>;
+    return albumsMap.map((m) => Album.fromJson(m)).toList();
   }
 
-  Future<Iterable<Track>> tracks(int albumId) async {
+  Future<List<Track>> tracks(int albumId) async {
     var jsonString = await _get('$_path/$albumId/tracks');
     var map = json.decode(jsonString);
 
-    var artistsMap = map['items'] as Iterable<dynamic>;
-    return artistsMap.map((m) => Track.fromJson(m));
+    var tracksMap = map['items'] as Iterable<dynamic>;
+    return tracksMap.map((m) => Track.fromJson(m)).toList();
   }
 }

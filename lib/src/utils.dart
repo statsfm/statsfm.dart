@@ -6,3 +6,7 @@ extension StringExtension on String {
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
 }
+
+DateTime dateTimeFromTimestamp(int timestamp) {
+  return DateTime.fromMillisecondsSinceEpoch(timestamp);
+}

@@ -1,7 +1,7 @@
 part of statsfm;
 
 abstract class StatsfmApiBase {
-  static const String _baseUrl = 'https://aart.backtrack.dev/api';
+  static const String _baseUrl = 'https://beta.stats.fm/api';
 
   bool _shouldWait = false;
   late FutureOr<oauth2.Client> _client;
@@ -11,6 +11,12 @@ abstract class StatsfmApiBase {
 
   late Albums _albums;
   Albums get albums => _albums;
+
+  late Genres _genres;
+  Genres get genres => _genres;
+
+  late Stats _stats;
+  Stats get stats => _stats;
 
   late Tracks _tracks;
   Tracks get tracks => _tracks;
@@ -28,6 +34,8 @@ abstract class StatsfmApiBase {
 
     _artists = Artists(this);
     _albums = Albums(this);
+    _genres = Genres(this);
+    _stats = Stats(this);
     _tracks = Tracks(this);
     _me = Me(this);
     _users = Users(this);
@@ -36,20 +44,23 @@ abstract class StatsfmApiBase {
   StatsfmApiBase.fromAccessToken(String accessToken)
       : this.fromClient(oauth2.Client(oauth2.Credentials(accessToken)));
 
-  Future<String> _get(String path) {
-    return _getImpl('${_baseUrl}/$path', const {});
+  Future<String> _get(String path, {Map<String, String> headers = const {}}) {
+    return _getImpl('${_baseUrl}/$path', headers);
   }
 
-  Future<String> _post(String path, [String body = '']) {
-    return _postImpl('${_baseUrl}/$path', const {}, body);
+  Future<String> _post(String path, String body,
+      {Map<String, String> headers = const {}}) {
+    return _postImpl('${_baseUrl}/$path', headers, body);
   }
 
-  Future<String> _delete(String path, [String body = '']) {
-    return _deleteImpl('${_baseUrl}/$path', const {}, body);
+  Future<String> _delete(String path, String body,
+      {Map<String, String> headers = const {}}) {
+    return _deleteImpl('${_baseUrl}/$path', headers, body);
   }
 
-  Future<String> _put(String path, [String body = '']) {
-    return _putImpl('${_baseUrl}/$path', const {}, body);
+  Future<String> _put(String path, String body,
+      {Map<String, String> headers = const {}}) {
+    return _putImpl('${_baseUrl}/$path', headers, body);
   }
 
   Future<String> _getImpl(String url, Map<String, String> headers) async {

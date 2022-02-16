@@ -15,7 +15,10 @@ class Album extends AlbumSimple {
   @JsonKey(name: 'totalTracks')
   late int totalTracks;
 
-  @JsonKey(name: 'releaseDate')
+  @JsonKey(name: 'type')
+  late String type;
+
+  @JsonKey(name: 'releaseDate', fromJson: dateTimeFromTimestamp)
   late DateTime releaseDate;
 
   @JsonKey(name: 'genres')
@@ -37,7 +40,7 @@ class AlbumSimple extends Object {
 
   /// The Statsfm id for the album.
   @JsonKey(name: 'id')
-  late String id;
+  late int id;
 
   @JsonKey(name: 'name')
   late String name;
