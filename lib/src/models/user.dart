@@ -1,8 +1,10 @@
 part of statsfm.models;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class UserPrivate extends UserPublic {
   UserPrivate();
+
+  Map<String, dynamic> toJson() => _$UserPrivateToJson(this);
 
   factory UserPrivate.fromJson(Map<String, dynamic> json) =>
       _$UserPrivateFromJson(json);
@@ -14,9 +16,11 @@ class UserPrivate extends UserPublic {
   late String country;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class UserPublic extends Object {
   UserPublic();
+
+  Map<String, dynamic> toJson() => _$UserPublicToJson(this);
 
   factory UserPublic.fromJson(Map<String, dynamic> json) =>
       _$UserPublicFromJson(json);
@@ -52,7 +56,16 @@ class UserPublic extends Object {
   late UserProfile? profile;
 }
 
-enum OrderBySetting { PLATFORM, COUNT, TIME }
+enum OrderBySetting {
+  @JsonValue("PLATFORM")
+  PLATFORM,
+
+  @JsonValue("COUNT")
+  COUNT,
+
+  @JsonValue("TIME")
+  TIME
+}
 
 @JsonSerializable(createToJson: false)
 class UserImport extends Object {
@@ -136,8 +149,7 @@ class UserPrivacySettings extends Object {
 class UserProfile extends Object {
   UserProfile();
 
-  Map<String, dynamic> toJson(UserProfile instance) =>
-      _$UserProfileToJson(instance);
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
@@ -158,4 +170,50 @@ class TopUser extends TopObject {
 
   @JsonKey(name: 'user')
   late UserPublic user;
+}
+
+@JsonSerializable(createToJson: true)
+class UserSpotifyPlaylist extends Object {
+  UserSpotifyPlaylist();
+
+  Map<String, dynamic> toJson() => _$UserSpotifyPlaylistToJson(this);
+
+  factory UserSpotifyPlaylist.fromJson(Map<String, dynamic> json) =>
+      _$UserSpotifyPlaylistFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'userId')
+  late String userId;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+
+  @JsonKey(name: 'syncedAt')
+  late DateTime syncedAt;
+
+  @JsonKey(name: 'size')
+  late int size;
+
+  @JsonKey(name: 'spotifyId')
+  late String spotifyId;
+
+  @JsonKey(name: 'range')
+  late Range? range;
+
+  @JsonKey(name: 'rangeInDays')
+  late int? rangeInDays;
+
+  @JsonKey(name: 'error')
+  late String? error;
+
+  @JsonKey(name: 'syncEnabled')
+  late bool syncEnabled;
+
+  @JsonKey(name: 'name')
+  late String? name;
+
+  @JsonKey(name: 'orderBy')
+  late OrderBySetting? orderBy;
 }

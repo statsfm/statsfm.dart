@@ -2,6 +2,7 @@ part of statsfm;
 
 abstract class StatsfmApiBase {
   static const String _baseUrl = 'https://beta.stats.fm/api';
+  // static const String _baseUrl = 'http://10.0.1.63:3000/api';
 
   bool _shouldWait = false;
   late FutureOr<oauth2.Client> _client;
@@ -11,6 +12,9 @@ abstract class StatsfmApiBase {
 
   late Albums _albums;
   Albums get albums => _albums;
+
+  late Charts _charts;
+  Charts get charts => _charts;
 
   late Genres _genres;
   Genres get genres => _genres;
@@ -34,6 +38,7 @@ abstract class StatsfmApiBase {
 
     _artists = Artists(this);
     _albums = Albums(this);
+    _charts = Charts(this);
     _genres = Genres(this);
     _stats = Stats(this);
     _tracks = Tracks(this);
@@ -45,22 +50,22 @@ abstract class StatsfmApiBase {
       : this.fromClient(oauth2.Client(oauth2.Credentials(accessToken)));
 
   Future<String> _get(String path, {Map<String, String> headers = const {}}) {
-    return _getImpl('${_baseUrl}/$path', headers);
+    return _getImpl('$_baseUrl/$path', headers);
   }
 
   Future<String> _post(String path, String body,
       {Map<String, String> headers = const {}}) {
-    return _postImpl('${_baseUrl}/$path', headers, body);
+    return _postImpl('$_baseUrl/$path', headers, body);
   }
 
   Future<String> _delete(String path, String body,
       {Map<String, String> headers = const {}}) {
-    return _deleteImpl('${_baseUrl}/$path', headers, body);
+    return _deleteImpl('$_baseUrl/$path', headers, body);
   }
 
   Future<String> _put(String path, String body,
       {Map<String, String> headers = const {}}) {
-    return _putImpl('${_baseUrl}/$path', headers, body);
+    return _putImpl('$_baseUrl/$path', headers, body);
   }
 
   Future<String> _getImpl(String url, Map<String, String> headers) async {
@@ -114,8 +119,11 @@ abstract class StatsfmApiBase {
   String handleErrors(http.Response response) {
     final responseBody = utf8.decode(response.bodyBytes);
     if (response.statusCode >= 400) {
+      print("-" * 100);
+      print(json.decode(responseBody));
+      print("-" * 100);
       final jsonMap = json.decode(responseBody);
-      final error = StatsfmError.fromJson(jsonMap['error']);
+      final error = StatsfmError.fromJson(jsonMap);
       if (response.statusCode == 429) {
         throw ApiRateException.fromStatsfm(
             error, num.parse(response.headers['retry-after']!));

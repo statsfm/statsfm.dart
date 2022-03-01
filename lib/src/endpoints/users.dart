@@ -29,7 +29,7 @@ class Users extends EndpointBase {
 
   Future<List<Stream>> streams(
     String userId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -41,9 +41,9 @@ class Users extends EndpointBase {
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
   }
 
-  Future<StreamStats> stats(
+  Future<ExtendedStreamStats> stats(
     String userId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -51,7 +51,21 @@ class Users extends EndpointBase {
     );
     var map = json.decode(jsonString);
 
-    return StreamStats.fromJson(map['items']);
+    return ExtendedStreamStats.fromJson(map['items']);
+  }
+
+  Future<DateStats> dateStats(
+    String userId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
+    final String jsonString = await _api._get(
+      '$_path/$userId/streams/stats/dates?timeZoneOffset=$timeZoneOffset&$query',
+    );
+    var map = json.decode(jsonString);
+
+    return DateStats.fromJson(map['items']);
   }
 
   Future<CurrentlyStreamingTrack?> currentlyStreaming(String userId) async {
@@ -82,7 +96,7 @@ class Users extends EndpointBase {
   Future<List<Stream>> trackStreams(
     String userId,
     int trackId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -97,7 +111,7 @@ class Users extends EndpointBase {
   Future<StreamStats> trackStats(
     String userId,
     int trackId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -108,10 +122,43 @@ class Users extends EndpointBase {
     return StreamStats.fromJson(map['items']);
   }
 
+  Future<List<Stream>> trackListStreams(
+    String userId,
+    Iterable<int> trackIds, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
+    final String jsonString = await _api._get(
+      '$_path/$userId/streams/tracks/list?ids=${trackIds.join(',')}&$query',
+    );
+    var map = json.decode(jsonString);
+
+    var streamsMap = map['items'] as Iterable<dynamic>;
+    return streamsMap.map((m) => Stream.fromJson(m)).toList();
+  }
+
+  Future<Map<int, StreamStats>> trackListStats(
+    String userId,
+    Iterable<int> trackIds, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
+    final String jsonString = await _api._get(
+      '$_path/$userId/streams/tracks/list/stats?ids=${trackIds.join(',')}&$query',
+    );
+    Map<String, dynamic> list = json.decode(jsonString)['items'];
+    Map<int, StreamStats> map = {};
+    list.keys.forEach((String key) {
+      map[int.parse(key)] = StreamStats.fromJson(list[key]);
+    });
+
+    return map;
+  }
+
   Future<List<Stream>> artistStreams(
     String userId,
     int artistId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -126,7 +173,7 @@ class Users extends EndpointBase {
   Future<StreamStats> artistStats(
     String userId,
     int artistId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -140,7 +187,7 @@ class Users extends EndpointBase {
   Future<List<Stream>> albumStreams(
     String userId,
     int albumId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -155,7 +202,7 @@ class Users extends EndpointBase {
   Future<StreamStats> albumStats(
     String userId,
     int albumId, {
-    PagingOptionsWithDate options = const PagingOptionsWithDate(),
+    QueryOptions options = const QueryOptions(),
   }) async {
     final String query = options.toQuery();
     final String jsonString = await _api._get(
@@ -163,12 +210,16 @@ class Users extends EndpointBase {
     );
     var map = json.decode(jsonString);
 
-    return StreamStats.fromJson(map['items']);
+    return StreamStats.fromJson(map['item']);
   }
 
-  Future<List<TopTrack>> topTracks(String userId) async {
+  Future<List<TopTrack>> topTracks(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/tracks',
+      '$_path/$userId/top/tracks?$query',
     );
     var map = json.decode(jsonString);
 
@@ -176,9 +227,13 @@ class Users extends EndpointBase {
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
   }
 
-  Future<List<TopArtist>> topArtists(String userId) async {
+  Future<List<TopArtist>> topArtists(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/artists',
+      '$_path/$userId/top/artists?$query',
     );
     var map = json.decode(jsonString);
 
@@ -187,9 +242,13 @@ class Users extends EndpointBase {
   }
 
   Future<List<TopTrack>> topTracksFromArtist(
-      String userId, int artistId) async {
+    String userId,
+    int artistId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/artists/$artistId/tracks',
+      '$_path/$userId/top/artists/$artistId/tracks?$query',
     );
     var map = json.decode(jsonString);
 
@@ -198,9 +257,13 @@ class Users extends EndpointBase {
   }
 
   Future<List<TopAlbum>> topAlbumsFromArtist(
-      String userId, int artistId) async {
+    String userId,
+    int artistId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/artists/$artistId/albums',
+      '$_path/$userId/top/artists/$artistId/albums?$query',
     );
     var map = json.decode(jsonString);
 
@@ -208,9 +271,13 @@ class Users extends EndpointBase {
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
   }
 
-  Future<List<TopAlbum>> topAlbums(String userId) async {
+  Future<List<TopAlbum>> topAlbums(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/albums',
+      '$_path/$userId/top/albums?$query',
     );
     var map = json.decode(jsonString);
 
@@ -218,13 +285,32 @@ class Users extends EndpointBase {
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
   }
 
-  Future<List<TopTrack>> topTracksFromAlbum(String userId, int albumId) async {
+  Future<List<TopTrack>> topTracksFromAlbum(
+    String userId,
+    int albumId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
     final String jsonString = await _api._get(
-      '$_path/$userId/top/albums/$albumId/tracks',
+      '$_path/$userId/top/albums/$albumId/tracks?$query',
     );
     var map = json.decode(jsonString);
 
     var topTracksMap = map['items'] as Iterable<dynamic>;
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
+  }
+
+  Future<List<TopGenre>> topGenres(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final String query = options.toQuery();
+    final String jsonString = await _api._get(
+      '$_path/$userId/top/genres?$query',
+    );
+    var map = json.decode(jsonString);
+
+    var topGenresMap = map['items'] as Iterable<dynamic>;
+    return topGenresMap.map((m) => TopGenre.fromJson(m)).toList();
   }
 }

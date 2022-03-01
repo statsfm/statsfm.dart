@@ -1,5 +1,6 @@
 library statsfm.models;
 
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:statsfm/statsfm.dart';
 
@@ -11,7 +12,7 @@ part 'database_size.dart';
 part 'error.dart';
 part 'external_ids.dart';
 part 'genre.dart';
-part 'paging.dart';
+part 'query.dart';
 part 'range.dart';
 part 'stream.dart';
 part 'stream_stats.dart';

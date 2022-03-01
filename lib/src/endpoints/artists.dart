@@ -14,7 +14,23 @@ class Artists extends EndpointBase {
   }
 
   Future<List<Artist>> list(Iterable<int> artistIds) async {
-    var jsonString = await _api._get('$_path/list?ids=${artistIds.join(',')}');
+    var jsonString = await _api._get('$_path/list?ids=${artistIds.join(',')}&');
+    var map = json.decode(jsonString);
+
+    var artistsMap = map['items'] as Iterable<dynamic>;
+    return artistsMap.map((m) => Artist.fromJson(m)).toList();
+  }
+
+  Future<Artist> getSpotify(String artistId) async {
+    var jsonString = await _api._get('$_path/$artistId?type=spotify&');
+    var map = json.decode(jsonString);
+
+    return Artist.fromJson(map['item']);
+  }
+
+  Future<List<Artist>> listSpotify(Iterable<String> artistIds) async {
+    var jsonString =
+        await _api._get('$_path/list?type=spotify&ids=${artistIds.join(',')}&');
     var map = json.decode(jsonString);
 
     var artistsMap = map['items'] as Iterable<dynamic>;

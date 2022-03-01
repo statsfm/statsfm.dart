@@ -13,6 +13,17 @@ class Me extends EndpointBase {
     return UserPrivate.fromJson(map['item']);
   }
 
+  Future<UserPrivate> updateMe(UserPrivate me) async {
+    final String jsonString = await _api._put(
+      '$_path',
+      json.encode(me.toJson()),
+      headers: {'Content-Type': 'application/json'},
+    );
+    var map = json.decode(jsonString);
+
+    return UserPrivate.fromJson(map['item']);
+  }
+
   Future<void> deleteAccount() async {
     // TODO: implement
     throw UnimplementedError();
@@ -55,10 +66,10 @@ class Me extends EndpointBase {
     return UserProfile.fromJson(map['item']);
   }
 
-  Future<UserProfile> updateProfile(UserPrivacySettings privacySettings) async {
+  Future<UserProfile> updateProfile(UserProfile profile) async {
     final String jsonString = await _api._put(
       '$_path/profile',
-      json.encode(privacySettings.toJson()),
+      json.encode(profile.toJson()),
       headers: {'Content-Type': 'application/json'},
     );
     var map = json.decode(jsonString);
@@ -81,5 +92,53 @@ class Me extends EndpointBase {
 
   Future<void> removeImport(int id) async {
     await _api._delete('$_path/imports/$id', '');
+  }
+
+  Future<List<UserSpotifyPlaylist>> spotifyPlaylists() async {
+    final String jsonString = await _api._get('$_path/playlists/spotify');
+    var map = json.decode(jsonString);
+
+    var importsMap = map['items'] as Iterable<dynamic>;
+    return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
+  }
+
+  Future<UserSpotifyPlaylist> updateSpotifyPlaylist(
+    UserSpotifyPlaylist playlist,
+  ) async {
+    print('$_path/playlists/spotify/${playlist.id}');
+    print(playlist.toJson());
+    final String jsonString = await _api._put(
+      '$_path/playlists/spotify/${playlist.id}',
+      json.encode(playlist.toJson()),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print('sjon string: ' + jsonString);
+    var map = json.decode(jsonString);
+
+    return UserSpotifyPlaylist.fromJson(map['item']);
+  }
+
+  Future<UserSpotifyPlaylist?> createSpotifyPlaylist(
+    int size,
+    OrderBySetting orderBy,
+    bool syncEnabled,
+    Range? range,
+    int? rangeInDays,
+  ) async {
+    final String jsonString = await _api._post(
+      '$_path/playlists/spotify',
+      json.encode({
+        'size': size,
+        'orderBy':
+            orderBy.toString().substring(orderBy.toString().indexOf('.') + 1),
+        'syncEnabled': syncEnabled,
+        'range': range?.toString().substring(range.toString().indexOf('.') + 1),
+        'rangeInDays': rangeInDays,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+    var map = json.decode(jsonString);
+
+    return UserSpotifyPlaylist.fromJson(map['item']);
   }
 }

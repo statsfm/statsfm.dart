@@ -26,3 +26,17 @@ class GenreSimple extends Object {
   @JsonKey(name: 'tag')
   late String tag;
 }
+
+@JsonSerializable(createToJson: false)
+class TopGenre extends TopObject {
+  TopGenre();
+
+  factory TopGenre.fromJson(Map<String, dynamic> json) =>
+      _$TopGenreFromJson(json);
+
+  @JsonKey(name: 'genre')
+  late GenreSimple genre;
+
+  @JsonKey(name: 'artistCount')
+  late int? artistCount;
+}

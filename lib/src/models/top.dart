@@ -1,10 +1,19 @@
 part of statsfm.models;
 
 enum Indicator {
+  @JsonValue("UP")
   UP,
+
+  @JsonValue("DOWN")
   DOWN,
+
+  @JsonValue("NEW")
   NEW,
+
+  @JsonValue("SAME")
   SAME,
+
+  @JsonValue("NONE")
   NONE,
 }
 
