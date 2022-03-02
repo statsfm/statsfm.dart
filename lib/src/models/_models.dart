@@ -14,6 +14,7 @@ part 'external_ids.dart';
 part 'genre.dart';
 part 'query.dart';
 part 'range.dart';
+part 'search.dart';
 part 'stream.dart';
 part 'stream_stats.dart';
 part 'top.dart';

@@ -19,6 +19,9 @@ abstract class StatsfmApiBase {
   late Genres _genres;
   Genres get genres => _genres;
 
+  late Search _search;
+  Search get search => _search;
+
   late Stats _stats;
   Stats get stats => _stats;
 
@@ -40,6 +43,7 @@ abstract class StatsfmApiBase {
     _albums = Albums(this);
     _charts = Charts(this);
     _genres = Genres(this);
+    _search = Search(this);
     _stats = Stats(this);
     _tracks = Tracks(this);
     _me = Me(this);
