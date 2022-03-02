@@ -102,22 +102,6 @@ class Me extends EndpointBase {
     return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
   }
 
-  Future<UserSpotifyPlaylist> updateSpotifyPlaylist(
-    UserSpotifyPlaylist playlist,
-  ) async {
-    print('$_path/playlists/spotify/${playlist.id}');
-    print(playlist.toJson());
-    final String jsonString = await _api._put(
-      '$_path/playlists/spotify/${playlist.id}',
-      json.encode(playlist.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    print('sjon string: ' + jsonString);
-    var map = json.decode(jsonString);
-
-    return UserSpotifyPlaylist.fromJson(map['item']);
-  }
-
   Future<UserSpotifyPlaylist?> createSpotifyPlaylist(
     int size,
     OrderBySetting orderBy,
@@ -140,5 +124,24 @@ class Me extends EndpointBase {
     var map = json.decode(jsonString);
 
     return UserSpotifyPlaylist.fromJson(map['item']);
+  }
+
+  Future<UserSpotifyPlaylist> updateSpotifyPlaylist(
+    UserSpotifyPlaylist playlist,
+  ) async {
+    final String jsonString = await _api._put(
+      '$_path/playlists/spotify/${playlist.id}',
+      json.encode(playlist.toJson()),
+      headers: {'Content-Type': 'application/json'},
+    );
+    var map = json.decode(jsonString);
+
+    return UserSpotifyPlaylist.fromJson(map['item']);
+  }
+
+  Future<void> deleteSpotifyPlaylist(
+    int id,
+  ) async {
+    await _api._delete('$_path/playlists/spotify/${id}', '');
   }
 }
