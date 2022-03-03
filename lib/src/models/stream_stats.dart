@@ -10,10 +10,10 @@ class DateStats extends Object {
   @JsonKey(name: 'hours')
   late Map<int, StreamStats> hours;
 
-  @JsonKey(name: 'weekdays')
+  @JsonKey(name: 'weekDays')
   late Map<int, StreamStats> weekDays;
 
-  @JsonKey(name: 'monthdays')
+  @JsonKey(name: 'monthDays')
   late Map<int, StreamStats> monthDays;
 
   @JsonKey(name: 'months')

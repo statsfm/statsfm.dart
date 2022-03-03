@@ -37,6 +37,7 @@ class Track extends Object {
 }
 
 @JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
 class CurrentlyStreamingTrack extends Object {
   CurrentlyStreamingTrack();
 
@@ -60,6 +61,7 @@ class CurrentlyStreamingTrack extends Object {
 }
 
 @JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
 class RecentlyStreamedTrack extends Object {
   RecentlyStreamedTrack();
 

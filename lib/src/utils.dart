@@ -8,5 +8,5 @@ extension StringExtension on String {
 }
 
 DateTime dateTimeFromTimestamp(int timestamp) {
-  return DateTime.fromMillisecondsSinceEpoch(timestamp);
+  return DateTime.fromMillisecondsSinceEpoch(timestamp).toLocal();
 }

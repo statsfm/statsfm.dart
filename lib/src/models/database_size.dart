@@ -41,6 +41,7 @@ class DatabaseSizeItem extends Object {
 }
 
 @JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
 class DatabaseSizeItemCount extends Object {
   DatabaseSizeItemCount();
 

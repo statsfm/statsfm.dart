@@ -68,6 +68,7 @@ enum OrderBySetting {
 }
 
 @JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
 class UserImport extends Object {
   UserImport();
 
@@ -173,6 +174,7 @@ class TopUser extends TopObject {
 }
 
 @JsonSerializable(createToJson: true)
+@LocalDateTimeConverter()
 class UserSpotifyPlaylist extends Object {
   UserSpotifyPlaylist();
 
