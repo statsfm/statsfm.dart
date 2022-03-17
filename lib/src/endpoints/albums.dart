@@ -7,39 +7,40 @@ class Albums extends EndpointBase {
   Albums(StatsfmApiBase api) : super(api);
 
   Future<Album> get(int albumId) async {
-    var jsonString = await _get('$_path/$albumId');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/$albumId')).data;
 
     return Album.fromJson(map['item']);
   }
 
   Future<List<Album>> list(Iterable<int> albumIds) async {
-    var jsonString = await _get('$_path?ids=${albumIds.join(',')}&');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/list', queryParameters: {
+      'ids': albumIds.join(','),
+    }))
+        .data;
 
     var albumsMap = map['items'] as Iterable<dynamic>;
     return albumsMap.map((m) => Album.fromJson(m)).toList();
   }
 
   Future<Album> getSpotify(String albumId) async {
-    var jsonString = await _get('$_path/$albumId?type=spotify&');
-    var map = json.decode(jsonString);
+    final Map map =
+        (await dio.get('$_path/$albumId', queryParameters: {'type': 'spotify'}))
+            .data;
 
     return Album.fromJson(map['item']);
   }
 
   Future<List<Album>> listSpotify(Iterable<String> albumIds) async {
-    var jsonString =
-        await _get('$_path?type=spotify&ids=${albumIds.join(',')}&');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/list',
+            queryParameters: {'type': 'spotify', 'ids': albumIds.join(',')}))
+        .data;
 
     var albumsMap = map['items'] as Iterable<dynamic>;
     return albumsMap.map((m) => Album.fromJson(m)).toList();
   }
 
   Future<List<Track>> tracks(int albumId) async {
-    var jsonString = await _get('$_path/$albumId/tracks');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/$albumId/tracks')).data;
 
     var tracksMap = map['items'] as Iterable<dynamic>;
     return tracksMap.map((m) => Track.fromJson(m)).toList();

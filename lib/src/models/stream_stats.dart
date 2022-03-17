@@ -1,6 +1,20 @@
 part of statsfm.models;
 
 @JsonSerializable(createToJson: false)
+class PerDayStats extends Object {
+  PerDayStats();
+
+  factory PerDayStats.fromJson(Map<String, dynamic> json) =>
+      _$PerDayStatsFromJson(json);
+
+  @JsonKey(name: 'average')
+  late StreamStatsWithPrecision average;
+
+  @JsonKey(name: 'days')
+  late Map<DateTime, StreamStats> days;
+}
+
+@JsonSerializable(createToJson: false)
 class DateStats extends Object {
   DateStats();
 
@@ -65,4 +79,20 @@ class StreamStats extends Object {
 
   @JsonKey(name: 'count')
   late int count;
+}
+
+@JsonSerializable(createToJson: false)
+class StreamStatsWithPrecision extends Object {
+  StreamStatsWithPrecision();
+
+  factory StreamStatsWithPrecision.fromJson(Map<String, dynamic> json) =>
+      _$StreamStatsWithPrecisionFromJson(json);
+
+  @JsonKey(name: 'durationMs')
+  late double durationMs;
+
+  Duration get duration => Duration(milliseconds: durationMs.toInt());
+
+  @JsonKey(name: 'count')
+  late double count;
 }

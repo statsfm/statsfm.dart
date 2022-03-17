@@ -16,9 +16,13 @@ class Search extends EndpointBase {
         .map((e) =>
             e.toString().substring(e.toString().indexOf('.') + 1).toLowerCase())
         .join(',');
-    var jsonString = await _api._get(
-        '$_path?query=$query&type=$typesString&limit=$limit&offset=$offset');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path', queryParameters: {
+      'query': query,
+      'types': typesString,
+      'limit': limit,
+      'offset': offset,
+    }))
+        .data;
 
     return SearchResults.fromJson(map['items']);
   }

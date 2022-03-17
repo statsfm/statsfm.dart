@@ -4,27 +4,32 @@ class QueryOptions {
   final int? limit;
   final DateTimeRange? range;
   final Range? rangeString;
+  final OrderBySetting? orderBy;
 
   const QueryOptions({
     this.limit,
     this.range,
     this.rangeString,
+    this.orderBy,
   });
 
-  String toQuery() {
-    String query = '';
+  Map<String, dynamic> toQuery() {
+    Map<String, dynamic> query = {};
     if (limit is int && limit! > 0) {
-      query += 'limit=$limit&';
+      query['limit'] = limit;
     }
 
-    if (range is DateTimeRange &&
-        range!.start is DateTime &&
-        range!.end is DateTime) {
-      query +=
-          'before=${range!.end.millisecondsSinceEpoch}&after=${range!.start.millisecondsSinceEpoch}&';
+    if (range is DateTimeRange) {
+      query['before'] = range!.end.millisecondsSinceEpoch;
+      query['after'] = range!.start.millisecondsSinceEpoch;
     }
     if (rangeString is Range) {
-      query += 'range=${rangeString.toString().substring(6).toLowerCase()}&';
+      query['range'] = rangeString.toString().substring(6).toLowerCase();
+    }
+
+    if (orderBy is OrderBySetting) {
+      query['orderBy'] =
+          orderBy.toString().substring(orderBy.toString().indexOf('.') + 1);
     }
 
     return query;

@@ -7,22 +7,19 @@ class Users extends EndpointBase {
   Users(StatsfmApiBase api) : super(api);
 
   Future<UserPublic> get(String userId) async {
-    var jsonString = await _api._get('$_path/$userId');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/$userId')).data;
 
     return UserPublic.fromJson(map['item']);
   }
 
   Future<UserPrivacySettings> privacySettings(String userId) async {
-    final String jsonString = await _api._get('$_path/$userId/privacy');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/$userId/privacy')).data;
 
     return UserPrivacySettings.fromJson(map['item']);
   }
 
   Future<UserProfile> profile(String userId) async {
-    final String jsonString = await _api._get('$_path/$userId/profile');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/$userId/profile')).data;
 
     return UserProfile.fromJson(map['item']);
   }
@@ -31,11 +28,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var streamsMap = map['items'] as Iterable<dynamic>;
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
@@ -45,11 +45,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/stats?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/stats',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     return ExtendedStreamStats.fromJson(map['items']);
   }
@@ -59,21 +62,43 @@ class Users extends EndpointBase {
     int timeZoneOffset, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/stats/dates?timeZoneOffset=$timeZoneOffset&$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/stats/dates',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
 
     return DateStats.fromJson(map['items']);
   }
 
+  Future<PerDayStats> perDayStats(
+    String userId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/stats/per-day',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return PerDayStats.fromJson(map['items']);
+  }
+
   Future<CurrentlyStreamingTrack?> currentlyStreaming(String userId) async {
     try {
-      final String jsonString = await _api._get(
+      final Map map = (await dio.get(
         '$_path/$userId/streams/current',
-      );
-      var map = json.decode(jsonString);
+      ))
+          .data;
 
       return CurrentlyStreamingTrack.fromJson(map['item']);
     } catch (e) {
@@ -82,10 +107,10 @@ class Users extends EndpointBase {
   }
 
   Future<List<RecentlyStreamedTrack>> recentlyStreamed(String userId) async {
-    final String jsonString = await _api._get(
+    final Map map = (await dio.get(
       '$_path/$userId/streams/recent',
-    );
-    var map = json.decode(jsonString);
+    ))
+        .data;
 
     var recentTracksMap = map['items'] as Iterable<dynamic>;
     return recentTracksMap
@@ -98,11 +123,14 @@ class Users extends EndpointBase {
     int trackId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/tracks/$trackId?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/tracks/$trackId',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var streamsMap = map['items'] as Iterable<dynamic>;
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
@@ -113,11 +141,14 @@ class Users extends EndpointBase {
     int trackId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/tracks/$trackId/stats?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/tracks/$trackId/stats',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     return StreamStats.fromJson(map['items']);
   }
@@ -127,11 +158,15 @@ class Users extends EndpointBase {
     Iterable<int> trackIds, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/tracks/list?ids=${trackIds.join(',')}&$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/tracks/list',
+      queryParameters: {
+        'ids': trackIds.join(','),
+        ...query,
+      },
+    ))
+        .data;
 
     var streamsMap = map['items'] as Iterable<dynamic>;
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
@@ -142,17 +177,22 @@ class Users extends EndpointBase {
     Iterable<int> trackIds, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/tracks/list/stats?ids=${trackIds.join(',')}&$query',
-    );
-    Map<String, dynamic> list = json.decode(jsonString)['items'];
-    Map<int, StreamStats> map = {};
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/tracks/list/stats',
+      queryParameters: {
+        'ids': trackIds.join(','),
+        ...query,
+      },
+    ))
+        .data;
+    Map<String, dynamic> list = map['items'];
+    Map<int, StreamStats> mapped = {};
     list.keys.forEach((String key) {
-      map[int.parse(key)] = StreamStats.fromJson(list[key]);
+      mapped[int.parse(key)] = StreamStats.fromJson(list[key]);
     });
 
-    return map;
+    return mapped;
   }
 
   Future<List<Stream>> artistStreams(
@@ -160,11 +200,14 @@ class Users extends EndpointBase {
     int artistId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/artists/$artistId?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/artists/$artistId',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var streamsMap = map['items'] as Iterable<dynamic>;
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
@@ -175,11 +218,14 @@ class Users extends EndpointBase {
     int artistId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/artists/$artistId/stats?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/artists/$artistId/stats',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     return StreamStats.fromJson(map['items']);
   }
@@ -189,11 +235,14 @@ class Users extends EndpointBase {
     int albumId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/albums/$albumId?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/albums/$albumId',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var streamsMap = map['items'] as Iterable<dynamic>;
     return streamsMap.map((m) => Stream.fromJson(m)).toList();
@@ -204,11 +253,14 @@ class Users extends EndpointBase {
     int albumId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/streams/albums/$albumId/stats?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/streams/albums/$albumId/stats',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     return StreamStats.fromJson(map['item']);
   }
@@ -217,11 +269,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/tracks?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/tracks',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topTracksMap = map['items'] as Iterable<dynamic>;
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
@@ -231,11 +286,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/artists?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/artists',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topArtistsMap = map['items'] as Iterable<dynamic>;
     return topArtistsMap.map((m) => TopArtist.fromJson(m)).toList();
@@ -246,11 +304,14 @@ class Users extends EndpointBase {
     int artistId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/artists/$artistId/tracks?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/artists/$artistId/tracks',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topTracksMap = map['items'] as Iterable<dynamic>;
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
@@ -261,11 +322,14 @@ class Users extends EndpointBase {
     int artistId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/artists/$artistId/albums?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/artists/$artistId/albums',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topAlbumsMap = map['items'] as Iterable<dynamic>;
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
@@ -275,11 +339,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/albums?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/albums',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topAlbumsMap = map['items'] as Iterable<dynamic>;
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
@@ -290,11 +357,14 @@ class Users extends EndpointBase {
     int albumId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/albums/$albumId/tracks?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/albums/$albumId/tracks',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topTracksMap = map['items'] as Iterable<dynamic>;
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
@@ -304,11 +374,14 @@ class Users extends EndpointBase {
     String userId, {
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/$userId/top/genres?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/$userId/top/genres',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topGenresMap = map['items'] as Iterable<dynamic>;
     return topGenresMap.map((m) => TopGenre.fromJson(m)).toList();

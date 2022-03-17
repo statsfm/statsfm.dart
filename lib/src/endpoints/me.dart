@@ -7,19 +7,17 @@ class Me extends EndpointBase {
   Me(StatsfmApiBase api) : super(api);
 
   Future<UserPrivate> get() async {
-    final String jsonString = await _api._get(_path);
-    var map = json.decode(jsonString);
+    final map = (await dio.get(_path)).data;
 
     return UserPrivate.fromJson(map['item']);
   }
 
   Future<UserPrivate> updateMe(UserPrivate me) async {
-    final String jsonString = await _api._put(
+    final Map map = (await dio.put(
       '$_path',
-      json.encode(me.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+      data: me.toJson(),
+    ))
+        .data;
 
     return UserPrivate.fromJson(map['item']);
   }
@@ -30,56 +28,50 @@ class Me extends EndpointBase {
   }
 
   Future<UserPrivacySettings> privacySettings() async {
-    final String jsonString = await _api._get('$_path/privacy');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/privacy')).data;
 
     return UserPrivacySettings.fromJson(map['item']);
   }
 
   Future<UserPrivacySettings> updatePrivacySettings(
       UserPrivacySettings privacySettings) async {
-    final String jsonString = await _api._put(
+    final Map map = (await dio.put(
       '$_path/privacy',
-      json.encode(privacySettings.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+      data: privacySettings.toJson(),
+    ))
+        .data;
 
     return UserPrivacySettings.fromJson(map['item']);
   }
 
   Future<bool> customIdAvailable(String customId) async {
-    final String jsonString = await _api._put(
+    final Map map = (await dio.put(
       '$_path/customid-available',
-      json.encode({'customId': customId}),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+      data: {'customId': customId},
+    ))
+        .data;
 
     return map['item'] as bool;
   }
 
   Future<UserProfile> profile() async {
-    final String jsonString = await _api._get('$_path/profile');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/profile')).data;
 
     return UserProfile.fromJson(map['item']);
   }
 
   Future<UserProfile> updateProfile(UserProfile profile) async {
-    final String jsonString = await _api._put(
+    final Map map = (await dio.put(
       '$_path/profile',
-      json.encode(profile.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+      data: profile.toJson(),
+    ))
+        .data;
 
     return UserProfile.fromJson(map['item']);
   }
 
   Future<List<UserImport>> imports() async {
-    final String jsonString = await _api._get('$_path/imports');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/imports')).data;
 
     var importsMap = map['items'] as Iterable<dynamic>;
     return importsMap.map((m) => UserImport.fromJson(m)).toList();
@@ -91,12 +83,11 @@ class Me extends EndpointBase {
   }
 
   Future<void> removeImport(int id) async {
-    await _api._delete('$_path/imports/$id', '');
+    await dio.delete('$_path/imports/$id');
   }
 
   Future<List<UserSpotifyPlaylist>> spotifyPlaylists() async {
-    final String jsonString = await _api._get('$_path/playlists/spotify');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/playlists/spotify')).data;
 
     var importsMap = map['items'] as Iterable<dynamic>;
     return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
@@ -108,20 +99,23 @@ class Me extends EndpointBase {
     bool syncEnabled,
     Range? range,
     int? rangeInDays,
+    DateTime? before,
+    DateTime? after,
   ) async {
-    final String jsonString = await _api._post(
+    final Map map = (await dio.post(
       '$_path/playlists/spotify',
-      json.encode({
+      data: {
         'size': size,
         'orderBy':
             orderBy.toString().substring(orderBy.toString().indexOf('.') + 1),
         'syncEnabled': syncEnabled,
         'range': range?.toString().substring(range.toString().indexOf('.') + 1),
         'rangeInDays': rangeInDays,
-      }),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+        'before': before?.millisecondsSinceEpoch,
+        'after': after?.millisecondsSinceEpoch,
+      },
+    ))
+        .data;
 
     return UserSpotifyPlaylist.fromJson(map['item']);
   }
@@ -129,12 +123,11 @@ class Me extends EndpointBase {
   Future<UserSpotifyPlaylist> updateSpotifyPlaylist(
     UserSpotifyPlaylist playlist,
   ) async {
-    final String jsonString = await _api._put(
+    final Map map = (await dio.put(
       '$_path/playlists/spotify/${playlist.id}',
-      json.encode(playlist.toJson()),
-      headers: {'Content-Type': 'application/json'},
-    );
-    var map = json.decode(jsonString);
+      data: playlist.toJson(),
+    ))
+        .data;
 
     return UserSpotifyPlaylist.fromJson(map['item']);
   }
@@ -142,6 +135,6 @@ class Me extends EndpointBase {
   Future<void> deleteSpotifyPlaylist(
     int id,
   ) async {
-    await _api._delete('$_path/playlists/spotify/${id}', '');
+    await dio.delete('$_path/playlists/spotify/${id}');
   }
 }

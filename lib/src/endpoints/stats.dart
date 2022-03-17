@@ -7,8 +7,7 @@ class Stats extends EndpointBase {
   Stats(StatsfmApiBase api) : super(api);
 
   Future<DatabaseSize> databaseSize() async {
-    var jsonString = await _api._get('$_path/database/size');
-    var map = json.decode(jsonString);
+    final Map map = (await dio.get('$_path/database/size')).data;
 
     return DatabaseSize.fromJson(map['item']);
   }

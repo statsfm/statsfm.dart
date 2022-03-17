@@ -9,11 +9,14 @@ class Charts extends EndpointBase {
   Future<List<TopTrack>> topTracks({
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/top/tracks?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/top/tracks',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topTracksMap = map['items'] as Iterable<dynamic>;
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
@@ -22,11 +25,14 @@ class Charts extends EndpointBase {
   Future<List<TopArtist>> topArtists({
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/top/artists?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/top/artists',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topArtistsMap = map['items'] as Iterable<dynamic>;
     return topArtistsMap.map((m) => TopArtist.fromJson(m)).toList();
@@ -35,11 +41,14 @@ class Charts extends EndpointBase {
   Future<List<TopAlbum>> topAlbums({
     QueryOptions options = const QueryOptions(),
   }) async {
-    final String query = options.toQuery();
-    final String jsonString = await _api._get(
-      '$_path/top/albums?$query',
-    );
-    var map = json.decode(jsonString);
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/top/albums',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
 
     var topAlbumsMap = map['items'] as Iterable<dynamic>;
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();

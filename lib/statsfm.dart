@@ -1,10 +1,11 @@
 library statsfm;
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 import 'src/models/_models.dart';
 
