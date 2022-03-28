@@ -8,17 +8,17 @@ class Search extends EndpointBase {
 
   Future<SearchResults> search(
     String query,
-    List<SearchType> types, {
+    List<SearchType> type, {
     int limit = 50,
     int offset = 0,
   }) async {
-    String typesString = types
+    String typesString = type
         .map((e) =>
             e.toString().substring(e.toString().indexOf('.') + 1).toLowerCase())
         .join(',');
     final Map map = (await dio.get('$_path', queryParameters: {
       'query': query,
-      'types': typesString,
+      'type': typesString,
       'limit': limit,
       'offset': offset,
     }))
