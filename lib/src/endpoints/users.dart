@@ -7,19 +7,22 @@ class Users extends EndpointBase {
   Users(StatsfmApiBase api) : super(api);
 
   Future<UserPublic> get(String userId) async {
-    final Map map = (await dio.get('$_path/$userId')).data;
+    final Map map =
+        (await dio.get('$_path/${Uri.encodeComponent(userId)}')).data;
 
     return UserPublic.fromJson(map['item']);
   }
 
   Future<UserPrivacySettings> privacySettings(String userId) async {
-    final Map map = (await dio.get('$_path/$userId/privacy')).data;
+    final Map map =
+        (await dio.get('$_path/${Uri.encodeComponent(userId)}/privacy')).data;
 
     return UserPrivacySettings.fromJson(map['item']);
   }
 
   Future<UserProfile> profile(String userId) async {
-    final Map map = (await dio.get('$_path/$userId/profile')).data;
+    final Map map =
+        (await dio.get('$_path/${Uri.encodeComponent(userId)}/profile')).data;
 
     return UserProfile.fromJson(map['item']);
   }
@@ -30,7 +33,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams',
+      '$_path/${Uri.encodeComponent(userId)}/streams',
       queryParameters: {
         ...query,
       },
@@ -47,7 +50,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/stats',
+      '$_path/${Uri.encodeComponent(userId)}/streams/stats',
       queryParameters: {
         ...query,
       },
@@ -64,7 +67,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/stats/dates',
+      '$_path/${Uri.encodeComponent(userId)}/streams/stats/dates',
       queryParameters: {
         'timeZoneOffset': timeZoneOffset,
         ...query,
@@ -82,7 +85,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/stats/per-day',
+      '$_path/${Uri.encodeComponent(userId)}/streams/stats/per-day',
       queryParameters: {
         'timeZoneOffset': timeZoneOffset,
         ...query,
@@ -96,7 +99,7 @@ class Users extends EndpointBase {
   Future<CurrentlyStreamingTrack?> currentlyStreaming(String userId) async {
     try {
       final Map map = (await dio.get(
-        '$_path/$userId/streams/current',
+        '$_path/${Uri.encodeComponent(userId)}/streams/current',
       ))
           .data;
 
@@ -108,7 +111,7 @@ class Users extends EndpointBase {
 
   Future<List<RecentlyStreamedTrack>> recentlyStreamed(String userId) async {
     final Map map = (await dio.get(
-      '$_path/$userId/streams/recent',
+      '$_path/${Uri.encodeComponent(userId)}/streams/recent',
     ))
         .data;
 
@@ -125,7 +128,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/tracks/$trackId',
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId',
       queryParameters: {
         ...query,
       },
@@ -143,7 +146,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/tracks/$trackId/stats',
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId/stats',
       queryParameters: {
         ...query,
       },
@@ -160,7 +163,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/tracks/list',
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/list',
       queryParameters: {
         'ids': trackIds.join(','),
         ...query,
@@ -179,7 +182,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/tracks/list/stats',
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/list/stats',
       queryParameters: {
         'ids': trackIds.join(','),
         ...query,
@@ -202,7 +205,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/artists/$artistId',
+      '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId',
       queryParameters: {
         ...query,
       },
@@ -220,7 +223,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/artists/$artistId/stats',
+      '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId/stats',
       queryParameters: {
         ...query,
       },
@@ -237,7 +240,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/albums/$albumId',
+      '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId',
       queryParameters: {
         ...query,
       },
@@ -255,7 +258,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/streams/albums/$albumId/stats',
+      '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId/stats',
       queryParameters: {
         ...query,
       },
@@ -271,7 +274,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/tracks',
+      '$_path/${Uri.encodeComponent(userId)}/top/tracks',
       queryParameters: {
         ...query,
       },
@@ -288,7 +291,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/artists',
+      '$_path/${Uri.encodeComponent(userId)}/top/artists',
       queryParameters: {
         ...query,
       },
@@ -306,7 +309,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/artists/$artistId/tracks',
+      '$_path/${Uri.encodeComponent(userId)}/top/artists/$artistId/tracks',
       queryParameters: {
         ...query,
       },
@@ -324,7 +327,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/artists/$artistId/albums',
+      '$_path/${Uri.encodeComponent(userId)}/top/artists/$artistId/albums',
       queryParameters: {
         ...query,
       },
@@ -341,7 +344,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/albums',
+      '$_path/${Uri.encodeComponent(userId)}/top/albums',
       queryParameters: {
         ...query,
       },
@@ -359,7 +362,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/albums/$albumId/tracks',
+      '$_path/${Uri.encodeComponent(userId)}/top/albums/$albumId/tracks',
       queryParameters: {
         ...query,
       },
@@ -376,7 +379,7 @@ class Users extends EndpointBase {
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
-      '$_path/$userId/top/genres',
+      '$_path/${Uri.encodeComponent(userId)}/top/genres',
       queryParameters: {
         ...query,
       },

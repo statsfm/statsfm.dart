@@ -10,7 +10,10 @@ dependencies:
   json_annotation: ^4.4.0
   hive_generator: 1.1.2
   dio: ^4.0.4
-  dio_cache_interceptor: ^3.2.6
+  dio_http_cache: ^0.3.0
+
+dependency_overrides:
+  json_serializable: ^6.1.4
 
 dev_dependencies:
   build_runner: ^2.1.7

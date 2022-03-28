@@ -53,17 +53,13 @@ abstract class StatsfmApiBase {
           'DIO: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
       return handler.next(response);
     }));
-    _dio.interceptors.add(
-      DioCacheInterceptor(
-        options: CacheOptions(
-          store: MemCacheStore(
-            maxSize: 52428800,
-            maxEntrySize: 5242880,
-          ),
-          policy: CachePolicy.forceCache,
-          maxStale: const Duration(days: 7),
+    dio.interceptors.add(
+      DioCacheManager(
+        CacheConfig(
+          baseUrl: "https://api.stats.fm/api/v1",
+          skipDiskCache: true,
         ),
-      ),
+      ).interceptor,
     );
 
     _artists = Artists(this);
