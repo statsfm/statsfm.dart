@@ -1,7 +1,7 @@
 part of statsfm;
 
 abstract class StatsfmApiBase {
-  static const String _baseUrl = 'https://beta.stats.fm/api/';
+  static String _baseUrl = "https://api.stats.fm/api";
 
   late String _accessToken;
 
@@ -35,8 +35,12 @@ abstract class StatsfmApiBase {
   late Me _me;
   Me get me => _me;
 
-  StatsfmApiBase.fromAccessToken(String accessToken) {
+  StatsfmApiBase.fromAccessToken(
+    String accessToken, {
+    String baseUrl = "https://beta.stats.fm/api",
+  }) {
     _accessToken = accessToken;
+    _baseUrl = baseUrl;
 
     init();
   }
