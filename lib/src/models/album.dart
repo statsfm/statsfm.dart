@@ -46,7 +46,7 @@ class AlbumSimple extends Object {
   late String name;
 
   @JsonKey(name: 'image')
-  late String image;
+  late String? image;
 }
 
 @JsonSerializable(createToJson: false)
