@@ -24,7 +24,7 @@ class Track extends Object {
   Duration? get duration => Duration(milliseconds: this.durationMs);
 
   @JsonKey(name: 'spotifyPopularity')
-  late int spotifyPopularity;
+  late int? spotifyPopularity;
 
   @JsonKey(name: 'artists')
   late List<ArtistSimple> artists;
