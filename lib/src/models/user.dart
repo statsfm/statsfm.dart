@@ -219,3 +219,82 @@ class UserSpotifyPlaylist extends Object {
   @JsonKey(name: 'orderBy')
   late OrderBySetting? orderBy;
 }
+
+@JsonSerializable(createToJson: true)
+@LocalDateTimeConverter()
+class UserDevice extends Object {
+  UserDevice({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.model,
+    required this.type,
+    required this.notifications,
+    required this.fcmToken,
+    required this.lastUsed,
+    required this.createdAt,
+  });
+
+  Map<String, dynamic> toJson() => _$UserDeviceToJson(this);
+
+  factory UserDevice.fromJson(Map<String, dynamic> json) =>
+      _$UserDeviceFromJson(json);
+
+  @JsonKey(name: 'id')
+  late String id;
+
+  @JsonKey(name: 'userId')
+  late String userId;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime? createdAt;
+
+  @JsonKey(name: 'lastUsed')
+  late DateTime? lastUsed;
+
+  @JsonKey(name: 'name')
+  late String? name;
+
+  @JsonKey(name: 'model')
+  late String? model;
+
+  @JsonKey(name: 'type')
+  late String? type;
+
+  @JsonKey(name: 'notifications')
+  late UserDeviceNotifications notifications;
+
+  @JsonKey(name: 'fcmToken')
+  late String? fcmToken;
+}
+
+@JsonSerializable(createToJson: true)
+class UserDeviceNotifications extends Object {
+  UserDeviceNotifications({
+    required this.imports,
+    required this.friends,
+    required this.weeklySummary,
+    required this.monthlySummary,
+    required this.updates,
+  });
+
+  Map<String, dynamic> toJson() => _$UserDeviceNotificationsToJson(this);
+
+  factory UserDeviceNotifications.fromJson(Map<String, dynamic> json) =>
+      _$UserDeviceNotificationsFromJson(json);
+
+  @JsonKey(name: 'imports')
+  late bool imports;
+
+  @JsonKey(name: 'friends')
+  late bool friends;
+
+  @JsonKey(name: 'weeklySummary')
+  late bool weeklySummary;
+
+  @JsonKey(name: 'monthlySummary')
+  late bool monthlySummary;
+
+  @JsonKey(name: 'updates')
+  late bool updates;
+}

@@ -137,4 +137,26 @@ class Me extends EndpointBase {
   ) async {
     await dio.delete('$_path/playlists/spotify/${id}');
   }
+
+  Future<List<UserDevice>> devices() async {
+    final Map map = (await dio.get('$_path/devices')).data;
+
+    var devicesMap = map['items'] as Iterable<dynamic>;
+    return devicesMap.map((m) => UserDevice.fromJson(m)).toList();
+  }
+
+  Future<UserDevice> addDevice(UserDevice device) async {
+    final Map map =
+        (await dio.post('$_path/devices', data: device.toJson())).data;
+
+    return UserDevice.fromJson(map['item']);
+  }
+
+  Future<UserDevice> updateDevice(UserDevice device) async {
+    final Map map =
+        (await dio.put('$_path/devices/${device.id}', data: device.toJson()))
+            .data;
+
+    return UserDevice.fromJson(map['item']);
+  }
 }
