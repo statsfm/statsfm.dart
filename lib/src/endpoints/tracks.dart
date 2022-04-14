@@ -69,4 +69,11 @@ class Tracks extends EndpointBase {
     var audioFeaturesMap = map['items'] as Iterable<dynamic>;
     return audioFeaturesMap.map((m) => AudioFeature.fromJson(m)).toList();
   }
+
+  Future<List<TopUser>> topListeners(int artistId) async {
+    final Map map = (await dio.get('$_path/$artistId/top/listeners')).data;
+
+    var topListeners = map['items'] as Iterable<dynamic>;
+    return topListeners.map((m) => TopUser.fromJson(m)).toList();
+  }
 }

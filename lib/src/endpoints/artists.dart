@@ -76,4 +76,11 @@ class Artists extends EndpointBase {
     var relatedArtists = map['items'] as Iterable<dynamic>;
     return relatedArtists.map((m) => Artist.fromJson(m)).toList();
   }
+
+  Future<List<TopUser>> topListeners(int artistId) async {
+    final Map map = (await dio.get('$_path/$artistId/top/listeners')).data;
+
+    var topListeners = map['items'] as Iterable<dynamic>;
+    return topListeners.map((m) => TopUser.fromJson(m)).toList();
+  }
 }
