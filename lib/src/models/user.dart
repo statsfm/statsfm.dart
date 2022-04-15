@@ -144,6 +144,9 @@ class UserPrivacySettings extends Object {
 
   @JsonKey(name: 'streamStats')
   late bool streamStats;
+
+  @JsonKey(name: 'leaderboards')
+  late bool leaderboards;
 }
 
 @JsonSerializable(createToJson: true)
@@ -170,7 +173,7 @@ class TopUser extends TopObject {
       _$TopUserFromJson(json);
 
   @JsonKey(name: 'user')
-  late UserPublic user;
+  late UserPublic? user;
 }
 
 @JsonSerializable(createToJson: true)
