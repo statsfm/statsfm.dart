@@ -29,13 +29,13 @@ class UserPublic extends Object {
   late String id;
 
   @JsonKey(name: 'customId')
-  late String customId;
+  late String? customId;
 
   @JsonKey(name: 'displayName')
   late String displayName;
 
   @JsonKey(name: 'image')
-  late String image;
+  late String? image;
 
   @JsonKey(name: 'isPlus')
   late bool isPlus;
@@ -85,7 +85,7 @@ class UserImport extends Object {
   late String userId;
 
   @JsonKey(name: 'path')
-  late String path;
+  late String? path;
 
   @JsonKey(name: 'count')
   late int count;
@@ -146,7 +146,7 @@ class UserPrivacySettings extends Object {
   late bool streamStats;
 
   @JsonKey(name: 'leaderboards')
-  late bool leaderboards;
+  late bool? leaderboards;
 }
 
 @JsonSerializable(createToJson: true)
