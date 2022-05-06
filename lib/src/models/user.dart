@@ -146,7 +146,7 @@ class UserPrivacySettings extends Object {
   late bool streamStats;
 
   @JsonKey(name: 'leaderboards')
-  late bool? leaderboards;
+  late bool leaderboards;
 }
 
 @JsonSerializable(createToJson: true)
