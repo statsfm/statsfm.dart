@@ -7,7 +7,7 @@ class Album extends AlbumSimple {
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
 
   @JsonKey(name: 'label')
-  late String label;
+  late String? label;
 
   @JsonKey(name: 'spotifyPopularity')
   late int spotifyPopularity;
