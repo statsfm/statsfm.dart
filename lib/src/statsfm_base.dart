@@ -17,6 +17,9 @@ abstract class StatsfmApiBase {
   late Charts _charts;
   Charts get charts => _charts;
 
+  late Crowns _crowns;
+  Crowns get crowns => _crowns;
+
   late Genres _genres;
   Genres get genres => _genres;
 
@@ -88,6 +91,7 @@ abstract class StatsfmApiBase {
     _artists = Artists(this);
     _albums = Albums(this);
     _charts = Charts(this);
+    _crowns = Crowns(this);
     _genres = Genres(this);
     _search = Search(this);
     _stats = Stats(this);
