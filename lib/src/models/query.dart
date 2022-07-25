@@ -2,12 +2,14 @@ part of statsfm.models;
 
 class QueryOptions {
   final int? limit;
+  final int? offset;
   final DateTimeRange? range;
   final Range? rangeString;
   final OrderBySetting? orderBy;
 
   const QueryOptions({
     this.limit,
+    this.offset,
     this.range,
     this.rangeString,
     this.orderBy,
@@ -17,6 +19,9 @@ class QueryOptions {
     Map<String, dynamic> query = {};
     if (limit is int && limit! > 0) {
       query['limit'] = limit;
+    }
+    if (offset is int && offset! > 0) {
+      query['offset'] = offset;
     }
 
     if (range is DateTimeRange) {
