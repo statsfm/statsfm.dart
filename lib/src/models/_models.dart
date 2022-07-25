@@ -8,6 +8,7 @@ part '_models.g.dart';
 part 'album.dart';
 part 'artist.dart';
 part 'audio_feature.dart';
+part 'chat.dart';
 part 'crown.dart';
 part 'database_size.dart';
 part 'error.dart';
