@@ -14,6 +14,9 @@ class UserPrivate extends UserPublic {
 
   @JsonKey(name: 'country')
   late String country;
+
+  @JsonKey(name: 'disabled')
+  late bool disabled;
 }
 
 @JsonSerializable(createToJson: true)
