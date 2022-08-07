@@ -57,6 +57,9 @@ class UserPublic extends Object {
 
   @JsonKey(name: 'profile')
   late UserProfile? profile;
+
+  @JsonKey(name: 'socialMediaConnections')
+  late List<UserProfileSocialMediaConnection> socialMediaConnections;
 }
 
 enum OrderBySetting {
@@ -166,6 +169,53 @@ class UserProfile extends Object {
 
   @JsonKey(name: 'pronouns')
   late String? pronouns;
+}
+
+@JsonSerializable(createToJson: true)
+class UserProfileSocialMediaConnection extends Object {
+  UserProfileSocialMediaConnection();
+
+  factory UserProfileSocialMediaConnection.fromJson(
+          Map<String, dynamic> json) =>
+      _$UserProfileSocialMediaConnectionFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'verified')
+  late bool verified;
+
+  @JsonKey(name: 'platformUserId')
+  late String platformUserId;
+
+  @JsonKey(name: 'platformUsername')
+  late String platformUsername;
+
+  @JsonKey(name: 'platformUserImage')
+  late String platformUserImage;
+
+  @JsonKey(name: 'platform')
+  late SocialMediaPlatform platform;
+
+  @JsonKey(name: 'user')
+  late UserPublic? user;
+}
+
+@JsonSerializable(createToJson: true)
+class SocialMediaPlatform extends Object {
+  SocialMediaPlatform();
+
+  factory SocialMediaPlatform.fromJson(Map<String, dynamic> json) =>
+      _$SocialMediaPlatformFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'name')
+  late String name;
+
+  @JsonKey(name: 'icon')
+  late String icon;
 }
 
 @JsonSerializable(createToJson: false)
