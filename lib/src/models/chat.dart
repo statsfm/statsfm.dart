@@ -1,6 +1,7 @@
 part of statsfm.models;
 
 @JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
 class ChatMessage extends Object {
   ChatMessage();
 
