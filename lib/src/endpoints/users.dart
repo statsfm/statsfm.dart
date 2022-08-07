@@ -400,4 +400,29 @@ class Users extends EndpointBase {
     var crownsMap = map['items'] as Iterable<dynamic>;
     return crownsMap.map((m) => ArtistCrown.fromJson(m)).toList();
   }
+
+  Future<List<UserPublic>> friends(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/friends',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var friendsMap = map['items'] as Iterable<dynamic>;
+    return friendsMap.map((m) => UserPublic.fromJson(m)).toList();
+  }
+
+  Future<int> friendCount(String userId) async {
+    final Map map =
+        (await dio.get('$_path/${Uri.encodeComponent(userId)}/friends/count'))
+            .data;
+
+    return map['item'];
+  }
 }
