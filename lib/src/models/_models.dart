@@ -17,6 +17,7 @@ part 'genre.dart';
 part 'query.dart';
 part 'range.dart';
 part 'search.dart';
+part 'soulmate.dart';
 part 'stream.dart';
 part 'stream_stats.dart';
 part 'top.dart';
