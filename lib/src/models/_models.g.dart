@@ -140,6 +140,22 @@ AudioFeature _$AudioFeatureFromJson(Map<String, dynamic> json) => AudioFeature()
   ..timeSignature = json['time_signature'] as int?
   ..valence = (json['valence'] as num?)?.toDouble();
 
+ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
+  ..id = json['id'] as int
+  ..chatId = json['chatId'] as String
+  ..content = json['content'] as String
+  ..sentAt = const LocalDateTimeConverter().fromJson(json['sentAt'] as String)
+  ..readAt =
+      json['readAt'] == null ? null : DateTime.parse(json['readAt'] as String)
+  ..fromId = json['fromId'] as String
+  ..from = json['from'] == null
+      ? null
+      : UserPublic.fromJson(json['from'] as Map<String, dynamic>)
+  ..toId = json['toId'] as String
+  ..to = json['to'] == null
+      ? null
+      : UserPublic.fromJson(json['to'] as Map<String, dynamic>);
+
 ArtistCrown _$ArtistCrownFromJson(Map<String, dynamic> json) => ArtistCrown()
   ..id = json['id'] as int
   ..type = $enumDecode(_$CrownTypeEnumMap, json['type'])
@@ -235,6 +251,15 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Album.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [];
+
+Soulmate _$SoulmateFromJson(Map<String, dynamic> json) => Soulmate()
+  ..score = (json['score'] as num).toDouble()
+  ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$SoulmateToJson(Soulmate instance) => <String, dynamic>{
+      'score': instance.score,
+      'user': instance.user,
+    };
 
 Stream _$StreamFromJson(Map<String, dynamic> json) => Stream()
   ..id = json['id'] as String
@@ -363,8 +388,13 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..profile = json['profile'] == null
       ? null
       : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
+  ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
+      .map((e) =>
+          UserProfileSocialMediaConnection.fromJson(e as Map<String, dynamic>))
+      .toList()
   ..email = json['email'] as String
-  ..country = json['country'] as String;
+  ..country = json['country'] as String
+  ..disabled = json['disabled'] as bool;
 
 Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
     <String, dynamic>{
@@ -378,8 +408,10 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'orderBy': _$OrderBySettingEnumMap[instance.orderBy],
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
+      'socialMediaConnections': instance.socialMediaConnections,
       'email': instance.email,
       'country': instance.country,
+      'disabled': instance.disabled,
     };
 
 const _$OrderBySettingEnumMap = {
@@ -404,7 +436,11 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
           json['privacySettings'] as Map<String, dynamic>)
   ..profile = json['profile'] == null
       ? null
-      : UserProfile.fromJson(json['profile'] as Map<String, dynamic>);
+      : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
+  ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
+      .map((e) =>
+          UserProfileSocialMediaConnection.fromJson(e as Map<String, dynamic>))
+      .toList();
 
 Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
     <String, dynamic>{
@@ -418,6 +454,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'orderBy': _$OrderBySettingEnumMap[instance.orderBy],
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
+      'socialMediaConnections': instance.socialMediaConnections,
     };
 
 UserImport _$UserImportFromJson(Map<String, dynamic> json) => UserImport()
@@ -471,6 +508,46 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
       'bio': instance.bio,
       'pronouns': instance.pronouns,
+    };
+
+UserProfileSocialMediaConnection _$UserProfileSocialMediaConnectionFromJson(
+        Map<String, dynamic> json) =>
+    UserProfileSocialMediaConnection()
+      ..id = json['id'] as int
+      ..verified = json['verified'] as bool
+      ..platformUserId = json['platformUserId'] as String
+      ..platformUsername = json['platformUsername'] as String
+      ..platformUserImage = json['platformUserImage'] as String
+      ..platform =
+          SocialMediaPlatform.fromJson(json['platform'] as Map<String, dynamic>)
+      ..user = json['user'] == null
+          ? null
+          : UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$UserProfileSocialMediaConnectionToJson(
+        UserProfileSocialMediaConnection instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'verified': instance.verified,
+      'platformUserId': instance.platformUserId,
+      'platformUsername': instance.platformUsername,
+      'platformUserImage': instance.platformUserImage,
+      'platform': instance.platform,
+      'user': instance.user,
+    };
+
+SocialMediaPlatform _$SocialMediaPlatformFromJson(Map<String, dynamic> json) =>
+    SocialMediaPlatform()
+      ..id = json['id'] as int
+      ..name = json['name'] as String
+      ..icon = json['icon'] as String;
+
+Map<String, dynamic> _$SocialMediaPlatformToJson(
+        SocialMediaPlatform instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'icon': instance.icon,
     };
 
 TopUser _$TopUserFromJson(Map<String, dynamic> json) => TopUser()
