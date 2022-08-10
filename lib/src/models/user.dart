@@ -209,7 +209,7 @@ class SocialMediaPlatform extends Object {
       _$SocialMediaPlatformFromJson(json);
 
   @JsonKey(name: 'id')
-  late int id;
+  late int? id;
 
   @JsonKey(name: 'name')
   late String name;

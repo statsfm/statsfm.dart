@@ -538,7 +538,7 @@ Map<String, dynamic> _$UserProfileSocialMediaConnectionToJson(
 
 SocialMediaPlatform _$SocialMediaPlatformFromJson(Map<String, dynamic> json) =>
     SocialMediaPlatform()
-      ..id = json['id'] as int
+      ..id = json['id'] as int?
       ..name = json['name'] as String
       ..icon = json['icon'] as String;
 
