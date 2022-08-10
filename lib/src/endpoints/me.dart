@@ -159,4 +159,55 @@ class Me extends EndpointBase {
 
     return UserDevice.fromJson(map['item']);
   }
+
+  Future<List<Soulmate>> soulmates() async {
+    final Map map = (await dio.get('$_path/soulmates')).data;
+
+    var soulmatesMap = map['items'] as Iterable<dynamic>;
+    return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
+  }
+
+  Future<List<ChatMessage>> chats({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/chats',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var messagesMap = map['items'] as Iterable<dynamic>;
+    return messagesMap.map((m) => ChatMessage.fromJson(m)).toList();
+  }
+
+  Future<List<ChatMessage>> chatMessages(
+    String userId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/chats/private/${Uri.encodeComponent(userId)}/messages',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var messagesMap = map['items'] as Iterable<dynamic>;
+    return messagesMap.map((m) => ChatMessage.fromJson(m)).toList();
+  }
+
+  Future<bool> sendChatMessage(String userId, String content) async {
+    return (await dio.post(
+          '$_path/chats/private/${Uri.encodeComponent(userId)}/messages',
+          data: {
+            "content": content,
+          },
+        ))
+            .statusCode ==
+        201;
+  }
 }

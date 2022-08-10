@@ -53,4 +53,20 @@ class Charts extends EndpointBase {
     var topAlbumsMap = map['items'] as Iterable<dynamic>;
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
   }
+
+  Future<List<TopUser>> topUsers({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/top/users',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var topUsersMap = map['items'] as Iterable<dynamic>;
+    return topUsersMap.map((m) => TopUser.fromJson(m)).toList();
+  }
 }
