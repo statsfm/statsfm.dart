@@ -175,6 +175,9 @@ class UserProfile extends Object {
 class UserProfileSocialMediaConnection extends Object {
   UserProfileSocialMediaConnection();
 
+  Map<String, dynamic> toJson() =>
+      _$UserProfileSocialMediaConnectionToJson(this);
+
   factory UserProfileSocialMediaConnection.fromJson(
           Map<String, dynamic> json) =>
       _$UserProfileSocialMediaConnectionFromJson(json);
@@ -204,6 +207,8 @@ class UserProfileSocialMediaConnection extends Object {
 @JsonSerializable(createToJson: true)
 class SocialMediaPlatform extends Object {
   SocialMediaPlatform();
+
+  Map<String, dynamic> toJson() => _$SocialMediaPlatformToJson(this);
 
   factory SocialMediaPlatform.fromJson(Map<String, dynamic> json) =>
       _$SocialMediaPlatformFromJson(json);
