@@ -24,7 +24,7 @@ class GenreSimple extends Object {
       _$GenreSimpleFromJson(json);
 
   @JsonKey(name: 'tag')
-  late String tag;
+  late String? tag;
 }
 
 @JsonSerializable(createToJson: false)

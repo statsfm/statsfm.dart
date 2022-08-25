@@ -32,7 +32,7 @@ class Stream extends Object {
   late List<int> artists;
 
   @JsonKey(name: 'albumId')
-  late int albumId;
+  late int? albumId;
 
   @JsonKey(name: 'importId')
   late int? importId;

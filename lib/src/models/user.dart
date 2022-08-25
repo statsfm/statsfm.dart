@@ -32,13 +32,13 @@ class UserPublic extends Object {
   late String id;
 
   @JsonKey(name: 'customId')
-  late String customId;
+  late String? customId;
 
   @JsonKey(name: 'displayName')
   late String displayName;
 
   @JsonKey(name: 'image')
-  late String image;
+  late String? image;
 
   @JsonKey(name: 'isPlus')
   late bool isPlus;
@@ -91,7 +91,7 @@ class UserImport extends Object {
   late String userId;
 
   @JsonKey(name: 'path')
-  late String path;
+  late String? path;
 
   @JsonKey(name: 'count')
   late int count;
@@ -214,7 +214,7 @@ class SocialMediaPlatform extends Object {
       _$SocialMediaPlatformFromJson(json);
 
   @JsonKey(name: 'id')
-  late int id;
+  late int? id;
 
   @JsonKey(name: 'name')
   late String name;

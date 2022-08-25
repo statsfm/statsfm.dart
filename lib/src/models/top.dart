@@ -28,7 +28,7 @@ class TopObject extends Object {
   late int position;
 
   @JsonKey(name: 'streams')
-  late int streams;
+  late int? streams;
 
   @JsonKey(name: 'playedMs')
   int? playedMs;
