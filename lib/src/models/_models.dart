@@ -9,7 +9,7 @@ part 'album.dart';
 part 'artist.dart';
 part 'audio_feature.dart';
 part 'chat.dart';
-part 'crown.dart';
+part 'record.dart';
 part 'database_size.dart';
 part 'error.dart';
 part 'external_ids.dart';

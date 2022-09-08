@@ -14,7 +14,7 @@ export 'src/models/_models.dart';
 part 'src/endpoints/albums.dart';
 part 'src/endpoints/artists.dart';
 part 'src/endpoints/charts.dart';
-part 'src/endpoints/crowns.dart';
+part 'src/endpoints/records.dart';
 part 'src/endpoints/endpoint_base.dart';
 part 'src/endpoints/genres.dart';
 part 'src/endpoints/me.dart';

@@ -390,15 +390,15 @@ class Users extends EndpointBase {
     return topGenresMap.map((m) => TopGenre.fromJson(m)).toList();
   }
 
-  Future<List<ArtistCrown>> artistCrowns(String userId) async {
+  Future<List<ArtistRecord>> artistRecords(String userId) async {
     final Map map = (await dio.get(
-      '$_path/${Uri.encodeComponent(userId)}/crowns/artists',
+      '$_path/${Uri.encodeComponent(userId)}/records/artists',
       queryParameters: {},
     ))
         .data;
 
-    var crownsMap = map['items'] as Iterable<dynamic>;
-    return crownsMap.map((m) => ArtistCrown.fromJson(m)).toList();
+    var recordsMap = map['items'] as Iterable<dynamic>;
+    return recordsMap.map((m) => ArtistRecord.fromJson(m)).toList();
   }
 
   Future<List<UserPublic>> friends(

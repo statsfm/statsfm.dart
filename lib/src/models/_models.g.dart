@@ -156,25 +156,25 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
       ? null
       : UserPublic.fromJson(json['to'] as Map<String, dynamic>);
 
-ArtistCrown _$ArtistCrownFromJson(Map<String, dynamic> json) => ArtistCrown()
+ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) => ArtistRecord()
   ..id = json['id'] as int
-  ..type = $enumDecode(_$CrownTypeEnumMap, json['type'])
+  ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
   ..active = json['active'] as bool
   ..userId = json['userId'] as String
   ..createdAt =
       const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
   ..artistId = json['artistId'] as int;
 
-const _$CrownTypeEnumMap = {
-  CrownType.PLATINUM: 'PLATINUM',
-  CrownType.GOLD: 'GOLD',
-  CrownType.SILVER: 'SILVER',
-  CrownType.BRONZE: 'BRONZE',
+const _$RecordTypeEnumMap = {
+  RecordType.PLATINUM: 'PLATINUM',
+  RecordType.GOLD: 'GOLD',
+  RecordType.SILVER: 'SILVER',
+  RecordType.BRONZE: 'BRONZE',
 };
 
-Crown _$CrownFromJson(Map<String, dynamic> json) => Crown()
+Record _$RecordFromJson(Map<String, dynamic> json) => Record()
   ..id = json['id'] as int
-  ..type = $enumDecode(_$CrownTypeEnumMap, json['type'])
+  ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
   ..active = json['active'] as bool
   ..userId = json['userId'] as String
   ..createdAt =

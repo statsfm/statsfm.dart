@@ -2,11 +2,11 @@ part of statsfm.models;
 
 @JsonSerializable(createToJson: false)
 @LocalDateTimeConverter()
-class ArtistCrown extends Crown {
-  ArtistCrown();
+class ArtistRecord extends Record {
+  ArtistRecord();
 
-  factory ArtistCrown.fromJson(Map<String, dynamic> json) =>
-      _$ArtistCrownFromJson(json);
+  factory ArtistRecord.fromJson(Map<String, dynamic> json) =>
+      _$ArtistRecordFromJson(json);
 
   @JsonKey(name: 'artistId')
   late int artistId;
@@ -14,16 +14,16 @@ class ArtistCrown extends Crown {
 
 @JsonSerializable(createToJson: false)
 @LocalDateTimeConverter()
-class Crown extends Object {
-  Crown();
+class Record extends Object {
+  Record();
 
-  factory Crown.fromJson(Map<String, dynamic> json) => _$CrownFromJson(json);
+  factory Record.fromJson(Map<String, dynamic> json) => _$RecordFromJson(json);
 
   @JsonKey(name: 'id')
   late int id;
 
   @JsonKey(name: 'type')
-  late CrownType type;
+  late RecordType type;
 
   @JsonKey(name: 'active')
   late bool active;
@@ -35,7 +35,7 @@ class Crown extends Object {
   late DateTime createdAt;
 }
 
-enum CrownType {
+enum RecordType {
   @JsonValue("PLATINUM")
   PLATINUM,
 
@@ -49,6 +49,6 @@ enum CrownType {
   BRONZE
 }
 
-extension on CrownType {
-  int compareTo(CrownType other) => this.index.compareTo(other.index);
+extension on RecordType {
+  int compareTo(RecordType other) => this.index.compareTo(other.index);
 }
