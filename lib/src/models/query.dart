@@ -6,6 +6,7 @@ class QueryOptions {
   final DateTimeRange? range;
   final Range? rangeString;
   final OrderBySetting? orderBy;
+  final Order? order;
 
   const QueryOptions({
     this.limit,
@@ -13,6 +14,7 @@ class QueryOptions {
     this.range,
     this.rangeString,
     this.orderBy,
+    this.order,
   });
 
   Map<String, dynamic> toQuery() {
@@ -37,8 +39,20 @@ class QueryOptions {
           orderBy.toString().substring(orderBy.toString().indexOf('.') + 1);
     }
 
+    if (order is Order) {
+      query['order'] = order == Order.ASC ? 'asc' : 'desc';
+    }
+
     return query;
   }
+}
+
+enum Order {
+  @JsonValue("asc")
+  ASC,
+
+  @JsonValue("desc")
+  DESC,
 }
 
 String dateTimeToString(DateTime date) {
