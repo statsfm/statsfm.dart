@@ -163,9 +163,11 @@ class Me extends EndpointBase {
   Future<List<Soulmate>> soulmates({bool forceRefresh = false}) async {
     final Map map = (await dio.get(
       '$_path/soulmates',
-      queryParameters: {
-        'force': forceRefresh,
-      },
+      queryParameters: forceRefresh == false
+          ? {} // for caching
+          : {
+              'force': forceRefresh,
+            },
     ))
         .data;
 
