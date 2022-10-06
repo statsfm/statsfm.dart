@@ -160,8 +160,14 @@ class Me extends EndpointBase {
     return UserDevice.fromJson(map['item']);
   }
 
-  Future<List<Soulmate>> soulmates() async {
-    final Map map = (await dio.get('$_path/soulmates')).data;
+  Future<List<Soulmate>> soulmates({bool forceRefresh = false}) async {
+    final Map map = (await dio.get(
+      '$_path/soulmates',
+      queryParameters: {
+        'force': forceRefresh,
+      },
+    ))
+        .data;
 
     var soulmatesMap = map['items'] as Iterable<dynamic>;
     return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
