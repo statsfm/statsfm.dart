@@ -70,16 +70,18 @@ class Tracks extends EndpointBase {
     return audioFeaturesMap.map((m) => AudioFeature.fromJson(m)).toList();
   }
 
-  Future<List<TopUser>> topListeners(
-    int trackId, {
-    QueryOptions options = const QueryOptions(),
-  }) async {
+  Future<List<TopUser>> topListeners(int trackId,
+      {QueryOptions options = const QueryOptions(),
+      bool friends = false}) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/$trackId/top/listeners',
-      queryParameters: {
-        ...query,
-      },
+      queryParameters: friends == false
+          ? {...query} // for caching
+          : {
+              'friends': friends,
+              ...query,
+            },
     ))
         .data;
 

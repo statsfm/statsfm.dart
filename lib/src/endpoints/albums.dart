@@ -49,13 +49,17 @@ class Albums extends EndpointBase {
   Future<List<TopUser>> topListeners(
     int albumId, {
     QueryOptions options = const QueryOptions(),
+    bool friends = false,
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/$albumId/top/listeners',
-      queryParameters: {
-        ...query,
-      },
+      queryParameters: friends == false
+          ? {...query} // for caching
+          : {
+              'friends': friends,
+              ...query,
+            },
     ))
         .data;
 
