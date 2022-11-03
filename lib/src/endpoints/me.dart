@@ -160,14 +160,25 @@ class Me extends EndpointBase {
     return UserDevice.fromJson(map['item']);
   }
 
-  Future<List<Soulmate>> soulmates({bool forceRefresh = false}) async {
+  Future<List<Soulmate>> soulmates(
+      {bool forceRefresh = false, bool? plusOnly, String? country}) async {
+    Map<String, dynamic> queryParams = {};
+    //Refreshes soulmates matches
+    if (forceRefresh) {
+      queryParams.addAll({'force': forceRefresh});
+    }
+    //Filters to only plus users
+    if (plusOnly == true) {
+      queryParams.addAll({'plus': plusOnly});
+    }
+    //Filters to matches by country iso code. Leave null for global results
+    if (country != null) {
+      queryParams.addAll({'country': country});
+    }
+
     final Map map = (await dio.get(
       '$_path/soulmates',
-      queryParameters: forceRefresh == false
-          ? {} // for caching
-          : {
-              'force': forceRefresh,
-            },
+      queryParameters: queryParams,
     ))
         .data;
 
