@@ -153,6 +153,9 @@ class UserPrivacySettings extends Object {
 
   @JsonKey(name: 'leaderboards')
   late bool leaderboards;
+
+  @JsonKey(name: 'connections')
+  late bool connections;
 }
 
 @JsonSerializable(createToJson: true)
