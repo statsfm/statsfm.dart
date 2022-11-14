@@ -27,6 +27,13 @@ class Me extends EndpointBase {
     throw UnimplementedError();
   }
 
+  Future<List<UserProfileSocialMediaConnection>> socialMediaConnections() async {
+    final Map map = (await dio.get('$_path/connections')).data;
+
+    var connectionsMap = map['items'] as Iterable<dynamic>;
+    return connectionsMap.map((m) => UserProfileSocialMediaConnection.fromJson(m)).toList();
+  }
+
   Future<UserPrivacySettings> privacySettings() async {
     final Map map = (await dio.get('$_path/privacy')).data;
 
