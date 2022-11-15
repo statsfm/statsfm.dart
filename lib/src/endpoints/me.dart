@@ -34,6 +34,10 @@ class Me extends EndpointBase {
     return connectionsMap.map((m) => UserProfileSocialMediaConnection.fromJson(m)).toList();
   }
 
+  Future<void> removeSocialMediaConnection(int id) async {
+    await dio.delete('$_path/connections/$id');
+  }
+
   Future<UserPrivacySettings> privacySettings() async {
     final Map map = (await dio.get('$_path/privacy')).data;
 
