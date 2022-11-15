@@ -145,8 +145,8 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
   ..chatId = json['chatId'] as String
   ..content = json['content'] as String
   ..sentAt = const LocalDateTimeConverter().fromJson(json['sentAt'] as String)
-  ..readAt =
-      json['readAt'] == null ? null : DateTime.parse(json['readAt'] as String)
+  ..readAt = _$JsonConverterFromJson<String, DateTime>(
+      json['readAt'], const LocalDateTimeConverter().fromJson)
   ..fromId = json['fromId'] as String
   ..from = json['from'] == null
       ? null
@@ -155,6 +155,12 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
   ..to = json['to'] == null
       ? null
       : UserPublic.fromJson(json['to'] as Map<String, dynamic>);
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
 
 ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) => ArtistRecord()
   ..id = json['id'] as int
@@ -420,7 +426,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'isPlus': instance.isPlus,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
-      'orderBy': _$OrderBySettingEnumMap[instance.orderBy],
+      'orderBy': _$OrderBySettingEnumMap[instance.orderBy]!,
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
@@ -466,7 +472,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'isPlus': instance.isPlus,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
-      'orderBy': _$OrderBySettingEnumMap[instance.orderBy],
+      'orderBy': _$OrderBySettingEnumMap[instance.orderBy]!,
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
@@ -498,7 +504,8 @@ UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
       ..topGenres = json['topGenres'] as bool
       ..streams = json['streams'] as bool
       ..streamStats = json['streamStats'] as bool
-      ..leaderboards = json['leaderboards'] as bool;
+      ..leaderboards = json['leaderboards'] as bool
+      ..connections = json['connections'] as bool;
 
 Map<String, dynamic> _$UserPrivacySettingsToJson(
         UserPrivacySettings instance) =>
@@ -513,6 +520,7 @@ Map<String, dynamic> _$UserPrivacySettingsToJson(
       'streams': instance.streams,
       'streamStats': instance.streamStats,
       'leaderboards': instance.leaderboards,
+      'connections': instance.connections,
     };
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile()
@@ -625,26 +633,32 @@ UserDevice _$UserDeviceFromJson(Map<String, dynamic> json) => UserDevice(
       notifications: UserDeviceNotifications.fromJson(
           json['notifications'] as Map<String, dynamic>),
       fcmToken: json['fcmToken'] as String?,
-      lastUsed: json['lastUsed'] == null
-          ? null
-          : DateTime.parse(json['lastUsed'] as String),
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
+      lastUsed: _$JsonConverterFromJson<String, DateTime>(
+          json['lastUsed'], const LocalDateTimeConverter().fromJson),
+      createdAt: _$JsonConverterFromJson<String, DateTime>(
+          json['createdAt'], const LocalDateTimeConverter().fromJson),
     );
 
 Map<String, dynamic> _$UserDeviceToJson(UserDevice instance) =>
     <String, dynamic>{
       'id': instance.id,
       'userId': instance.userId,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'lastUsed': instance.lastUsed?.toIso8601String(),
+      'createdAt': _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const LocalDateTimeConverter().toJson),
+      'lastUsed': _$JsonConverterToJson<String, DateTime>(
+          instance.lastUsed, const LocalDateTimeConverter().toJson),
       'name': instance.name,
       'model': instance.model,
       'type': instance.type,
       'notifications': instance.notifications,
       'fcmToken': instance.fcmToken,
     };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
 
 UserDeviceNotifications _$UserDeviceNotificationsFromJson(
         Map<String, dynamic> json) =>
