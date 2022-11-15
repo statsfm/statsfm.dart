@@ -212,7 +212,22 @@ ExternalIds _$ExternalIdsFromJson(Map<String, dynamic> json) => ExternalIds()
   ..ean = json['ean'] as String?
   ..upc = json['upc'] as String?
   ..spotify =
-      (json['spotify'] as List<dynamic>?)?.map((e) => e as String).toList();
+      (json['spotify'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..amazonMusic =
+      (json['amazonMusic'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..deezer =
+      (json['deezer'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..napster =
+      (json['napster'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..pandora =
+      (json['pandora'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..soundcloud =
+      (json['soundcloud'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..tidal = (json['tidal'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..youtubeMusic =
+      (json['youtubeMusic'] as List<dynamic>?)?.map((e) => e as String).toList()
+  ..appleMusic =
+      (json['appleMusic'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre()
   ..tag = json['tag'] as String?
