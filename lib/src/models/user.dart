@@ -49,6 +49,9 @@ class UserPublic extends Object {
   @JsonKey(name: 'syncEnabled')
   late bool syncEnabled;
 
+  @JsonKey(name: 'timezone')
+  late String? timezone;
+
   @JsonKey(name: 'orderBy', defaultValue: OrderBySetting.PLATFORM)
   late OrderBySetting orderBy;
 
@@ -172,6 +175,9 @@ class UserProfile extends Object {
 
   @JsonKey(name: 'pronouns')
   late String? pronouns;
+
+  @JsonKey(name: 'theme')
+  late String? theme;
 }
 
 @JsonSerializable(createToJson: true)

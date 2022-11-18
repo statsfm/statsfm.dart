@@ -400,6 +400,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..isPlus = json['isPlus'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
+  ..timezone = json['timezone'] as String?
   ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
       OrderBySetting.PLATFORM
   ..privacySettings = json['privacySettings'] == null
@@ -426,6 +427,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'isPlus': instance.isPlus,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
+      'timezone': instance.timezone,
       'orderBy': _$OrderBySettingEnumMap[instance.orderBy]!,
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
@@ -449,6 +451,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
   ..isPlus = json['isPlus'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
+  ..timezone = json['timezone'] as String?
   ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
       OrderBySetting.PLATFORM
   ..privacySettings = json['privacySettings'] == null
@@ -472,6 +475,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'isPlus': instance.isPlus,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
+      'timezone': instance.timezone,
       'orderBy': _$OrderBySettingEnumMap[instance.orderBy]!,
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
@@ -525,12 +529,14 @@ Map<String, dynamic> _$UserPrivacySettingsToJson(
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile()
   ..bio = json['bio'] as String
-  ..pronouns = json['pronouns'] as String?;
+  ..pronouns = json['pronouns'] as String?
+  ..theme = json['theme'] as String?;
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
       'bio': instance.bio,
       'pronouns': instance.pronouns,
+      'theme': instance.theme,
     };
 
 UserProfileSocialMediaConnection _$UserProfileSocialMediaConnectionFromJson(
