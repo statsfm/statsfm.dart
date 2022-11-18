@@ -156,6 +156,44 @@ class Users extends EndpointBase {
     return StreamStats.fromJson(map['items']);
   }
 
+  Future<DateStats> trackDateStats(
+    String userId,
+    int trackId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId/stats/dates',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return DateStats.fromJson(map['items']);
+  }
+
+  Future<PerDayStats> trackPerDayStats(
+    String userId,
+    int trackId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId/stats/per-day',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return PerDayStats.fromJson(map['items']);
+  }
+
   Future<List<Stream>> trackListStreams(
     String userId,
     Iterable<int> trackIds, {
@@ -233,6 +271,44 @@ class Users extends EndpointBase {
     return StreamStats.fromJson(map['items']);
   }
 
+  Future<DateStats> artistDateStats(
+    String userId,
+    int artistId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId/stats/dates',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return DateStats.fromJson(map['items']);
+  }
+
+  Future<PerDayStats> artistPerDayStats(
+    String userId,
+    int artistId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId/stats/per-day',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return PerDayStats.fromJson(map['items']);
+  }
+
   Future<List<Stream>> albumStreams(
     String userId,
     int albumId, {
@@ -266,6 +342,44 @@ class Users extends EndpointBase {
         .data;
 
     return StreamStats.fromJson(map['item']);
+  }
+
+  Future<DateStats> albumDateStats(
+    String userId,
+    int albumId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId/stats/dates',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return DateStats.fromJson(map['items']);
+  }
+
+  Future<PerDayStats> albumPerDayStats(
+    String userId,
+    int albumId,
+    int timeZoneOffset, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId/stats/per-day',
+      queryParameters: {
+        'timeZoneOffset': timeZoneOffset,
+        ...query,
+      },
+    ))
+        .data;
+
+    return PerDayStats.fromJson(map['items']);
   }
 
   Future<List<TopTrack>> topTracks(
