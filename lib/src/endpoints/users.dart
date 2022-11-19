@@ -62,14 +62,14 @@ class Users extends EndpointBase {
 
   Future<DateStats> dateStats(
     String userId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/stats/dates',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -80,14 +80,14 @@ class Users extends EndpointBase {
 
   Future<PerDayStats> perDayStats(
     String userId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/stats/per-day',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -159,14 +159,14 @@ class Users extends EndpointBase {
   Future<DateStats> trackDateStats(
     String userId,
     int trackId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId/stats/dates',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -178,14 +178,14 @@ class Users extends EndpointBase {
   Future<PerDayStats> trackPerDayStats(
     String userId,
     int trackId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/tracks/$trackId/stats/per-day',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -274,14 +274,14 @@ class Users extends EndpointBase {
   Future<DateStats> artistDateStats(
     String userId,
     int artistId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId/stats/dates',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -293,14 +293,14 @@ class Users extends EndpointBase {
   Future<PerDayStats> artistPerDayStats(
     String userId,
     int artistId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/artists/$artistId/stats/per-day',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -347,14 +347,14 @@ class Users extends EndpointBase {
   Future<DateStats> albumDateStats(
     String userId,
     int albumId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId/stats/dates',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
@@ -366,14 +366,14 @@ class Users extends EndpointBase {
   Future<PerDayStats> albumPerDayStats(
     String userId,
     int albumId,
-    int timeZoneOffset, {
+    String timeZone, {
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/streams/albums/$albumId/stats/per-day',
       queryParameters: {
-        'timeZoneOffset': timeZoneOffset,
+        'timeZone': timeZone,
         ...query,
       },
     ))
