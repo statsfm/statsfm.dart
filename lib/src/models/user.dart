@@ -159,6 +159,9 @@ class UserPrivacySettings extends Object {
 
   @JsonKey(name: 'connections')
   late bool connections;
+
+  @JsonKey(name: 'friends')
+  late bool friends;
 }
 
 @JsonSerializable(createToJson: true)
