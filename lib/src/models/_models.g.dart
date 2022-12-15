@@ -671,11 +671,11 @@ Json? _$JsonConverterToJson<Json, Value>(
 UserDeviceNotifications _$UserDeviceNotificationsFromJson(
         Map<String, dynamic> json) =>
     UserDeviceNotifications(
-      imports: json['imports'] as bool,
-      friends: json['friends'] as bool,
-      weeklySummary: json['weeklySummary'] as bool,
-      monthlySummary: json['monthlySummary'] as bool,
-      updates: json['updates'] as bool,
+      imports: json['imports'] as bool?,
+      friends: json['friends'] as bool?,
+      weeklySummary: json['weeklySummary'] as bool?,
+      monthlySummary: json['monthlySummary'] as bool?,
+      updates: json['updates'] as bool?,
     );
 
 Map<String, dynamic> _$UserDeviceNotificationsToJson(

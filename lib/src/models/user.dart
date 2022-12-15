@@ -357,17 +357,17 @@ class UserDeviceNotifications extends Object {
       _$UserDeviceNotificationsFromJson(json);
 
   @JsonKey(name: 'imports')
-  late bool imports;
+  late bool? imports;
 
   @JsonKey(name: 'friends')
-  late bool friends;
+  late bool? friends;
 
   @JsonKey(name: 'weeklySummary')
-  late bool weeklySummary;
+  late bool? weeklySummary;
 
   @JsonKey(name: 'monthlySummary')
-  late bool monthlySummary;
+  late bool? monthlySummary;
 
   @JsonKey(name: 'updates')
-  late bool updates;
+  late bool? updates;
 }

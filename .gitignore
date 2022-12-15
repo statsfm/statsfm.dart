@@ -27,3 +27,5 @@ test.dart
 *.inject.summary
 
 .DS_Store
+.flutter-plugins
+.flutter-plugins-dependencies
