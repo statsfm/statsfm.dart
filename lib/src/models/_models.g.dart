@@ -634,7 +634,7 @@ const _$RangeEnumMap = {
 
 UserDevice _$UserDeviceFromJson(Map<String, dynamic> json) => UserDevice(
       id: json['id'] as String,
-      userId: json['userId'] as String,
+      userId: json['userId'] as String?,
       name: json['name'] as String?,
       model: json['model'] as String?,
       type: json['type'] as String?,

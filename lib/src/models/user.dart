@@ -317,7 +317,7 @@ class UserDevice extends Object {
   late String id;
 
   @JsonKey(name: 'userId')
-  late String userId;
+  late String? userId;
 
   @JsonKey(name: 'createdAt')
   late DateTime? createdAt;
