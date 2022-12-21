@@ -56,6 +56,10 @@ class CurrentlyStreamingTrack extends Object {
   @JsonKey(name: 'deviceName')
   late String? deviceName;
 
+  ///Valid streaming platforms 'spotify' or 'appleMusic'
+  @JsonKey(name: 'platform')
+  late String platform;
+
   @JsonKey(name: 'track')
   late Track track;
 }
