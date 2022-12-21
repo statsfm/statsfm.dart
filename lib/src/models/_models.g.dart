@@ -142,7 +142,7 @@ AudioFeature _$AudioFeatureFromJson(Map<String, dynamic> json) => AudioFeature()
 
 ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
   ..id = json['id'] as int
-  ..chatId = json['chatId'] as String
+  ..chatId = json['chatId'] as String?
   ..content = json['content'] as String
   ..sentAt = const LocalDateTimeConverter().fromJson(json['sentAt'] as String)
   ..readAt = _$JsonConverterFromJson<String, DateTime>(

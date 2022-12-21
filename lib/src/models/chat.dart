@@ -11,8 +11,9 @@ class ChatMessage extends Object {
   @JsonKey(name: 'id')
   late int id;
 
+  //chatId is null when message is sending.
   @JsonKey(name: 'chatId')
-  late String chatId;
+  late String? chatId;
 
   @JsonKey(name: 'content')
   late String content;
