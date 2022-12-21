@@ -376,6 +376,7 @@ CurrentlyStreamingTrack _$CurrentlyStreamingTrackFromJson(
       ..isPlaying = json['isPlaying'] as bool? ?? false
       ..progressMs = json['progressMs'] as int
       ..deviceName = json['deviceName'] as String?
+      ..platform = json['platform'] as String
       ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 
 RecentlyStreamedTrack _$RecentlyStreamedTrackFromJson(
