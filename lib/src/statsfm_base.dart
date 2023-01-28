@@ -50,7 +50,10 @@ abstract class StatsfmApiBase {
 
   void init() {
     _dio.options.baseUrl = _baseUrl;
-    _dio.options.headers = {'Authorization': _accessToken};
+    _dio.options.headers = {
+      'Authorization': _accessToken,
+      'Connection': 'Keep-Alive'
+    };
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       options.queryParameters =
           Map<String, dynamic>.from(SplayTreeMap.from(options.queryParameters));
