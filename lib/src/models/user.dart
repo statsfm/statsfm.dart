@@ -371,3 +371,51 @@ class UserDeviceNotifications extends Object {
   @JsonKey(name: 'updates')
   late bool? updates;
 }
+
+enum AchievementCategory  {
+  @JsonValue("STREAK")
+  STREAK,
+
+  @JsonValue("ONE-TIME")
+  ONETIME,
+
+  @JsonValue("CUSTOM")
+  CUSTOM
+}
+
+@JsonSerializable(createToJson: true)
+class UserAchievement extends Object {
+  UserAchievement();
+
+  Map<String, dynamic> toJson() => _$UserAchievementToJson(this);
+
+  factory UserAchievement.fromJson(Map<String, dynamic> json) =>
+      _$UserAchievementFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'image')
+  late String image;
+
+  @JsonKey(name: 'category', defaultValue: AchievementCategory.ONETIME)
+  late AchievementCategory category;
+
+  @JsonKey(name: 'userId')
+  late String userId;
+
+  @JsonKey(name: 'title')
+  late String title;
+
+  @JsonKey(name: 'description')
+  late String description;
+
+  @JsonKey(name: 'active')
+  late String active;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+
+  @JsonKey(name: 'updatedAt')
+  late DateTime updatedAt;
+}

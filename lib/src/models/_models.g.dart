@@ -688,3 +688,36 @@ Map<String, dynamic> _$UserDeviceNotificationsToJson(
       'monthlySummary': instance.monthlySummary,
       'updates': instance.updates,
     };
+
+UserAchievement _$UserAchievementFromJson(Map<String, dynamic> json) =>
+    UserAchievement()
+      ..id = json['id'] as int
+      ..image = json['image'] as String
+      ..category =
+          $enumDecodeNullable(_$AchievementCategoryEnumMap, json['category']) ??
+              AchievementCategory.ONETIME
+      ..userId = json['userId'] as String
+      ..title = json['title'] as String
+      ..description = json['description'] as String
+      ..active = json['active'] as String
+      ..createdAt = DateTime.parse(json['createdAt'] as String)
+      ..updatedAt = DateTime.parse(json['updatedAt'] as String);
+
+Map<String, dynamic> _$UserAchievementToJson(UserAchievement instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'image': instance.image,
+      'category': _$AchievementCategoryEnumMap[instance.category]!,
+      'userId': instance.userId,
+      'title': instance.title,
+      'description': instance.description,
+      'active': instance.active,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+    };
+
+const _$AchievementCategoryEnumMap = {
+  AchievementCategory.STREAK: 'STREAK',
+  AchievementCategory.ONETIME: 'ONE-TIME',
+  AchievementCategory.CUSTOM: 'CUSTOM',
+};
