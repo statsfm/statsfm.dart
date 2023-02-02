@@ -688,3 +688,44 @@ Map<String, dynamic> _$UserDeviceNotificationsToJson(
       'monthlySummary': instance.monthlySummary,
       'updates': instance.updates,
     };
+
+SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) => SpotifyAuth()
+  ..disabled = json['disabled'] as bool
+  ..email = json['email'] as String
+  ..displayName = json['displayName'] as String
+  ..platformUserId = json['platformUserId'] as String
+  ..image = json['image'] as String?
+  ..country = json['country'] as String
+  ..syncStreams = json['sync'] as bool
+  ..imported = json['imported'] as bool;
+
+Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
+    <String, dynamic>{
+      'disabled': instance.disabled,
+      'email': instance.email,
+      'displayName': instance.displayName,
+      'platformUserId': instance.platformUserId,
+      'image': instance.image,
+      'country': instance.country,
+      'sync': instance.syncStreams,
+      'imported': instance.imported,
+    };
+
+AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
+    AppleMusicAuth()
+      ..disabled = json['disabled'] as bool
+      ..email = json['email'] as String
+      ..emailVerified = json['emailVerified'] as bool
+      ..appleUserId = json['appleUserId'] as String
+      ..syncStreams = json['sync'] as bool
+      ..imported = json['imported'] as bool;
+
+Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
+    <String, dynamic>{
+      'disabled': instance.disabled,
+      'email': instance.email,
+      'emailVerified': instance.emailVerified,
+      'appleUserId': instance.appleUserId,
+      'sync': instance.syncStreams,
+      'imported': instance.imported,
+    };

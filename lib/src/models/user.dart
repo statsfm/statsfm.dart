@@ -371,3 +371,65 @@ class UserDeviceNotifications extends Object {
   @JsonKey(name: 'updates')
   late bool? updates;
 }
+
+@JsonSerializable(createToJson: true)
+class SpotifyAuth extends Object {
+  SpotifyAuth();
+
+  Map<String, dynamic> toJson() => _$SpotifyAuthToJson(this);
+
+  factory SpotifyAuth.fromJson(Map<String, dynamic> json) =>
+      _$SpotifyAuthFromJson(json);
+
+  @JsonKey(name: 'disabled')
+  late bool disabled;
+
+  @JsonKey(name: 'email')
+  late String email;
+
+  @JsonKey(name: 'displayName')
+  late String displayName;
+
+  @JsonKey(name: 'platformUserId')
+  late String platformUserId;
+
+  @JsonKey(name: 'image')
+  late String? image;
+
+  @JsonKey(name: 'country')
+  late String country;
+
+  @JsonKey(name: 'sync')
+  late bool syncStreams;
+
+  @JsonKey(name: 'imported')
+  late bool imported;
+}
+
+@JsonSerializable(createToJson: true)
+class AppleMusicAuth extends Object {
+  AppleMusicAuth();
+
+  Map<String, dynamic> toJson() => _$AppleMusicAuthToJson(this);
+
+  factory AppleMusicAuth.fromJson(Map<String, dynamic> json) =>
+      _$AppleMusicAuthFromJson(json);
+
+  @JsonKey(name: 'disabled')
+  late bool disabled;
+
+  @JsonKey(name: 'email')
+  late String email;
+
+  @JsonKey(name: 'emailVerified')
+  late bool emailVerified;
+
+  @JsonKey(name: 'appleUserId')
+  late String appleUserId;
+
+  @JsonKey(name: 'sync')
+  late bool syncStreams;
+
+  @JsonKey(name: 'imported')
+  late bool imported;
+}
