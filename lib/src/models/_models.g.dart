@@ -689,6 +689,22 @@ Map<String, dynamic> _$UserDeviceNotificationsToJson(
       'updates': instance.updates,
     };
 
+AuthConnections _$AuthConnectionsFromJson(Map<String, dynamic> json) =>
+    AuthConnections()
+      ..spotifyAuth = json['spotifyAuth'] == null
+          ? null
+          : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
+      ..appleMusicAuth = json['appleMusicAuth'] == null
+          ? null
+          : AppleMusicAuth.fromJson(
+              json['appleMusicAuth'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$AuthConnectionsToJson(AuthConnections instance) =>
+    <String, dynamic>{
+      'spotifyAuth': instance.spotifyAuth,
+      'appleMusicAuth': instance.appleMusicAuth,
+    };
+
 SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) => SpotifyAuth()
   ..disabled = json['disabled'] as bool
   ..email = json['email'] as String

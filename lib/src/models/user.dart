@@ -373,6 +373,22 @@ class UserDeviceNotifications extends Object {
 }
 
 @JsonSerializable(createToJson: true)
+class AuthConnections extends Object {
+  AuthConnections();
+
+  Map<String, dynamic> toJson() => _$AuthConnectionsToJson(this);
+
+  factory AuthConnections.fromJson(Map<String, dynamic> json) =>
+      _$AuthConnectionsFromJson(json);
+
+  @JsonKey(name: 'spotifyAuth')
+  late SpotifyAuth? spotifyAuth;
+
+  @JsonKey(name: 'appleMusicAuth')
+  late AppleMusicAuth? appleMusicAuth;
+}
+
+@JsonSerializable(createToJson: true)
 class SpotifyAuth extends Object {
   SpotifyAuth();
 
