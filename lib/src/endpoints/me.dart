@@ -172,7 +172,7 @@ class Me extends EndpointBase {
   }
 
   Future<List<Soulmate>> soulmates(
-      {bool forceRefresh = false, bool? plusOnly, String? country}) async {
+      {bool forceRefresh = false, bool? plusOnly, String? country, List<int>? artistsIds}) async {
     Map<String, dynamic> queryParams = {};
     //Refreshes soulmates matches
     if (forceRefresh) {
@@ -185,6 +185,10 @@ class Me extends EndpointBase {
     //Filters to matches by country iso code. Leave null for global results
     if (country != null) {
       queryParams.addAll({'country': country});
+    }
+    //Match with users who listen to the listed artists (Max 50 artists ids)
+    if (artistsIds != null) {
+      queryParams.addAll({'artistsIds': artistsIds});
     }
 
     final Map map = (await dio.get(
