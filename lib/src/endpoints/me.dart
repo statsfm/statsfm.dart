@@ -188,7 +188,7 @@ class Me extends EndpointBase {
     }
     //Match with users who listen to the listed artists (Max 50 artists ids)
     if (artistsIds != null) {
-      queryParams.addAll({'artistsIds': artistsIds});
+      queryParams.addAll({'artistsIds': artistsIds.join(',')});
     }
 
     final Map map = (await dio.get(
