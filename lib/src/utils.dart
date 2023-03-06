@@ -10,3 +10,7 @@ extension StringExtension on String {
 DateTime dateTimeFromTimestamp(int timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp).toLocal();
 }
+
+int dateTimeToTimestamp(DateTime timestamp) {
+  return timestamp.millisecondsSinceEpoch;
+}

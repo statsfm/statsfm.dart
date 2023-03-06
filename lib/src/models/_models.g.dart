@@ -81,10 +81,31 @@ Album _$AlbumFromJson(Map<String, dynamic> json) => Album()
       ? null
       : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
 
+Map<String, dynamic> _$AlbumToJson(Album instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image': instance.image,
+      'label': instance.label,
+      'spotifyPopularity': instance.spotifyPopularity,
+      'totalTracks': instance.totalTracks,
+      'type': instance.type,
+      'releaseDate': dateTimeToTimestamp(instance.releaseDate),
+      'genres': instance.genres,
+      'artists': instance.artists.map((e) => e.toJson()).toList(),
+      'externalIds': instance.externalIds?.toJson(),
+    };
+
 AlbumSimple _$AlbumSimpleFromJson(Map<String, dynamic> json) => AlbumSimple()
   ..id = json['id'] as int
   ..name = json['name'] as String
   ..image = json['image'] as String?;
+
+Map<String, dynamic> _$AlbumSimpleToJson(AlbumSimple instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'image': instance.image,
+    };
 
 TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) => TopAlbum()
   ..position = json['position'] as int
@@ -92,6 +113,14 @@ TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) => TopAlbum()
   ..playedMs = json['playedMs'] as int?
   ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
   ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopAlbumToJson(TopAlbum instance) => <String, dynamic>{
+      'position': instance.position,
+      'streams': instance.streams,
+      'playedMs': instance.playedMs,
+      'indicator': _$IndicatorEnumMap[instance.indicator],
+      'album': instance.album.toJson(),
+    };
 
 const _$IndicatorEnumMap = {
   Indicator.UP: 'UP',
@@ -112,9 +141,25 @@ Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist()
       ? null
       : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
 
+Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'followers': instance.followers,
+      'image': instance.image,
+      'spotifyPopularity': instance.spotifyPopularity,
+      'genres': instance.genres,
+      'externalIds': instance.externalIds?.toJson(),
+    };
+
 ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) => ArtistSimple()
   ..id = json['id'] as int
   ..name = json['name'] as String;
+
+Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
 
 TopArtist _$TopArtistFromJson(Map<String, dynamic> json) => TopArtist()
   ..position = json['position'] as int
@@ -122,6 +167,14 @@ TopArtist _$TopArtistFromJson(Map<String, dynamic> json) => TopArtist()
   ..playedMs = json['playedMs'] as int?
   ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
   ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopArtistToJson(TopArtist instance) => <String, dynamic>{
+      'position': instance.position,
+      'streams': instance.streams,
+      'playedMs': instance.playedMs,
+      'indicator': _$IndicatorEnumMap[instance.indicator],
+      'artist': instance.artist.toJson(),
+    };
 
 AudioFeature _$AudioFeatureFromJson(Map<String, dynamic> json) => AudioFeature()
   ..acousticness = (json['acousticness'] as num?)?.toDouble()
@@ -234,6 +287,22 @@ ExternalIds _$ExternalIdsFromJson(Map<String, dynamic> json) => ExternalIds()
       (json['youtubeMusic'] as List<dynamic>?)?.map((e) => e as String).toList()
   ..appleMusic =
       (json['appleMusic'] as List<dynamic>?)?.map((e) => e as String).toList();
+
+Map<String, dynamic> _$ExternalIdsToJson(ExternalIds instance) =>
+    <String, dynamic>{
+      'isrc': instance.isrc,
+      'ean': instance.ean,
+      'upc': instance.upc,
+      'spotify': instance.spotify,
+      'amazonMusic': instance.amazonMusic,
+      'deezer': instance.deezer,
+      'napster': instance.napster,
+      'pandora': instance.pandora,
+      'soundcloud': instance.soundcloud,
+      'tidal': instance.tidal,
+      'youtubeMusic': instance.youtubeMusic,
+      'appleMusic': instance.appleMusic,
+    };
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre()
   ..tag = json['tag'] as String?
@@ -369,6 +438,17 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track()
       ? null
       : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
 
+Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'explicit': instance.explicit,
+      'durationMs': instance.durationMs,
+      'spotifyPopularity': instance.spotifyPopularity,
+      'artists': instance.artists.map((e) => e.toJson()).toList(),
+      'albums': instance.albums.map((e) => e.toJson()).toList(),
+      'externalIds': instance.externalIds?.toJson(),
+    };
+
 CurrentlyStreamingTrack _$CurrentlyStreamingTrackFromJson(
         Map<String, dynamic> json) =>
     CurrentlyStreamingTrack()
@@ -392,6 +472,14 @@ TopTrack _$TopTrackFromJson(Map<String, dynamic> json) => TopTrack()
   ..playedMs = json['playedMs'] as int?
   ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
   ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
+      'position': instance.position,
+      'streams': instance.streams,
+      'playedMs': instance.playedMs,
+      'indicator': _$IndicatorEnumMap[instance.indicator],
+      'track': instance.track.toJson(),
+    };
 
 UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..id = json['id'] as String

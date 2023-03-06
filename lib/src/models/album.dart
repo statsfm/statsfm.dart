@@ -1,11 +1,12 @@
 part of statsfm.models;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 @LocalDateTimeConverter()
 class Album extends AlbumSimple {
   Album();
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);
+  Map<String, dynamic> toJson() => _$AlbumToJson(this);
 
   @JsonKey(name: 'label')
   late String? label;
@@ -19,7 +20,7 @@ class Album extends AlbumSimple {
   @JsonKey(name: 'type')
   late String type;
 
-  @JsonKey(name: 'releaseDate', fromJson: dateTimeFromTimestamp)
+  @JsonKey(name: 'releaseDate', fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
   late DateTime releaseDate;
 
   @JsonKey(name: 'genres')
@@ -32,12 +33,13 @@ class Album extends AlbumSimple {
   late ExternalIds? externalIds;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class AlbumSimple extends Object {
   AlbumSimple();
 
   factory AlbumSimple.fromJson(Map<String, dynamic> json) =>
       _$AlbumSimpleFromJson(json);
+  Map<String, dynamic> toJson() => _$AlbumSimpleToJson(this);
 
   /// The Statsfm id for the album.
   @JsonKey(name: 'id')
@@ -50,12 +52,13 @@ class AlbumSimple extends Object {
   late String? image;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class TopAlbum extends TopObject {
   TopAlbum();
 
   factory TopAlbum.fromJson(Map<String, dynamic> json) =>
       _$TopAlbumFromJson(json);
+  Map<String, dynamic> toJson() => _$TopAlbumToJson(this);
 
   @JsonKey(name: 'album')
   late Album album;

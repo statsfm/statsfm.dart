@@ -1,11 +1,12 @@
 part of statsfm.models;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class ExternalIds extends Object {
   ExternalIds();
 
   factory ExternalIds.fromJson(Map<String, dynamic> json) =>
       _$ExternalIdsFromJson(json);
+  Map<String, dynamic> toJson() => _$ExternalIdsToJson(this);
 
   /// International Standard Recording Code
   @JsonKey(name: 'isrc')

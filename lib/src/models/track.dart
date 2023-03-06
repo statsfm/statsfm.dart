@@ -1,10 +1,11 @@
 part of statsfm.models;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class Track extends Object {
   Track();
 
   factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);
+  Map<String, dynamic> toJson() => _$TrackToJson(this);
 
   /// The Statsfm id for the track.
   @JsonKey(name: 'id')
@@ -79,12 +80,13 @@ class RecentlyStreamedTrack extends Object {
   late Track track;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class TopTrack extends TopObject {
   TopTrack();
 
   factory TopTrack.fromJson(Map<String, dynamic> json) =>
       _$TopTrackFromJson(json);
+  Map<String, dynamic> toJson() => _$TopTrackToJson(this);
 
   @JsonKey(name: 'track')
   late Track track;

@@ -1,10 +1,11 @@
 part of statsfm.models;
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class Artist extends ArtistSimple {
   Artist();
 
   factory Artist.fromJson(Map<String, dynamic> json) => _$ArtistFromJson(json);
+  Map<String, dynamic> toJson() => _$ArtistToJson(this);
 
   @JsonKey(name: 'followers')
   late int followers;
@@ -22,12 +23,13 @@ class Artist extends ArtistSimple {
   late ExternalIds? externalIds;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class ArtistSimple extends Object {
   ArtistSimple();
 
   factory ArtistSimple.fromJson(Map<String, dynamic> json) =>
       _$ArtistSimpleFromJson(json);
+  Map<String, dynamic> toJson() => _$ArtistSimpleToJson(this);
 
   /// The Statsfm id for the artist.
   @JsonKey(name: 'id')
@@ -37,12 +39,13 @@ class ArtistSimple extends Object {
   late String name;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class TopArtist extends TopObject {
   TopArtist();
 
   factory TopArtist.fromJson(Map<String, dynamic> json) =>
       _$TopArtistFromJson(json);
+  Map<String, dynamic> toJson() => _$TopArtistToJson(this);
 
   @JsonKey(name: 'artist')
   late Artist artist;
