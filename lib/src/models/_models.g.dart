@@ -237,7 +237,6 @@ ExternalIds _$ExternalIdsFromJson(Map<String, dynamic> json) => ExternalIds()
 
 Genre _$GenreFromJson(Map<String, dynamic> json) => Genre()
   ..tag = json['tag'] as String?
-  ..name = json['name'] as String?
   ..artists = (json['artists'] as List<dynamic>)
       .map((e) => Artist.fromJson(e as Map<String, dynamic>))
       .toList()

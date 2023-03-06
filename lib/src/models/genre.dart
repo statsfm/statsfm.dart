@@ -6,8 +6,8 @@ class Genre extends GenreSimple {
 
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
 
-  @JsonKey(name: 'name')
-  late String? name; //TODO: make this non-nullable once added to the api.
+  @JsonKey(name: 'tag')
+  late String? tag; //TODO: make this non-nullable once added to the production api.
 
   @JsonKey(name: 'artists')
   late List<Artist> artists;
