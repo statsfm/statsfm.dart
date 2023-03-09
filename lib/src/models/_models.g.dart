@@ -428,6 +428,7 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track()
   ..explicit = json['explicit'] as bool
   ..durationMs = json['durationMs'] as int
   ..spotifyPopularity = json['spotifyPopularity'] as int?
+  ..previewUrl = json['previewUrl'] as String?
   ..artists = (json['artists'] as List<dynamic>)
       .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
       .toList()
@@ -444,6 +445,7 @@ Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'explicit': instance.explicit,
       'durationMs': instance.durationMs,
       'spotifyPopularity': instance.spotifyPopularity,
+      'previewUrl': instance.previewUrl,
       'artists': instance.artists.map((e) => e.toJson()).toList(),
       'albums': instance.albums.map((e) => e.toJson()).toList(),
       'externalIds': instance.externalIds?.toJson(),
