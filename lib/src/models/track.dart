@@ -27,6 +27,9 @@ class Track extends Object {
   @JsonKey(name: 'spotifyPopularity')
   late int? spotifyPopularity;
 
+  @JsonKey(name: 'previewUrl')
+  late String? previewUrl;
+
   @JsonKey(name: 'artists')
   late List<ArtistSimple> artists;
 
