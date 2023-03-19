@@ -56,6 +56,13 @@ class Artists extends EndpointBase {
     return topTracks.map((m) => Track.fromJson(m)).toList();
   }
 
+  Future<List<SwipeTopTrack>> topSwipedTracks(int artistId) async {
+    final Map map = (await dio.get('$_path/$artistId/swipefy/top/tracks')).data;
+
+    var topTracks = map['items'] as Iterable<dynamic>;
+    return topTracks.map((m) => SwipeTopTrack.fromJson(m)).toList();
+  }
+
   Future<List<Album>> albums(int artistId) async {
     final Map map = (await dio.get('$_path/$artistId/albums')).data;
 
@@ -68,6 +75,13 @@ class Artists extends EndpointBase {
 
     var topTracks = map['items'] as Iterable<dynamic>;
     return topTracks.map((m) => Track.fromJson(m)).toList();
+  }
+
+  Future<List<SwipeTopAlbum>> topSwipedAlbums(int artistId) async {
+    final Map map = (await dio.get('$_path/$artistId/swipefy/top/albums')).data;
+
+    var topAlbums = map['items'] as Iterable<dynamic>;
+    return topAlbums.map((m) => SwipeTopAlbum.fromJson(m)).toList();
   }
 
   Future<List<Artist>> related(int artistId) async {

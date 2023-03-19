@@ -65,12 +65,12 @@ class TopAlbum extends TopObject {
 }
 
 @JsonSerializable(explicitToJson: true)
-class TopSwipeAlbum extends TopSwipeObject {
-  TopSwipeAlbum();
+class SwipeTopAlbum extends SwipeTopObject {
+  SwipeTopAlbum();
 
-  factory TopSwipeAlbum.fromJson(Map<String, dynamic> json) =>
-      _$TopSwipeAlbumFromJson(json);
-  Map<String, dynamic> toJson() => _$TopSwipeAlbumToJson(this);
+  factory SwipeTopAlbum.fromJson(Map<String, dynamic> json) =>
+      _$SwipeTopAlbumFromJson(json);
+  Map<String, dynamic> toJson() => _$SwipeTopAlbumToJson(this);
 
   @JsonKey(name: 'album')
   late Album album;

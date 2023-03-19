@@ -130,8 +130,8 @@ const _$IndicatorEnumMap = {
   Indicator.NONE: 'NONE',
 };
 
-TopSwipeAlbum _$TopSwipeAlbumFromJson(Map<String, dynamic> json) =>
-    TopSwipeAlbum()
+SwipeTopAlbum _$SwipeTopAlbumFromJson(Map<String, dynamic> json) =>
+    SwipeTopAlbum()
       ..position = json['position'] as int
       ..swipes = json['swipes'] as int
       ..decision =
@@ -140,7 +140,7 @@ TopSwipeAlbum _$TopSwipeAlbumFromJson(Map<String, dynamic> json) =>
           SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
       ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$TopSwipeAlbumToJson(TopSwipeAlbum instance) =>
+Map<String, dynamic> _$SwipeTopAlbumToJson(SwipeTopAlbum instance) =>
     <String, dynamic>{
       'position': instance.position,
       'swipes': instance.swipes,
@@ -506,8 +506,8 @@ TopObject _$TopObjectFromJson(Map<String, dynamic> json) => TopObject()
   ..playedMs = json['playedMs'] as int?
   ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
 
-TopSwipeObject _$TopSwipeObjectFromJson(Map<String, dynamic> json) =>
-    TopSwipeObject()
+SwipeTopObject _$SwipeTopObjectFromJson(Map<String, dynamic> json) =>
+    SwipeTopObject()
       ..position = json['position'] as int
       ..swipes = json['swipes'] as int
       ..decision =
@@ -515,7 +515,7 @@ TopSwipeObject _$TopSwipeObjectFromJson(Map<String, dynamic> json) =>
       ..decisionMs =
           SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$TopSwipeObjectToJson(TopSwipeObject instance) =>
+Map<String, dynamic> _$SwipeTopObjectToJson(SwipeTopObject instance) =>
     <String, dynamic>{
       'position': instance.position,
       'swipes': instance.swipes,
@@ -584,8 +584,8 @@ Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
       'track': instance.track.toJson(),
     };
 
-TopSwipeTrack _$TopSwipeTrackFromJson(Map<String, dynamic> json) =>
-    TopSwipeTrack()
+SwipeTopTrack _$SwipeTopTrackFromJson(Map<String, dynamic> json) =>
+    SwipeTopTrack()
       ..position = json['position'] as int
       ..swipes = json['swipes'] as int
       ..decision =
@@ -594,7 +594,7 @@ TopSwipeTrack _$TopSwipeTrackFromJson(Map<String, dynamic> json) =>
           SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
       ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$TopSwipeTrackToJson(TopSwipeTrack instance) =>
+Map<String, dynamic> _$SwipeTopTrackToJson(SwipeTopTrack instance) =>
     <String, dynamic>{
       'position': instance.position,
       'swipes': instance.swipes,
