@@ -393,13 +393,16 @@ SwipeStats _$SwipeStatsFromJson(Map<String, dynamic> json) => SwipeStats()
   ..decision = SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
   ..decisionMs =
       SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
-  ..count = json['count'] as int;
+  ..count = json['count'] as int
+  ..cardinality =
+      SwipeCardinality.fromJson(json['cardinality'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$SwipeStatsToJson(SwipeStats instance) =>
     <String, dynamic>{
       'decision': instance.decision.toJson(),
       'decisionMs': instance.decisionMs.toJson(),
       'count': instance.count,
+      'cardinality': instance.cardinality.toJson(),
     };
 
 SwipeDecision _$SwipeDecisionFromJson(Map<String, dynamic> json) =>

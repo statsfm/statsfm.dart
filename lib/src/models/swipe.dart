@@ -39,6 +39,9 @@ class SwipeStats extends Object {
 
   @JsonKey(name: 'count')
   late int count;
+
+  @JsonKey(name: 'cardinality')
+  late SwipeCardinality cardinality;
 }
 
 @JsonSerializable(createToJson: true)
