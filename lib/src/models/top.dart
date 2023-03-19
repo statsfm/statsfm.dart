@@ -36,3 +36,24 @@ class TopObject extends Object {
   @JsonKey(name: 'indicator')
   Indicator? indicator;
 }
+
+@JsonSerializable(explicitToJson: true)
+class TopSwipeObject extends Object {
+  TopSwipeObject();
+
+  factory TopSwipeObject.fromJson(Map<String, dynamic> json) =>
+      _$TopSwipeObjectFromJson(json);
+  Map<String, dynamic> toJson() => _$TopSwipeObjectToJson(this);
+
+  @JsonKey(name: 'position')
+  late int position;
+
+  @JsonKey(name: 'swipes')
+  late int swipes;
+
+  @JsonKey(name: 'decision')
+  late SwipeDecision decision;
+
+  @JsonKey(name: 'decisionMs')
+  late SwipeDecisionMs decisionMs;
+}

@@ -94,3 +94,15 @@ class TopTrack extends TopObject {
   @JsonKey(name: 'track')
   late Track track;
 }
+
+@JsonSerializable(explicitToJson: true)
+class TopSwipeTrack extends TopSwipeObject {
+  TopSwipeTrack();
+
+  factory TopSwipeTrack.fromJson(Map<String, dynamic> json) =>
+      _$TopSwipeTrackFromJson(json);
+  Map<String, dynamic> toJson() => _$TopSwipeTrackToJson(this);
+
+  @JsonKey(name: 'track')
+  late Track track;
+}

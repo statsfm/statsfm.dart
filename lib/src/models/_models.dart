@@ -19,6 +19,7 @@ part 'range.dart';
 part 'search.dart';
 part 'soulmate.dart';
 part 'stream.dart';
+part 'swipe.dart';
 part 'stream_stats.dart';
 part 'top.dart';
 part 'track.dart';

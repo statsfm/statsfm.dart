@@ -130,6 +130,25 @@ const _$IndicatorEnumMap = {
   Indicator.NONE: 'NONE',
 };
 
+TopSwipeAlbum _$TopSwipeAlbumFromJson(Map<String, dynamic> json) =>
+    TopSwipeAlbum()
+      ..position = json['position'] as int
+      ..swipes = json['swipes'] as int
+      ..decision =
+          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+      ..decisionMs =
+          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+      ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopSwipeAlbumToJson(TopSwipeAlbum instance) =>
+    <String, dynamic>{
+      'position': instance.position,
+      'swipes': instance.swipes,
+      'decision': instance.decision.toJson(),
+      'decisionMs': instance.decisionMs.toJson(),
+      'album': instance.album.toJson(),
+    };
+
 Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist()
   ..id = json['id'] as int
   ..name = json['name'] as String
@@ -362,6 +381,68 @@ Stream _$StreamFromJson(Map<String, dynamic> json) => Stream()
   ..albumId = json['albumId'] as int?
   ..importId = json['importId'] as int?;
 
+Swipe _$SwipeFromJson(Map<String, dynamic> json) => Swipe()
+  ..id = json['id'] as String
+  ..createdAt = DateTime.parse(json['createdAt'] as String)
+  ..decision = json['decision'] as String
+  ..decisionMs = json['decisionMs'] as int
+  ..algorithmId = json['algorithmId'] as int
+  ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+
+SwipeStats _$SwipeStatsFromJson(Map<String, dynamic> json) => SwipeStats()
+  ..decision = SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+  ..decisionMs =
+      SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+  ..count = json['count'] as int;
+
+Map<String, dynamic> _$SwipeStatsToJson(SwipeStats instance) =>
+    <String, dynamic>{
+      'decision': instance.decision.toJson(),
+      'decisionMs': instance.decisionMs.toJson(),
+      'count': instance.count,
+    };
+
+SwipeDecision _$SwipeDecisionFromJson(Map<String, dynamic> json) =>
+    SwipeDecision()
+      ..liked = json['liked'] as int
+      ..disliked = json['disliked'] as int;
+
+Map<String, dynamic> _$SwipeDecisionToJson(SwipeDecision instance) =>
+    <String, dynamic>{
+      'liked': instance.liked,
+      'disliked': instance.disliked,
+    };
+
+SwipeDecisionMs _$SwipeDecisionMsFromJson(Map<String, dynamic> json) =>
+    SwipeDecisionMs()
+      ..min = json['min'] as int?
+      ..max = json['max'] as int?
+      ..avg = (json['avg'] as num?)?.toDouble()
+      ..sum = json['sum'] as int;
+
+Map<String, dynamic> _$SwipeDecisionMsToJson(SwipeDecisionMs instance) =>
+    <String, dynamic>{
+      'min': instance.min,
+      'max': instance.max,
+      'avg': instance.avg,
+      'sum': instance.sum,
+    };
+
+SwipeCardinality _$SwipeCardinalityFromJson(Map<String, dynamic> json) =>
+    SwipeCardinality()
+      ..tracks = json['tracks'] as int?
+      ..artists = json['artists'] as int?
+      ..albums = json['albums'] as int?
+      ..users = json['users'] as int?;
+
+Map<String, dynamic> _$SwipeCardinalityToJson(SwipeCardinality instance) =>
+    <String, dynamic>{
+      'tracks': instance.tracks,
+      'artists': instance.artists,
+      'albums': instance.albums,
+      'users': instance.users,
+    };
+
 PerDayStats _$PerDayStatsFromJson(Map<String, dynamic> json) => PerDayStats()
   ..average =
       StreamStatsWithPrecision.fromJson(json['average'] as Map<String, dynamic>)
@@ -422,6 +503,23 @@ TopObject _$TopObjectFromJson(Map<String, dynamic> json) => TopObject()
   ..playedMs = json['playedMs'] as int?
   ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
 
+TopSwipeObject _$TopSwipeObjectFromJson(Map<String, dynamic> json) =>
+    TopSwipeObject()
+      ..position = json['position'] as int
+      ..swipes = json['swipes'] as int
+      ..decision =
+          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+      ..decisionMs =
+          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopSwipeObjectToJson(TopSwipeObject instance) =>
+    <String, dynamic>{
+      'position': instance.position,
+      'swipes': instance.swipes,
+      'decision': instance.decision.toJson(),
+      'decisionMs': instance.decisionMs.toJson(),
+    };
+
 Track _$TrackFromJson(Map<String, dynamic> json) => Track()
   ..id = json['id'] as int
   ..name = json['name'] as String
@@ -480,6 +578,25 @@ Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
       'streams': instance.streams,
       'playedMs': instance.playedMs,
       'indicator': _$IndicatorEnumMap[instance.indicator],
+      'track': instance.track.toJson(),
+    };
+
+TopSwipeTrack _$TopSwipeTrackFromJson(Map<String, dynamic> json) =>
+    TopSwipeTrack()
+      ..position = json['position'] as int
+      ..swipes = json['swipes'] as int
+      ..decision =
+          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+      ..decisionMs =
+          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+      ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$TopSwipeTrackToJson(TopSwipeTrack instance) =>
+    <String, dynamic>{
+      'position': instance.position,
+      'swipes': instance.swipes,
+      'decision': instance.decision.toJson(),
+      'decisionMs': instance.decisionMs.toJson(),
       'track': instance.track.toJson(),
     };
 
