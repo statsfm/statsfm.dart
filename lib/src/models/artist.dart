@@ -50,3 +50,15 @@ class TopArtist extends TopObject {
   @JsonKey(name: 'artist')
   late Artist artist;
 }
+
+@JsonSerializable(explicitToJson: true)
+class SwipeTopArtist extends SwipeTopObject {
+  SwipeTopArtist();
+
+  factory SwipeTopArtist.fromJson(Map<String, dynamic> json) =>
+      _$SwipeTopArtistFromJson(json);
+  Map<String, dynamic> toJson() => _$SwipeTopArtistToJson(this);
+
+  @JsonKey(name: 'artist')
+  late Artist artist;
+}

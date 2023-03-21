@@ -195,6 +195,25 @@ Map<String, dynamic> _$TopArtistToJson(TopArtist instance) => <String, dynamic>{
       'artist': instance.artist.toJson(),
     };
 
+SwipeTopArtist _$SwipeTopArtistFromJson(Map<String, dynamic> json) =>
+    SwipeTopArtist()
+      ..position = json['position'] as int
+      ..swipes = json['swipes'] as int
+      ..decision =
+          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+      ..decisionMs =
+          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+      ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$SwipeTopArtistToJson(SwipeTopArtist instance) =>
+    <String, dynamic>{
+      'position': instance.position,
+      'swipes': instance.swipes,
+      'decision': instance.decision.toJson(),
+      'decisionMs': instance.decisionMs.toJson(),
+      'artist': instance.artist.toJson(),
+    };
+
 AudioFeature _$AudioFeatureFromJson(Map<String, dynamic> json) => AudioFeature()
   ..acousticness = (json['acousticness'] as num?)?.toDouble()
   ..analysisUrl = json['analysis_url'] as String?
