@@ -22,6 +22,22 @@ class Charts extends EndpointBase {
     return topTracksMap.map((m) => TopTrack.fromJson(m)).toList();
   }
 
+  Future<List<SwipeTopTrack>> topSwipefyTracks({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/swipefy/top/tracks',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var topTracksMap = map['items'] as Iterable<dynamic>;
+    return topTracksMap.map((m) => SwipeTopTrack.fromJson(m)).toList();
+  }
+
   Future<List<TopArtist>> topArtists({
     QueryOptions options = const QueryOptions(),
   }) async {
@@ -36,6 +52,22 @@ class Charts extends EndpointBase {
 
     var topArtistsMap = map['items'] as Iterable<dynamic>;
     return topArtistsMap.map((m) => TopArtist.fromJson(m)).toList();
+  }
+
+  Future<List<SwipeTopArtist>> topSwipefyArtists({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/swipefy/top/artists',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var topArtistsMap = map['items'] as Iterable<dynamic>;
+    return topArtistsMap.map((m) => SwipeTopArtist.fromJson(m)).toList();
   }
 
   Future<List<TopAlbum>> topAlbums({
