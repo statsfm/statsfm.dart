@@ -15,6 +15,9 @@ class SearchResults extends Object {
 
   @JsonKey(name: 'albums', defaultValue: [])
   late List<Album> albums;
+
+  @JsonKey(name: 'users', defaultValue: [])
+  late List<UserPublic> users;
 }
 
-enum SearchType { TRACK, ARTIST, ALBUM }
+enum SearchType { TRACK, ARTIST, ALBUM, USER }

@@ -378,6 +378,10 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
       ..albums = (json['albums'] as List<dynamic>?)
               ?.map((e) => Album.fromJson(e as Map<String, dynamic>))
               .toList() ??
+          []
+      ..users = (json['users'] as List<dynamic>?)
+              ?.map((e) => UserPublic.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           [];
 
 Soulmate _$SoulmateFromJson(Map<String, dynamic> json) => Soulmate()
