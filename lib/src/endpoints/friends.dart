@@ -85,8 +85,26 @@ class Friends extends EndpointBase {
 
   /// Check if the current user has blocked the other user
   Future<bool> blockStatus(UserPublic user) async {
-    return (await dio.get('$_path/block-status/${Uri.encodeComponent(user.id)}'))
+    return (await dio
+                .get('$_path/block-status/${Uri.encodeComponent(user.id)}'))
             .statusCode ==
         200;
+  }
+
+  /// Check if the current users friend status with another user
+  Future<FriendStatus> status(UserPublic user) async {
+    final Map map =
+        (await dio.get('$_path/status/${Uri.encodeComponent(user.id)}')).data;
+    String status = map['data'] as String;
+
+    if (status == "FRIENDS") {
+      return FriendStatus.FRIENDS;
+    } else if (status == "REQUEST_INCOMING") {
+      return FriendStatus.REQUEST_INCOMING;
+    } else if (status == "REQUEST_OUTGOING") {
+      return FriendStatus.REQUEST_OUTGOING;
+    } else {
+      return FriendStatus.NONE;
+    }
   }
 }
