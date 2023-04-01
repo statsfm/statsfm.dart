@@ -184,6 +184,43 @@ class UserProfile extends Object {
 }
 
 @JsonSerializable(createToJson: true)
+@LocalDateTimeConverter()
+class IncomingFriendRequest extends Object {
+  IncomingFriendRequest();
+
+  factory IncomingFriendRequest.fromJson(Map<String, dynamic> json) =>
+      _$IncomingFriendRequestFromJson(json);
+
+  @JsonKey(name: 'from')
+  late UserPublic friend;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+}
+
+@JsonSerializable(createToJson: true)
+@LocalDateTimeConverter()
+class OutgoingFriendRequest extends Object {
+  OutgoingFriendRequest();
+
+  factory OutgoingFriendRequest.fromJson(Map<String, dynamic> json) =>
+      _$OutgoingFriendRequestFromJson(json);
+
+  @JsonKey(name: 'to')
+  late UserPublic friend;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+}
+
+enum FriendStatus {
+  NONE,
+  FRIENDS,
+  REQUEST_INCOMING,
+  REQUEST_OUTGOING,
+}
+
+@JsonSerializable(createToJson: true)
 class UserProfileSocialMediaConnection extends Object {
   UserProfileSocialMediaConnection();
 

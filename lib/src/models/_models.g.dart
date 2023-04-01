@@ -775,6 +775,34 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
       'theme': instance.theme,
     };
 
+IncomingFriendRequest _$IncomingFriendRequestFromJson(
+        Map<String, dynamic> json) =>
+    IncomingFriendRequest()
+      ..friend = UserPublic.fromJson(json['from'] as Map<String, dynamic>)
+      ..createdAt =
+          const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+
+Map<String, dynamic> _$IncomingFriendRequestToJson(
+        IncomingFriendRequest instance) =>
+    <String, dynamic>{
+      'from': instance.friend,
+      'createdAt': const LocalDateTimeConverter().toJson(instance.createdAt),
+    };
+
+OutgoingFriendRequest _$OutgoingFriendRequestFromJson(
+        Map<String, dynamic> json) =>
+    OutgoingFriendRequest()
+      ..friend = UserPublic.fromJson(json['to'] as Map<String, dynamic>)
+      ..createdAt =
+          const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+
+Map<String, dynamic> _$OutgoingFriendRequestToJson(
+        OutgoingFriendRequest instance) =>
+    <String, dynamic>{
+      'to': instance.friend,
+      'createdAt': const LocalDateTimeConverter().toJson(instance.createdAt),
+    };
+
 UserProfileSocialMediaConnection _$UserProfileSocialMediaConnectionFromJson(
         Map<String, dynamic> json) =>
     UserProfileSocialMediaConnection()
