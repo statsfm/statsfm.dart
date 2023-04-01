@@ -244,4 +244,9 @@ class Me extends EndpointBase {
             .statusCode ==
         201;
   }
+
+  /// Removes the current users profile image
+  Future<bool> deleteProfileImage() async {
+    return (await dio.delete('$_path/image')).statusCode == 200;
+  }
 }
