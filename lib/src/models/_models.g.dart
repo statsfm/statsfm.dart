@@ -646,6 +646,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..displayName = json['displayName'] as String
   ..image = json['image'] as String?
   ..isPlus = json['isPlus'] as bool
+  ..hasSwipefy = json['hasSwipefy'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -673,6 +674,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'displayName': instance.displayName,
       'image': instance.image,
       'isPlus': instance.isPlus,
+      'hasSwipefy': instance.hasSwipefy,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -697,6 +699,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
   ..displayName = json['displayName'] as String
   ..image = json['image'] as String?
   ..isPlus = json['isPlus'] as bool
+  ..hasSwipefy = json['hasSwipefy'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -721,6 +724,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'displayName': instance.displayName,
       'image': instance.image,
       'isPlus': instance.isPlus,
+      'hasSwipefy': instance.hasSwipefy,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,

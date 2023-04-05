@@ -43,6 +43,9 @@ class UserPublic extends Object {
   @JsonKey(name: 'isPlus')
   late bool isPlus;
 
+  @JsonKey(name: 'hasSwipefy')
+  late bool hasSwipefy;
+
   @JsonKey(name: 'hasImported')
   late bool hasImported;
 
