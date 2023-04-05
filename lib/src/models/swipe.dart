@@ -16,7 +16,7 @@ class Swipe extends Object {
   late String decision;
 
   @JsonKey(name: 'decisionMs')
-  late  int decisionMs;
+  late int decisionMs;
 
   @JsonKey(name: 'algorithmId')
   late int algorithmId;
@@ -29,7 +29,8 @@ class Swipe extends Object {
 class SwipeStats extends Object {
   SwipeStats();
 
-  factory SwipeStats.fromJson(Map<String, dynamic> json) => _$SwipeStatsFromJson(json);
+  factory SwipeStats.fromJson(Map<String, dynamic> json) =>
+      _$SwipeStatsFromJson(json);
 
   @JsonKey(name: 'decision')
   late SwipeDecision decision;
@@ -48,7 +49,8 @@ class SwipeStats extends Object {
 class SwipeDecision extends Object {
   SwipeDecision();
 
-  factory SwipeDecision.fromJson(Map<String, dynamic> json) => _$SwipeDecisionFromJson(json);
+  factory SwipeDecision.fromJson(Map<String, dynamic> json) =>
+      _$SwipeDecisionFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeDecisionToJson(this);
 
   @JsonKey(name: 'liked')
@@ -62,7 +64,8 @@ class SwipeDecision extends Object {
 class SwipeDecisionMs extends Object {
   SwipeDecisionMs();
 
-  factory SwipeDecisionMs.fromJson(Map<String, dynamic> json) => _$SwipeDecisionMsFromJson(json);
+  factory SwipeDecisionMs.fromJson(Map<String, dynamic> json) =>
+      _$SwipeDecisionMsFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeDecisionMsToJson(this);
 
   @JsonKey(name: 'min')
@@ -85,7 +88,8 @@ class SwipeDecisionMs extends Object {
 class SwipeCardinality extends Object {
   SwipeCardinality();
 
-  factory SwipeCardinality.fromJson(Map<String, dynamic> json) => _$SwipeCardinalityFromJson(json);
+  factory SwipeCardinality.fromJson(Map<String, dynamic> json) =>
+      _$SwipeCardinalityFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeCardinalityToJson(this);
 
   @JsonKey(name: 'tracks')
@@ -99,4 +103,40 @@ class SwipeCardinality extends Object {
 
   @JsonKey(name: 'users')
   late int? users;
+}
+
+@JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
+class SwipeCollection extends Object {
+  SwipeCollection();
+
+  factory SwipeCollection.fromJson(Map<String, dynamic> json) =>
+      _$SwipeCollectionFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'name')
+  late String name;
+
+  @JsonKey(name: 'description')
+  late String? description;
+
+  @JsonKey(name: 'image')
+  late String? image;
+
+  @JsonKey(name: 'swipeCount')
+  late int swipeCount;
+
+  @JsonKey(name: 'public')
+  late bool public;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+
+  @JsonKey(name: 'updatedAt')
+  late DateTime updatedAt;
+
+  @JsonKey(name: 'user')
+  late UserPublic user;
 }

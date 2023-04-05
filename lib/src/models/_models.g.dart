@@ -469,6 +469,20 @@ Map<String, dynamic> _$SwipeCardinalityToJson(SwipeCardinality instance) =>
       'users': instance.users,
     };
 
+SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
+    SwipeCollection()
+      ..id = json['id'] as int
+      ..name = json['name'] as String
+      ..description = json['description'] as String?
+      ..image = json['image'] as String?
+      ..swipeCount = json['swipeCount'] as int
+      ..public = json['public'] as bool
+      ..createdAt =
+          const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+      ..updatedAt =
+          const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
+      ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+
 PerDayStats _$PerDayStatsFromJson(Map<String, dynamic> json) => PerDayStats()
   ..average =
       StreamStatsWithPrecision.fromJson(json['average'] as Map<String, dynamic>)
