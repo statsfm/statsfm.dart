@@ -481,7 +481,7 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
           const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
       ..updatedAt =
           const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
-      ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+      ..userId = json['userId'] as String;
 
 PerDayStats _$PerDayStatsFromJson(Map<String, dynamic> json) => PerDayStats()
   ..average =

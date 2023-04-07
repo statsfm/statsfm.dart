@@ -539,4 +539,75 @@ class Users extends EndpointBase {
 
     return map['item'];
   }
+
+  ///Gets users Swipefy collections
+  Future<List<SwipeCollection>> swipefyCollections(String userId) async {
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections',
+    ))
+        .data;
+
+    var collectionsMap = map['items'] as Iterable<dynamic>;
+    return collectionsMap.map((m) => SwipeCollection.fromJson(m)).toList();
+  }
+
+  ///Gets a users Swipefy collection
+  Future<SwipeCollection> swipefyCollection(
+      String userId, int collectionId) async {
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections',
+    ))
+        .data;
+
+    return SwipeCollection.fromJson(map['item']);
+  }
+
+  ///Creates a Swipefy collection (user id has to be the id of the current user)
+  Future<SwipeCollection> swipefyCreateCollection(
+    String userId, {
+    required String name,
+    String? description,
+    required bool public,
+  }) async {
+    final Map map = (await dio.post(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections',
+      data: {
+        "name": name,
+        "description": description,
+        "public": public,
+      },
+    ))
+        .data;
+
+    return SwipeCollection.fromJson(map['item']);
+  }
+
+  ///Updates a Swipefy collection that the current user owns (user id has to be the id of the current user)
+  Future<SwipeCollection> swipefyUpdateCollection(
+    String userId,
+    int collectionId, {
+    required String name,
+    String? description,
+    required bool public,
+  }) async {
+    final Map map = (await dio.put(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId',
+      data: {
+        "name": name,
+        "description": description,
+        "public": public,
+      },
+    ))
+        .data;
+
+    return SwipeCollection.fromJson(map['item']);
+  }
+
+  ///Remove a Swipefy collection that the current user owns (user id has to be the id of the current user)
+  Future<bool> swipefyRemoveCollection(String userId, int collectionId) async {
+    return (await dio.delete(
+                '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId'))
+            .statusCode ==
+        200;
+  }
 }

@@ -137,6 +137,6 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'updatedAt')
   late DateTime updatedAt;
 
-  @JsonKey(name: 'user')
-  late UserPublic user;
+  @JsonKey(name: 'userId')
+  late String userId;
 }
