@@ -72,12 +72,12 @@ class StreamStats extends Object {
   factory StreamStats.fromJson(Map<String, dynamic> json) =>
       _$StreamStatsFromJson(json);
 
-  @JsonKey(name: 'durationMs')
+  @JsonKey(name: 'durationMs', defaultValue: 0)
   late int durationMs;
 
   Duration get duration => Duration(milliseconds: durationMs);
 
-  @JsonKey(name: 'count')
+  @JsonKey(name: 'count', defaultValue: 0)
   late int count;
 }
 
@@ -88,11 +88,11 @@ class StreamStatsWithPrecision extends Object {
   factory StreamStatsWithPrecision.fromJson(Map<String, dynamic> json) =>
       _$StreamStatsWithPrecisionFromJson(json);
 
-  @JsonKey(name: 'durationMs')
+  @JsonKey(name: 'durationMs', defaultValue: 0)
   late double durationMs;
 
   Duration get duration => Duration(milliseconds: durationMs.toInt());
 
-  @JsonKey(name: 'count')
+  @JsonKey(name: 'count', defaultValue: 0)
   late double count;
 }

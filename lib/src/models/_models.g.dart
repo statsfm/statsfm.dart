@@ -515,8 +515,8 @@ DateStats _$DateStatsFromJson(Map<String, dynamic> json) => DateStats()
 
 ExtendedStreamStats _$ExtendedStreamStatsFromJson(Map<String, dynamic> json) =>
     ExtendedStreamStats()
-      ..durationMs = json['durationMs'] as int
-      ..count = json['count'] as int
+      ..durationMs = json['durationMs'] as int? ?? 0
+      ..count = json['count'] as int? ?? 0
       ..cardinality = ExtendedStreamStatsCardinality.fromJson(
           json['cardinality'] as Map<String, dynamic>);
 
@@ -528,14 +528,14 @@ ExtendedStreamStatsCardinality _$ExtendedStreamStatsCardinalityFromJson(
       ..albums = json['albums'] as int;
 
 StreamStats _$StreamStatsFromJson(Map<String, dynamic> json) => StreamStats()
-  ..durationMs = json['durationMs'] as int
-  ..count = json['count'] as int;
+  ..durationMs = json['durationMs'] as int? ?? 0
+  ..count = json['count'] as int? ?? 0;
 
 StreamStatsWithPrecision _$StreamStatsWithPrecisionFromJson(
         Map<String, dynamic> json) =>
     StreamStatsWithPrecision()
-      ..durationMs = (json['durationMs'] as num).toDouble()
-      ..count = (json['count'] as num).toDouble();
+      ..durationMs = (json['durationMs'] as num?)?.toDouble() ?? 0
+      ..count = (json['count'] as num?)?.toDouble() ?? 0;
 
 TopObject _$TopObjectFromJson(Map<String, dynamic> json) => TopObject()
   ..position = json['position'] as int
