@@ -86,6 +86,22 @@ class Charts extends EndpointBase {
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
   }
 
+  Future<List<TopAlbum>> topSwipefyAlbums({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/swipefy/top/albums',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var topAlbumsMap = map['items'] as Iterable<dynamic>;
+    return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
+  }
+
   Future<List<TopUser>> topUsers({
     QueryOptions options = const QueryOptions(),
   }) async {
