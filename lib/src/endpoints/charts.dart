@@ -86,7 +86,7 @@ class Charts extends EndpointBase {
     return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
   }
 
-  Future<List<TopAlbum>> topSwipefyAlbums({
+  Future<List<SwipeTopAlbum>> topSwipefyAlbums({
     QueryOptions options = const QueryOptions(),
   }) async {
     final Map<String, dynamic> query = options.toQuery();
@@ -99,7 +99,7 @@ class Charts extends EndpointBase {
         .data;
 
     var topAlbumsMap = map['items'] as Iterable<dynamic>;
-    return topAlbumsMap.map((m) => TopAlbum.fromJson(m)).toList();
+    return topAlbumsMap.map((m) => SwipeTopAlbum.fromJson(m)).toList();
   }
 
   Future<List<TopUser>> topUsers({
