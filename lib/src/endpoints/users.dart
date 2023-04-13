@@ -555,11 +555,30 @@ class Users extends EndpointBase {
   Future<SwipeCollection> swipefyCollection(
       String userId, int collectionId) async {
     final Map map = (await dio.get(
-      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections',
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId',
     ))
         .data;
 
     return SwipeCollection.fromJson(map['item']);
+  }
+
+  ///Gets a users Swipefy collection swipes
+  Future<List<Swipe>> swipefyCollectionSwipes(
+    String userId,
+    int collectionId, {
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId/swipes',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var collectionSwipesMap = map['items'] as Iterable<dynamic>;
+    return collectionSwipesMap.map((m) => Swipe.fromJson(m)).toList();
   }
 
   ///Creates a Swipefy collection (user id has to be the id of the current user)
