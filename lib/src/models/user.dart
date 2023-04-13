@@ -133,6 +133,9 @@ class UserPrivacySettings extends Object {
   @JsonKey(name: 'profile')
   late bool profile;
 
+  @JsonKey(name: 'message')
+  late bool message;
+
   @JsonKey(name: 'currentlyPlaying')
   late bool currentlyPlaying;
 

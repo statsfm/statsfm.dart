@@ -756,6 +756,7 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) => UserImport()
 UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
     UserPrivacySettings()
       ..profile = json['profile'] as bool
+      ..message = json['message'] as bool
       ..currentlyPlaying = json['currentlyPlaying'] as bool
       ..recentlyPlayed = json['recentlyPlayed'] as bool
       ..topTracks = json['topTracks'] as bool
@@ -772,6 +773,7 @@ Map<String, dynamic> _$UserPrivacySettingsToJson(
         UserPrivacySettings instance) =>
     <String, dynamic>{
       'profile': instance.profile,
+      'message': instance.message,
       'currentlyPlaying': instance.currentlyPlaying,
       'recentlyPlayed': instance.recentlyPlayed,
       'topTracks': instance.topTracks,
