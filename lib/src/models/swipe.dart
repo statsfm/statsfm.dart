@@ -23,6 +23,9 @@ class Swipe extends Object {
 
   @JsonKey(name: 'track')
   late Track track;
+
+  @JsonKey(name: 'collectionIds', defaultValue: [])
+  late List<int> collectionIds;
 }
 
 @JsonSerializable(explicitToJson: true)

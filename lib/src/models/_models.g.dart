@@ -410,7 +410,11 @@ Swipe _$SwipeFromJson(Map<String, dynamic> json) => Swipe()
   ..decision = json['decision'] as String
   ..decisionMs = json['decisionMs'] as int
   ..algorithmId = json['algorithmId'] as int
-  ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+  ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
+  ..collectionIds = (json['collectionIds'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList() ??
+      [];
 
 SwipeStats _$SwipeStatsFromJson(Map<String, dynamic> json) => SwipeStats()
   ..decision = SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
