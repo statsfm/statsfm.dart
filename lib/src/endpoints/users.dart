@@ -615,6 +615,7 @@ class Users extends EndpointBase {
         "name": name,
         "description": description,
         "public": public,
+        "tags": [], //TODO: Add tags support
       },
     ))
         .data;
