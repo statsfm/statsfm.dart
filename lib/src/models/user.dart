@@ -40,8 +40,11 @@ class UserPublic extends Object {
   @JsonKey(name: 'image')
   late String? image;
 
-  @JsonKey(name: 'isPlus')
+  @JsonKey(name: 'isPlus', defaultValue: false)
   late bool isPlus;
+
+  @JsonKey(name: 'isPro', defaultValue: false)
+  late bool isPro;
 
   @JsonKey(name: 'hasSwipefy')
   late bool hasSwipefy;

@@ -664,7 +664,8 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..customId = json['customId'] as String?
   ..displayName = json['displayName'] as String
   ..image = json['image'] as String?
-  ..isPlus = json['isPlus'] as bool
+  ..isPlus = json['isPlus'] as bool? ?? false
+  ..isPro = json['isPro'] as bool? ?? false
   ..hasSwipefy = json['hasSwipefy'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
@@ -693,6 +694,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'displayName': instance.displayName,
       'image': instance.image,
       'isPlus': instance.isPlus,
+      'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
@@ -717,7 +719,8 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
   ..customId = json['customId'] as String?
   ..displayName = json['displayName'] as String
   ..image = json['image'] as String?
-  ..isPlus = json['isPlus'] as bool
+  ..isPlus = json['isPlus'] as bool? ?? false
+  ..isPro = json['isPro'] as bool? ?? false
   ..hasSwipefy = json['hasSwipefy'] as bool
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
@@ -743,6 +746,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'displayName': instance.displayName,
       'image': instance.image,
       'isPlus': instance.isPlus,
+      'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
