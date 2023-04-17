@@ -1,6 +1,6 @@
 name: statsfm
 description: Official stats.fm Dart package
-version: 1.3.3
+version: 1.3.4
 homepage: https://github.com/statsfm/statsfm.dart
 
 environment:
