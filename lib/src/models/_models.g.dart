@@ -487,6 +487,21 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
           const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
       ..userId = json['userId'] as String;
 
+RecommendedSwipe _$RecommendedSwipeFromJson(Map<String, dynamic> json) =>
+    RecommendedSwipe()
+      ..id = json['swipeId'] as String
+      ..recommendationId = json['recommendationId'] as String
+      ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
+      ..metadata = json['metadata'] == null
+          ? null
+          : SwipeMetadata.fromJson(json['metadata'] as Map<String, dynamic>);
+
+SwipeMetadata _$SwipeMetadataFromJson(Map<String, dynamic> json) =>
+    SwipeMetadata()
+      ..createdAt = json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String);
+
 PerDayStats _$PerDayStatsFromJson(Map<String, dynamic> json) => PerDayStats()
   ..average =
       StreamStatsWithPrecision.fromJson(json['average'] as Map<String, dynamic>)

@@ -143,3 +143,33 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'userId')
   late String userId;
 }
+
+@JsonSerializable(createToJson: false)
+class RecommendedSwipe extends Object {
+  RecommendedSwipe();
+
+  factory RecommendedSwipe.fromJson(Map<String, dynamic> json) => _$RecommendedSwipeFromJson(json);
+
+  @JsonKey(name: 'swipeId')
+  late String id;
+
+  @JsonKey(name: 'recommendationId')
+  late String recommendationId;
+
+  @JsonKey(name: 'track')
+  late Track track;
+
+  @JsonKey(name: 'metadata')
+  late SwipeMetadata? metadata;
+}
+
+@JsonSerializable(createToJson: false)
+class SwipeMetadata extends Object {
+  SwipeMetadata();
+
+  factory SwipeMetadata.fromJson(Map<String, dynamic> json) =>
+      _$SwipeMetadataFromJson(json);
+
+  @JsonKey(name: 'createdAt')
+  late DateTime? createdAt;
+}
