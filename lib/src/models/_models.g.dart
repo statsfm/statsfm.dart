@@ -667,6 +667,9 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..isPlus = json['isPlus'] as bool? ?? false
   ..isPro = json['isPro'] as bool? ?? false
   ..hasSwipefy = json['hasSwipefy'] as bool
+  ..firstSwipe = json['firstSwipe'] == null
+      ? null
+      : DateTime.parse(json['firstSwipe'] as String)
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -696,6 +699,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'isPlus': instance.isPlus,
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
+      'firstSwipe': instance.firstSwipe?.toIso8601String(),
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -722,6 +726,9 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
   ..isPlus = json['isPlus'] as bool? ?? false
   ..isPro = json['isPro'] as bool? ?? false
   ..hasSwipefy = json['hasSwipefy'] as bool
+  ..firstSwipe = json['firstSwipe'] == null
+      ? null
+      : DateTime.parse(json['firstSwipe'] as String)
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -748,6 +755,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'isPlus': instance.isPlus,
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
+      'firstSwipe': instance.firstSwipe?.toIso8601String(),
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,

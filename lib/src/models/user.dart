@@ -49,6 +49,10 @@ class UserPublic extends Object {
   @JsonKey(name: 'hasSwipefy')
   late bool hasSwipefy;
 
+  ///If firstSwipe is null the user hasn't swipped anything on Swipefy
+  @JsonKey(name: 'firstSwipe')
+  late DateTime? firstSwipe;
+
   @JsonKey(name: 'hasImported')
   late bool hasImported;
 
