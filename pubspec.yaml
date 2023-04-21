@@ -9,8 +9,8 @@ environment:
 dependencies:
   json_annotation: ^4.4.0
   hive_generator: 2.0.0
-  dio: 4.0.6
-  dio_http_cache: ^0.3.0
+  dio: 5.1.1
+  dio_cache_interceptor: 3.4.2
 
 dependency_overrides:
   json_serializable: ^6.1.4

@@ -76,22 +76,17 @@ abstract class StatsfmApiBase {
         } catch (e) {}
       }
       handler.next(err);
-      // handler.resolve(
-      //   Response(
-      //     requestOptions: err.requestOptions,
-      //     data: ,
-      //     statusCode: err.response!.statusCode,
-      //     statusMessage: err.response!.statusMessage,
-      //   ),
-      // );
     }));
     dio.interceptors.add(
-      DioCacheManager(
-        CacheConfig(
-          baseUrl: "https://api.stats.fm/api/v1",
-          skipDiskCache: true,
+      DioCacheInterceptor(
+        options: CacheOptions(
+          // A default store is required for interceptor.
+          store: MemCacheStore(),
+          policy: CachePolicy.request,
+          keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+          allowPostMethod: false,
         ),
-      ).interceptor,
+      ),
     );
 
     _artists = Artists(this);
