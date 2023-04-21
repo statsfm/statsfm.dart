@@ -11,6 +11,7 @@ dependencies:
   hive_generator: 2.0.0
   dio: 5.1.1
   dio_cache_interceptor: 3.4.2
+  dio_smart_retry: 5.0.0
 
 dependency_overrides:
   json_serializable: ^6.1.4

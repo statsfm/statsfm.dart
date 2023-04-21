@@ -88,6 +88,15 @@ abstract class StatsfmApiBase {
         ),
       ),
     );
+    dio.interceptors.add(RetryInterceptor(
+      dio: dio,
+      logPrint: print,
+      retries: 2,
+      retryDelays: const [
+        Duration(seconds: 1), // wait 1 sec before first retry
+        Duration(seconds: 2), // wait 2 sec before second retry
+      ],
+    ));
 
     _artists = Artists(this);
     _albums = Albums(this);
