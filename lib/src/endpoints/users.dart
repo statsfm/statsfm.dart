@@ -630,4 +630,12 @@ class Users extends EndpointBase {
             .statusCode ==
         200;
   }
+
+  ///Remove a Swipefy collection image that the current user owns (user id has to be the id of the current user)
+  Future<bool> swipefyCollectionRemoveImage(String userId, int collectionId) async {
+    return (await dio.delete(
+                '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId/image'))
+            .statusCode ==
+        200;
+  }
 }
