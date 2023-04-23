@@ -3,7 +3,8 @@ library statsfm;
 import 'dart:async';
 import 'dart:collection';
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:dio_smart_retry/dio_smart_retry.dart';
 
 import 'src/models/_models.dart';
 
