@@ -66,9 +66,11 @@ abstract class StatsfmApiBase {
           'DIO: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
       return handler.next(response);
     }, onError: (err, handler) {
+      if (err.response?.data == null) {
+        return handler.next(err);
+      }
       print(
           "DIO: ERROR, URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
-      // err = ;
       if (err.response?.data != null) {
         try {
           String message = Map.from(err.response?.data)['message'];
