@@ -140,8 +140,38 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'updatedAt')
   late DateTime updatedAt;
 
-  @JsonKey(name: 'spotifySync', defaultValue: false)
-  late bool spotifySync;
+  @JsonKey(name: 'spotifySync')
+  late SwipeCollectionSpotifySync? spotifySync;
+
+  @JsonKey(name: 'userId')
+  late String userId;
+}
+
+@JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
+class SwipeCollectionSpotifySync extends Object {
+  SwipeCollectionSpotifySync();
+
+  factory SwipeCollectionSpotifySync.fromJson(Map<String, dynamic> json) =>
+      _$SwipeCollectionSpotifySyncFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'collectionId')
+  late int collectionId;
+
+  @JsonKey(name: 'spotifyId')
+  late String spotifyId;
+
+  @JsonKey(name: 'syncEnabled')
+  late bool syncEnabled;
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+
+  @JsonKey(name: 'syncedAt')
+  late DateTime syncedAt;
 
   @JsonKey(name: 'userId')
   late String userId;
