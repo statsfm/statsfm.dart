@@ -494,7 +494,6 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
 SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
         Map<String, dynamic> json) =>
     SwipeCollectionSpotifySync()
-      ..id = json['id'] as int
       ..collectionId = json['collectionId'] as int
       ..spotifyId = json['spotifyId'] as String
       ..syncEnabled = json['syncEnabled'] as bool

@@ -155,9 +155,6 @@ class SwipeCollectionSpotifySync extends Object {
   factory SwipeCollectionSpotifySync.fromJson(Map<String, dynamic> json) =>
       _$SwipeCollectionSpotifySyncFromJson(json);
 
-  @JsonKey(name: 'id')
-  late int id;
-
   @JsonKey(name: 'collectionId')
   late int collectionId;
 
