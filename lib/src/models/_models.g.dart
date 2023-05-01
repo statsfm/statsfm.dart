@@ -485,6 +485,7 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
           const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
       ..updatedAt =
           const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
+      ..spotifySync = json['spotifySync'] as bool? ?? false
       ..userId = json['userId'] as String;
 
 RecommendedSwipe _$RecommendedSwipeFromJson(Map<String, dynamic> json) =>

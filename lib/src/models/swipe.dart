@@ -140,6 +140,9 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'updatedAt')
   late DateTime updatedAt;
 
+  @JsonKey(name: 'spotifySync', defaultValue: false)
+  late bool spotifySync;
+
   @JsonKey(name: 'userId')
   late String userId;
 }
