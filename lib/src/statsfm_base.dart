@@ -77,17 +77,20 @@ abstract class StatsfmApiBase {
       handler.next(err);
     }));
     //Dio cache interceptor
-    dio.interceptors.add(
-      DioCacheInterceptor(
-        options: CacheOptions(
-          // A default store is required for interceptor.
-          store: MemCacheStore(),
-          policy: CachePolicy.request,
-          keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-          allowPostMethod: false,
+    getTemporaryDirectory().then((dir) {
+      dio.interceptors.add(
+        DioCacheInterceptor(
+          options: CacheOptions(
+            // A default store is required for interceptor.
+            store: HiveCacheStore(dir.path),
+            policy: CachePolicy.request,
+            keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+            allowPostMethod: false,
+          ),
         ),
-      ),
-    );
+      );
+    });
+
     //Dio retry interceptor
     final myStatuses = {
       status408RequestTimeout,
