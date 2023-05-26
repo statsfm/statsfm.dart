@@ -53,6 +53,10 @@ class UserPublic extends Object {
   @JsonKey(name: 'firstSwipe')
   late DateTime? firstSwipe;
 
+  ///Currently only not null if on the Apple Music supported api.
+  @JsonKey(name: 'connectedServices')
+  late ConnectedServices? connectedServices;
+
   @JsonKey(name: 'hasImported')
   late bool hasImported;
 
@@ -498,4 +502,36 @@ class AppleMusicAuth extends Object {
 
   @JsonKey(name: 'imported')
   late bool imported;
+}
+
+@JsonSerializable(createToJson: true)
+class ConnectedServices extends Object {
+  ConnectedServices();
+
+  Map<String, dynamic> toJson() => _$ConnectedServicesToJson(this);
+
+  factory ConnectedServices.fromJson(Map<String, dynamic> json) =>
+      _$ConnectedServicesFromJson(json);
+
+  @JsonKey(name: 'spotify')
+  late StreamingService spotify;
+
+  @JsonKey(name: 'appleMusic')
+  late StreamingService appleMusic;
+}
+
+@JsonSerializable(createToJson: true)
+class StreamingService extends Object {
+  StreamingService();
+
+  Map<String, dynamic> toJson() => _$StreamingServiceToJson(this);
+
+  factory StreamingService.fromJson(Map<String, dynamic> json) =>
+      _$StreamingServiceFromJson(json);
+
+  @JsonKey(name: 'connected', defaultValue: false)
+  late bool connected;
+
+  @JsonKey(name: 'hasImported', defaultValue: false)
+  late bool hasImported;
 }

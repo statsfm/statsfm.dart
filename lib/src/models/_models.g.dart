@@ -686,6 +686,10 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
   ..firstSwipe = json['firstSwipe'] == null
       ? null
       : DateTime.parse(json['firstSwipe'] as String)
+  ..connectedServices = json['connectedServices'] == null
+      ? null
+      : ConnectedServices.fromJson(
+          json['connectedServices'] as Map<String, dynamic>)
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -716,6 +720,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
+      'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -745,6 +750,10 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
   ..firstSwipe = json['firstSwipe'] == null
       ? null
       : DateTime.parse(json['firstSwipe'] as String)
+  ..connectedServices = json['connectedServices'] == null
+      ? null
+      : ConnectedServices.fromJson(
+          json['connectedServices'] as Map<String, dynamic>)
   ..hasImported = json['hasImported'] as bool
   ..syncEnabled = json['syncEnabled'] as bool
   ..timezone = json['timezone'] as String?
@@ -772,6 +781,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
+      'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -1072,4 +1082,28 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
+    };
+
+ConnectedServices _$ConnectedServicesFromJson(Map<String, dynamic> json) =>
+    ConnectedServices()
+      ..spotify =
+          StreamingService.fromJson(json['spotify'] as Map<String, dynamic>)
+      ..appleMusic =
+          StreamingService.fromJson(json['appleMusic'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ConnectedServicesToJson(ConnectedServices instance) =>
+    <String, dynamic>{
+      'spotify': instance.spotify,
+      'appleMusic': instance.appleMusic,
+    };
+
+StreamingService _$StreamingServiceFromJson(Map<String, dynamic> json) =>
+    StreamingService()
+      ..connected = json['connected'] as bool? ?? false
+      ..hasImported = json['hasImported'] as bool? ?? false;
+
+Map<String, dynamic> _$StreamingServiceToJson(StreamingService instance) =>
+    <String, dynamic>{
+      'connected': instance.connected,
+      'hasImported': instance.hasImported,
     };
