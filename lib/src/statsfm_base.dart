@@ -91,7 +91,10 @@ abstract class StatsfmApiBase {
       dio.interceptors.add(
         DioCacheInterceptor(
           options: CacheOptions(
-            store: HiveCacheStore(dir.path),
+            store: HiveCacheStore(
+              dir.path,
+              hiveBoxName: 'statsfm_dio_cache',
+            ),
             policy: CachePolicy.request,
             keyBuilder: CacheOptions.defaultCacheKeyBuilder,
             allowPostMethod: false,
