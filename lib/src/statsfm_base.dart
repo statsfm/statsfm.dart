@@ -5,7 +5,17 @@ abstract class StatsfmApiBase {
 
   late String _accessToken;
 
-  Dio _dio = Dio();
+  Dio _dio = Dio(
+    BaseOptions(
+      validateStatus: (int? status) {
+        if (status == null) {
+          return false;
+        }
+        return status >= 200 && status < 300 || status == 304;
+      },
+    ),
+  );
+
   Dio get dio => _dio;
 
   late Artists _artists;
@@ -81,7 +91,6 @@ abstract class StatsfmApiBase {
       dio.interceptors.add(
         DioCacheInterceptor(
           options: CacheOptions(
-            // A default store is required for interceptor.
             store: HiveCacheStore(dir.path),
             policy: CachePolicy.request,
             keyBuilder: CacheOptions.defaultCacheKeyBuilder,
