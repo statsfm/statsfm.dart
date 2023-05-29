@@ -67,25 +67,27 @@ abstract class StatsfmApiBase {
       'Authorization': _accessToken,
       'Connection': 'Keep-Alive'
     };
-    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-      options.queryParameters =
-          Map<String, dynamic>.from(SplayTreeMap.from(options.queryParameters));
-      return handler.next(options);
-    }, onResponse: (response, handler) {
-      print(
-          'DIO: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
-      return handler.next(response);
-    }, onError: (err, handler) {
-      print(
-          "DIO: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
-      if (err.response?.data != null) {
-        try {
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        options.queryParameters = Map<String, dynamic>.from(
+            SplayTreeMap.from(options.queryParameters));
+        return handler.next(options);
+      },
+      onResponse: (response, handler) {
+        print(
+            'DIO: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
+        return handler.next(response);
+      },
+      onError: (err, handler) {
+        print(
+            "DIO: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
+        if (err.response?.data != null) {
           String message = Map.from(err.response?.data)['message'];
           throw Exception(message);
-        } catch (e) {}
-      }
-      handler.next(err);
-    }));
+        }
+        handler.next(err);
+      },
+    ));
     //Dio cache interceptor
     getTemporaryDirectory().then((dir) {
       dio.interceptors.add(
