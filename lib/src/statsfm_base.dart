@@ -5,16 +5,7 @@ abstract class StatsfmApiBase {
 
   late String _accessToken;
 
-  Dio _dio = Dio(
-    BaseOptions(
-      validateStatus: (int? status) {
-        if (status == null) {
-          return false;
-        }
-        return status >= 200 && status < 300 || status == 304;
-      },
-    ),
-  );
+  Dio _dio = Dio();
 
   Dio get dio => _dio;
 
@@ -88,22 +79,22 @@ abstract class StatsfmApiBase {
         handler.next(err);
       },
     ));
-    //Dio cache interceptor
-    getTemporaryDirectory().then((dir) {
-      dio.interceptors.add(
-        DioCacheInterceptor(
-          options: CacheOptions(
-            store: HiveCacheStore(
-              dir.path,
-              hiveBoxName: 'statsfm_dio_cache',
-            ),
-            policy: CachePolicy.request,
-            keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-            allowPostMethod: false,
-          ),
-        ),
-      );
-    });
+    //Dio cache interceptor Disabled till caching issue is fixed
+    // getTemporaryDirectory().then((dir) {
+    //   dio.interceptors.add(
+    //     DioCacheInterceptor(
+    //       options: CacheOptions(
+    //         store: HiveCacheStore(
+    //           dir.path,
+    //           hiveBoxName: 'statsfm_dio_cache',
+    //         ),
+    //         policy: CachePolicy.request,
+    //         keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+    //         allowPostMethod: false,
+    //       ),
+    //     ),
+    //   );
+    // });
 
     //Dio retry interceptor
     final myStatuses = {
