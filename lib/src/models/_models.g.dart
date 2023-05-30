@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of statsfm.models;
+part of '_models.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -433,13 +433,15 @@ Map<String, dynamic> _$SwipeStatsToJson(SwipeStats instance) =>
 
 SwipeDecision _$SwipeDecisionFromJson(Map<String, dynamic> json) =>
     SwipeDecision()
-      ..liked = json['liked'] as int
-      ..disliked = json['disliked'] as int;
+      ..liked = json['liked'] as int? ?? 0
+      ..disliked = json['disliked'] as int? ?? 0
+      ..skips = json['skips'] as int? ?? 0;
 
 Map<String, dynamic> _$SwipeDecisionToJson(SwipeDecision instance) =>
     <String, dynamic>{
       'liked': instance.liked,
       'disliked': instance.disliked,
+      'skips': instance.skips,
     };
 
 SwipeDecisionMs _$SwipeDecisionMsFromJson(Map<String, dynamic> json) =>
