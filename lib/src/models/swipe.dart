@@ -56,11 +56,14 @@ class SwipeDecision extends Object {
       _$SwipeDecisionFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeDecisionToJson(this);
 
-  @JsonKey(name: 'liked')
+  @JsonKey(name: 'liked', defaultValue: 0)
   late int liked;
 
-  @JsonKey(name: 'disliked')
+  @JsonKey(name: 'disliked', defaultValue: 0)
   late int disliked;
+
+  @JsonKey(name: 'skips', defaultValue: 0)
+  late int skips;
 }
 
 @JsonSerializable(createToJson: true)
