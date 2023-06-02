@@ -54,5 +54,5 @@ class ExternalIds extends Object {
 
   /// Apple Music id
   @JsonKey(name: 'appleMusic')
-  String? appleMusic;
+  List<String>? appleMusic;
 }

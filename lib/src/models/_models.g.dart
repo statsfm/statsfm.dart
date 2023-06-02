@@ -323,7 +323,8 @@ ExternalIds _$ExternalIdsFromJson(Map<String, dynamic> json) => ExternalIds()
   ..tidal = (json['tidal'] as List<dynamic>?)?.map((e) => e as String).toList()
   ..youtubeMusic =
       (json['youtubeMusic'] as List<dynamic>?)?.map((e) => e as String).toList()
-  ..appleMusic = json['appleMusic'] as String?;
+  ..appleMusic =
+      (json['appleMusic'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Map<String, dynamic> _$ExternalIdsToJson(ExternalIds instance) =>
     <String, dynamic>{
