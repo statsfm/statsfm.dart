@@ -9,6 +9,10 @@ class Me extends EndpointBase {
   Future<UserPrivate> get() async {
     final map = (await dio.get(_path)).data;
 
+    if (map['item'] == null) {
+      throw StatsfmException(400, 'User Id in token is not valid');
+    }
+
     return UserPrivate.fromJson(map['item']);
   }
 
