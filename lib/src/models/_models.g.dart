@@ -152,7 +152,7 @@ Map<String, dynamic> _$SwipeTopAlbumToJson(SwipeTopAlbum instance) =>
 Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist()
   ..id = json['id'] as int
   ..name = json['name'] as String
-  ..followers = json['followers'] as int
+  ..followers = json['followers'] as int? ?? 0
   ..image = json['image'] as String?
   ..spotifyPopularity = json['spotifyPopularity'] as int
   ..genres = (json['genres'] as List<dynamic>).map((e) => e as String).toList()

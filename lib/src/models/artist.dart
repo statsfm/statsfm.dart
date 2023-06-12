@@ -7,7 +7,7 @@ class Artist extends ArtistSimple {
   factory Artist.fromJson(Map<String, dynamic> json) => _$ArtistFromJson(json);
   Map<String, dynamic> toJson() => _$ArtistToJson(this);
 
-  @JsonKey(name: 'followers')
+  @JsonKey(name: 'followers', defaultValue: 0)
   late int followers;
 
   @JsonKey(name: 'image')
