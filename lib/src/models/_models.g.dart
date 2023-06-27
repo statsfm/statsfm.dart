@@ -501,6 +501,13 @@ SwipeCollectionSimple _$SwipeCollectionSimpleFromJson(
       ..addedAt =
           const LocalDateTimeConverter().fromJson(json['addedAt'] as String);
 
+Map<String, dynamic> _$SwipeCollectionSimpleToJson(
+        SwipeCollectionSimple instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'addedAt': const LocalDateTimeConverter().toJson(instance.addedAt),
+    };
+
 SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
         Map<String, dynamic> json) =>
     SwipeCollectionSpotifySync()

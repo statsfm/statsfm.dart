@@ -150,13 +150,14 @@ class SwipeCollection extends Object {
   late String userId;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 @LocalDateTimeConverter()
 class SwipeCollectionSimple extends Object {
   SwipeCollectionSimple();
 
   factory SwipeCollectionSimple.fromJson(Map<String, dynamic> json) =>
       _$SwipeCollectionSimpleFromJson(json);
+  Map<String, dynamic> toJson() => _$SwipeCollectionSimpleToJson(this);
 
   @JsonKey(name: 'id')
   late int id;
