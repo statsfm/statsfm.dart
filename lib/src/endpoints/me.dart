@@ -31,11 +31,14 @@ class Me extends EndpointBase {
     throw UnimplementedError();
   }
 
-  Future<List<UserProfileSocialMediaConnection>> socialMediaConnections() async {
+  Future<List<UserProfileSocialMediaConnection>>
+      socialMediaConnections() async {
     final Map map = (await dio.get('$_path/connections')).data;
 
     var connectionsMap = map['items'] as Iterable<dynamic>;
-    return connectionsMap.map((m) => UserProfileSocialMediaConnection.fromJson(m)).toList();
+    return connectionsMap
+        .map((m) => UserProfileSocialMediaConnection.fromJson(m))
+        .toList();
   }
 
   Future<void> removeSocialMediaConnection(int id) async {
@@ -175,8 +178,19 @@ class Me extends EndpointBase {
     return UserDevice.fromJson(map['item']);
   }
 
+  Future<UserDevice> updateSwipefyDevice(UserDevice device) async {
+    final Map map = (await dio.put('$_path/swipefy/devices/${device.id}',
+            data: device.toJson()))
+        .data;
+
+    return UserDevice.fromJson(map['item']);
+  }
+
   Future<List<Soulmate>> soulmates(
-      {bool forceRefresh = false, bool? plusOnly, String? country, List<int>? artistIds}) async {
+      {bool forceRefresh = false,
+      bool? plusOnly,
+      String? country,
+      List<int>? artistIds}) async {
     Map<String, dynamic> queryParams = {};
     //Refreshes soulmates matches
     if (forceRefresh) {
