@@ -24,8 +24,8 @@ class Swipe extends Object {
   @JsonKey(name: 'track')
   late Track track;
 
-  @JsonKey(name: 'collectionIds', defaultValue: [])
-  late List<int> collectionIds;
+  @JsonKey(name: 'collections', defaultValue: [])
+  late List<SwipeCollectionSimple> collections;
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -148,6 +148,21 @@ class SwipeCollection extends Object {
 
   @JsonKey(name: 'userId')
   late String userId;
+}
+
+@JsonSerializable(createToJson: false)
+@LocalDateTimeConverter()
+class SwipeCollectionSimple extends Object {
+  SwipeCollectionSimple();
+
+  factory SwipeCollectionSimple.fromJson(Map<String, dynamic> json) =>
+      _$SwipeCollectionSimpleFromJson(json);
+
+  @JsonKey(name: 'id')
+  late int id;
+
+  @JsonKey(name: 'addedAt')
+  late DateTime addedAt;
 }
 
 @JsonSerializable(createToJson: false)

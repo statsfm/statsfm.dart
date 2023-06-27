@@ -411,8 +411,9 @@ Swipe _$SwipeFromJson(Map<String, dynamic> json) => Swipe()
   ..decisionMs = json['decisionMs'] as int
   ..algorithmId = json['algorithmId'] as int
   ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
-  ..collectionIds = (json['collectionIds'] as List<dynamic>?)
-          ?.map((e) => e as int)
+  ..collections = (json['collections'] as List<dynamic>?)
+          ?.map(
+              (e) => SwipeCollectionSimple.fromJson(e as Map<String, dynamic>))
           .toList() ??
       [];
 
@@ -492,6 +493,13 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
           : SwipeCollectionSpotifySync.fromJson(
               json['spotifySync'] as Map<String, dynamic>)
       ..userId = json['userId'] as String;
+
+SwipeCollectionSimple _$SwipeCollectionSimpleFromJson(
+        Map<String, dynamic> json) =>
+    SwipeCollectionSimple()
+      ..id = json['id'] as int
+      ..addedAt =
+          const LocalDateTimeConverter().fromJson(json['addedAt'] as String);
 
 SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
         Map<String, dynamic> json) =>
