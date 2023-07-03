@@ -692,40 +692,56 @@ Map<String, dynamic> _$SwipeTopTrackToJson(SwipeTopTrack instance) =>
       'track': instance.track.toJson(),
     };
 
-UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) => UserPrivate()
-  ..id = json['id'] as String
-  ..customId = json['customId'] as String?
-  ..displayName = json['displayName'] as String
-  ..image = json['image'] as String?
-  ..isPlus = json['isPlus'] as bool? ?? false
-  ..isPro = json['isPro'] as bool? ?? false
-  ..hasSwipefy = json['hasSwipefy'] as bool
-  ..firstSwipe = json['firstSwipe'] == null
-      ? null
-      : DateTime.parse(json['firstSwipe'] as String)
-  ..connectedServices = json['connectedServices'] == null
-      ? null
-      : ConnectedServices.fromJson(
-          json['connectedServices'] as Map<String, dynamic>)
-  ..hasImported = json['hasImported'] as bool
-  ..syncEnabled = json['syncEnabled'] as bool
-  ..timezone = json['timezone'] as String?
-  ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
-      OrderBySetting.PLATFORM
-  ..privacySettings = json['privacySettings'] == null
-      ? null
-      : UserPrivacySettings.fromJson(
-          json['privacySettings'] as Map<String, dynamic>)
-  ..profile = json['profile'] == null
-      ? null
-      : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
-  ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
-      .map((e) =>
-          UserProfileSocialMediaConnection.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..email = json['email'] as String
-  ..country = json['country'] as String
-  ..disabled = json['disabled'] as bool;
+UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const [
+      'id',
+      'customId',
+      'displayName',
+      'image',
+      'isPlus',
+      'isPro'
+    ],
+  );
+  return UserPrivate()
+    ..id = json['id'] as String
+    ..customId = json['customId'] as String?
+    ..displayName = json['displayName'] as String
+    ..image = json['image'] as String?
+    ..isPlus = json['isPlus'] as bool? ?? false
+    ..isPro = json['isPro'] as bool? ?? false
+    ..hasSwipefy = json['hasSwipefy'] as bool? ?? false
+    ..firstSwipe = json['firstSwipe'] == null
+        ? null
+        : DateTime.parse(json['firstSwipe'] as String)
+    ..lastSwipe = json['lastSwipe'] == null
+        ? null
+        : DateTime.parse(json['lastSwipe'] as String)
+    ..connectedServices = json['connectedServices'] == null
+        ? null
+        : ConnectedServices.fromJson(
+            json['connectedServices'] as Map<String, dynamic>)
+    ..hasImported = json['hasImported'] as bool? ?? false
+    ..syncEnabled = json['syncEnabled'] as bool? ?? false
+    ..timezone = json['timezone'] as String?
+    ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
+        OrderBySetting.PLATFORM
+    ..privacySettings = json['privacySettings'] == null
+        ? null
+        : UserPrivacySettings.fromJson(
+            json['privacySettings'] as Map<String, dynamic>)
+    ..profile = json['profile'] == null
+        ? null
+        : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
+    ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
+        .map((e) => UserProfileSocialMediaConnection.fromJson(
+            e as Map<String, dynamic>))
+        .toList()
+    ..email = json['email'] as String
+    ..country = json['country'] as String
+    ..disabled = json['disabled'] as bool? ?? false;
+}
 
 Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
     <String, dynamic>{
@@ -737,6 +753,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
+      'lastSwipe': instance.lastSwipe?.toIso8601String(),
       'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
@@ -756,37 +773,53 @@ const _$OrderBySettingEnumMap = {
   OrderBySetting.TIME: 'TIME',
 };
 
-UserPublic _$UserPublicFromJson(Map<String, dynamic> json) => UserPublic()
-  ..id = json['id'] as String
-  ..customId = json['customId'] as String?
-  ..displayName = json['displayName'] as String
-  ..image = json['image'] as String?
-  ..isPlus = json['isPlus'] as bool? ?? false
-  ..isPro = json['isPro'] as bool? ?? false
-  ..hasSwipefy = json['hasSwipefy'] as bool
-  ..firstSwipe = json['firstSwipe'] == null
-      ? null
-      : DateTime.parse(json['firstSwipe'] as String)
-  ..connectedServices = json['connectedServices'] == null
-      ? null
-      : ConnectedServices.fromJson(
-          json['connectedServices'] as Map<String, dynamic>)
-  ..hasImported = json['hasImported'] as bool
-  ..syncEnabled = json['syncEnabled'] as bool
-  ..timezone = json['timezone'] as String?
-  ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
-      OrderBySetting.PLATFORM
-  ..privacySettings = json['privacySettings'] == null
-      ? null
-      : UserPrivacySettings.fromJson(
-          json['privacySettings'] as Map<String, dynamic>)
-  ..profile = json['profile'] == null
-      ? null
-      : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
-  ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
-      .map((e) =>
-          UserProfileSocialMediaConnection.fromJson(e as Map<String, dynamic>))
-      .toList();
+UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const [
+      'id',
+      'customId',
+      'displayName',
+      'image',
+      'isPlus',
+      'isPro'
+    ],
+  );
+  return UserPublic()
+    ..id = json['id'] as String
+    ..customId = json['customId'] as String?
+    ..displayName = json['displayName'] as String
+    ..image = json['image'] as String?
+    ..isPlus = json['isPlus'] as bool? ?? false
+    ..isPro = json['isPro'] as bool? ?? false
+    ..hasSwipefy = json['hasSwipefy'] as bool? ?? false
+    ..firstSwipe = json['firstSwipe'] == null
+        ? null
+        : DateTime.parse(json['firstSwipe'] as String)
+    ..lastSwipe = json['lastSwipe'] == null
+        ? null
+        : DateTime.parse(json['lastSwipe'] as String)
+    ..connectedServices = json['connectedServices'] == null
+        ? null
+        : ConnectedServices.fromJson(
+            json['connectedServices'] as Map<String, dynamic>)
+    ..hasImported = json['hasImported'] as bool? ?? false
+    ..syncEnabled = json['syncEnabled'] as bool? ?? false
+    ..timezone = json['timezone'] as String?
+    ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
+        OrderBySetting.PLATFORM
+    ..privacySettings = json['privacySettings'] == null
+        ? null
+        : UserPrivacySettings.fromJson(
+            json['privacySettings'] as Map<String, dynamic>)
+    ..profile = json['profile'] == null
+        ? null
+        : UserProfile.fromJson(json['profile'] as Map<String, dynamic>)
+    ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
+        .map((e) => UserProfileSocialMediaConnection.fromJson(
+            e as Map<String, dynamic>))
+        .toList();
+}
 
 Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
     <String, dynamic>{
@@ -798,6 +831,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'isPro': instance.isPro,
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
+      'lastSwipe': instance.lastSwipe?.toIso8601String(),
       'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
@@ -808,20 +842,26 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'socialMediaConnections': instance.socialMediaConnections,
     };
 
-UserImport _$UserImportFromJson(Map<String, dynamic> json) => UserImport()
-  ..hash = json['hash'] as String
-  ..id = json['id'] as int
-  ..userId = json['userId'] as String
-  ..path = json['path'] as String?
-  ..count = json['count'] as int
-  ..status = json['status'] as int
-  ..updatedAt =
-      const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
-  ..createdAt =
-      const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-  ..serverId = json['serverId'] as int
-  ..error = json['error'] as String?
-  ..name = json['name'] as String?;
+UserImport _$UserImportFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'userId'],
+  );
+  return UserImport()
+    ..hash = json['hash'] as String
+    ..id = json['id'] as int
+    ..userId = json['userId'] as String
+    ..path = json['path'] as String?
+    ..count = json['count'] as int? ?? 0
+    ..status = json['status'] as int
+    ..updatedAt =
+        const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..serverId = json['serverId'] as int
+    ..error = json['error'] as String?
+    ..name = json['name'] as String?;
+}
 
 UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
     UserPrivacySettings()
@@ -857,10 +897,16 @@ Map<String, dynamic> _$UserPrivacySettingsToJson(
       'friends': instance.friends,
     };
 
-UserProfile _$UserProfileFromJson(Map<String, dynamic> json) => UserProfile()
-  ..bio = json['bio'] as String
-  ..pronouns = json['pronouns'] as String?
-  ..theme = json['theme'] as String?;
+UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['bio'],
+  );
+  return UserProfile()
+    ..bio = json['bio'] as String
+    ..pronouns = json['pronouns'] as String?
+    ..theme = json['theme'] as String?;
+}
 
 Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     <String, dynamic>{
@@ -870,11 +916,16 @@ Map<String, dynamic> _$UserProfileToJson(UserProfile instance) =>
     };
 
 IncomingFriendRequest _$IncomingFriendRequestFromJson(
-        Map<String, dynamic> json) =>
-    IncomingFriendRequest()
-      ..friend = UserPublic.fromJson(json['from'] as Map<String, dynamic>)
-      ..createdAt =
-          const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+    Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['from', 'createdAt'],
+  );
+  return IncomingFriendRequest()
+    ..friend = UserPublic.fromJson(json['from'] as Map<String, dynamic>)
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+}
 
 Map<String, dynamic> _$IncomingFriendRequestToJson(
         IncomingFriendRequest instance) =>
@@ -884,11 +935,16 @@ Map<String, dynamic> _$IncomingFriendRequestToJson(
     };
 
 OutgoingFriendRequest _$OutgoingFriendRequestFromJson(
-        Map<String, dynamic> json) =>
-    OutgoingFriendRequest()
-      ..friend = UserPublic.fromJson(json['to'] as Map<String, dynamic>)
-      ..createdAt =
-          const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+    Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['to', 'createdAt'],
+  );
+  return OutgoingFriendRequest()
+    ..friend = UserPublic.fromJson(json['to'] as Map<String, dynamic>)
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+}
 
 Map<String, dynamic> _$OutgoingFriendRequestToJson(
         OutgoingFriendRequest instance) =>

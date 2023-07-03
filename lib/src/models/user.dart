@@ -15,7 +15,7 @@ class UserPrivate extends UserPublic {
   @JsonKey(name: 'country')
   late String country;
 
-  @JsonKey(name: 'disabled')
+  @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 }
 
@@ -28,39 +28,43 @@ class UserPublic extends Object {
   factory UserPublic.fromJson(Map<String, dynamic> json) =>
       _$UserPublicFromJson(json);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late String id;
 
-  @JsonKey(name: 'customId')
+  @JsonKey(name: 'customId', required: true)
   late String? customId;
 
-  @JsonKey(name: 'displayName')
+  @JsonKey(name: 'displayName', required: true)
   late String displayName;
 
-  @JsonKey(name: 'image')
+  @JsonKey(name: 'image', required: true)
   late String? image;
 
-  @JsonKey(name: 'isPlus', defaultValue: false)
+  @JsonKey(name: 'isPlus', defaultValue: false, required: true)
   late bool isPlus;
 
-  @JsonKey(name: 'isPro', defaultValue: false)
+  @JsonKey(name: 'isPro', defaultValue: false, required: true)
   late bool isPro;
 
-  @JsonKey(name: 'hasSwipefy')
+  @JsonKey(name: 'hasSwipefy', defaultValue: false)
   late bool hasSwipefy;
 
   ///If firstSwipe is null the user hasn't swipped anything on Swipefy
   @JsonKey(name: 'firstSwipe')
   late DateTime? firstSwipe;
 
+  ///If lastSwipe is null the user hasn't swipped anything on Swipefy
+  @JsonKey(name: 'lastSwipe')
+  late DateTime? lastSwipe;
+
   ///Currently only not null if on the Apple Music supported api.
   @JsonKey(name: 'connectedServices')
   late ConnectedServices? connectedServices;
 
-  @JsonKey(name: 'hasImported')
+  @JsonKey(name: 'hasImported', defaultValue: false)
   late bool hasImported;
 
-  @JsonKey(name: 'syncEnabled')
+  @JsonKey(name: 'syncEnabled', defaultValue: false)
   late bool syncEnabled;
 
   @JsonKey(name: 'timezone')
@@ -101,16 +105,16 @@ class UserImport extends Object {
   @JsonKey(name: 'hash')
   late String hash;
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'userId')
+  @JsonKey(name: 'userId', required: true)
   late String userId;
 
   @JsonKey(name: 'path')
   late String? path;
 
-  @JsonKey(name: 'count')
+  @JsonKey(name: 'count', defaultValue: 0)
   late int count;
 
   @JsonKey(name: 'status')
@@ -190,7 +194,7 @@ class UserProfile extends Object {
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
 
-  @JsonKey(name: 'bio')
+  @JsonKey(name: 'bio', required: true)
   late String bio;
 
   @JsonKey(name: 'pronouns')
@@ -208,10 +212,10 @@ class IncomingFriendRequest extends Object {
   factory IncomingFriendRequest.fromJson(Map<String, dynamic> json) =>
       _$IncomingFriendRequestFromJson(json);
 
-  @JsonKey(name: 'from')
+  @JsonKey(name: 'from', required: true)
   late UserPublic friend;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 }
 
@@ -223,10 +227,10 @@ class OutgoingFriendRequest extends Object {
   factory OutgoingFriendRequest.fromJson(Map<String, dynamic> json) =>
       _$OutgoingFriendRequestFromJson(json);
 
-  @JsonKey(name: 'to')
+  @JsonKey(name: 'to', required: true)
   late UserPublic friend;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 }
 
