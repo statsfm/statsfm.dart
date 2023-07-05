@@ -7,10 +7,10 @@ class Stream extends Object {
 
   factory Stream.fromJson(Map<String, dynamic> json) => _$StreamFromJson(json);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late String id;
 
-  @JsonKey(name: 'userId')
+  @JsonKey(name: 'userId', required: true)
   late String userId;
 
   @JsonKey(name: 'endTime')

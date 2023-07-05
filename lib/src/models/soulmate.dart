@@ -9,9 +9,9 @@ class Soulmate extends Object {
   factory Soulmate.fromJson(Map<String, dynamic> json) =>
       _$SoulmateFromJson(json);
 
-  @JsonKey(name: 'score')
+  @JsonKey(name: 'score', required: true)
   late double score;
 
-  @JsonKey(name: 'user')
+  @JsonKey(name: 'user', required: true)
   late UserPublic user;
 }

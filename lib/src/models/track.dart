@@ -8,10 +8,10 @@ class Track extends Object {
   Map<String, dynamic> toJson() => _$TrackToJson(this);
 
   /// The Statsfm id for the track.
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', required: true)
   late String name;
 
   @JsonKey(name: 'explicit')
@@ -92,7 +92,7 @@ class TopTrack extends TopObject {
       _$TopTrackFromJson(json);
   Map<String, dynamic> toJson() => _$TopTrackToJson(this);
 
-  @JsonKey(name: 'track')
+  @JsonKey(name: 'track', required: true)
   late Track track;
 }
 
@@ -104,6 +104,6 @@ class SwipeTopTrack extends SwipeTopObject {
       _$SwipeTopTrackFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeTopTrackToJson(this);
 
-  @JsonKey(name: 'track')
+  @JsonKey(name: 'track', required: true)
   late Track track;
 }

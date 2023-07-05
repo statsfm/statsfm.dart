@@ -6,22 +6,22 @@ class Swipe extends Object {
 
   factory Swipe.fromJson(Map<String, dynamic> json) => _$SwipeFromJson(json);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late String id;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 
-  @JsonKey(name: 'decision')
+  @JsonKey(name: 'decision', required: true)
   late String decision;
 
-  @JsonKey(name: 'decisionMs')
+  @JsonKey(name: 'decisionMs', defaultValue: 0)
   late int decisionMs;
 
   @JsonKey(name: 'algorithmId')
   late int algorithmId;
 
-  @JsonKey(name: 'track')
+  @JsonKey(name: 'track', required: true)
   late Track track;
 
   @JsonKey(name: 'collections', defaultValue: [])
@@ -159,10 +159,10 @@ class SwipeCollectionSimple extends Object {
       _$SwipeCollectionSimpleFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeCollectionSimpleToJson(this);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'addedAt')
+  @JsonKey(name: 'addedAt', required: true)
   late DateTime addedAt;
 }
 
@@ -199,13 +199,13 @@ class RecommendedSwipe extends Object {
 
   factory RecommendedSwipe.fromJson(Map<String, dynamic> json) => _$RecommendedSwipeFromJson(json);
 
-  @JsonKey(name: 'swipeId')
+  @JsonKey(name: 'swipeId', required: true)
   late String id;
 
-  @JsonKey(name: 'recommendationId')
+  @JsonKey(name: 'recommendationId', required: true)
   late String recommendationId;
 
-  @JsonKey(name: 'track')
+  @JsonKey(name: 'track', required: true)
   late Track track;
 
   @JsonKey(name: 'metadata')

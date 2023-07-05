@@ -32,10 +32,10 @@ class ArtistSimple extends Object {
   Map<String, dynamic> toJson() => _$ArtistSimpleToJson(this);
 
   /// The Statsfm id for the artist.
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', required: true)
   late String name;
 }
 
@@ -47,7 +47,7 @@ class TopArtist extends TopObject {
       _$TopArtistFromJson(json);
   Map<String, dynamic> toJson() => _$TopArtistToJson(this);
 
-  @JsonKey(name: 'artist')
+  @JsonKey(name: 'artist', required: true)
   late Artist artist;
 }
 
@@ -59,6 +59,6 @@ class SwipeTopArtist extends SwipeTopObject {
       _$SwipeTopArtistFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeTopArtistToJson(this);
 
-  @JsonKey(name: 'artist')
+  @JsonKey(name: 'artist', required: true)
   late Artist artist;
 }

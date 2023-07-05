@@ -19,19 +19,19 @@ class Record extends Object {
 
   factory Record.fromJson(Map<String, dynamic> json) => _$RecordFromJson(json);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
   @JsonKey(name: 'type')
   late RecordType type;
 
-  @JsonKey(name: 'active')
+  @JsonKey(name: 'active', defaultValue: false)
   late bool active;
 
-  @JsonKey(name: 'userId')
+  @JsonKey(name: 'userId', required: true)
   late String userId;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 }
 

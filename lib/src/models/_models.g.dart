@@ -64,22 +64,29 @@ class RangeAdapter extends TypeAdapter<Range> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Album _$AlbumFromJson(Map<String, dynamic> json) => Album()
-  ..id = json['id'] as int
-  ..name = json['name'] as String
-  ..image = json['image'] as String?
-  ..label = json['label'] as String?
-  ..spotifyPopularity = json['spotifyPopularity'] as int
-  ..totalTracks = json['totalTracks'] as int
-  ..type = json['type'] as String
-  ..releaseDate = dateTimeFromTimestamp(json['releaseDate'] as int)
-  ..genres = (json['genres'] as List<dynamic>).map((e) => e as String).toList()
-  ..artists = (json['artists'] as List<dynamic>)
-      .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..externalIds = json['externalIds'] == null
-      ? null
-      : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+Album _$AlbumFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name'],
+  );
+  return Album()
+    ..id = json['id'] as int
+    ..name = json['name'] as String
+    ..image = json['image'] as String?
+    ..label = json['label'] as String?
+    ..spotifyPopularity = json['spotifyPopularity'] as int
+    ..totalTracks = json['totalTracks'] as int
+    ..type = json['type'] as String
+    ..releaseDate = dateTimeFromTimestamp(json['releaseDate'] as int)
+    ..genres =
+        (json['genres'] as List<dynamic>).map((e) => e as String).toList()
+    ..artists = (json['artists'] as List<dynamic>)
+        .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..externalIds = json['externalIds'] == null
+        ? null
+        : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$AlbumToJson(Album instance) => <String, dynamic>{
       'id': instance.id,
@@ -95,10 +102,16 @@ Map<String, dynamic> _$AlbumToJson(Album instance) => <String, dynamic>{
       'externalIds': instance.externalIds?.toJson(),
     };
 
-AlbumSimple _$AlbumSimpleFromJson(Map<String, dynamic> json) => AlbumSimple()
-  ..id = json['id'] as int
-  ..name = json['name'] as String
-  ..image = json['image'] as String?;
+AlbumSimple _$AlbumSimpleFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name'],
+  );
+  return AlbumSimple()
+    ..id = json['id'] as int
+    ..name = json['name'] as String
+    ..image = json['image'] as String?;
+}
 
 Map<String, dynamic> _$AlbumSimpleToJson(AlbumSimple instance) =>
     <String, dynamic>{
@@ -107,12 +120,18 @@ Map<String, dynamic> _$AlbumSimpleToJson(AlbumSimple instance) =>
       'image': instance.image,
     };
 
-TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) => TopAlbum()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
-  ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['album'],
+  );
+  return TopAlbum()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
+    ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$TopAlbumToJson(TopAlbum instance) => <String, dynamic>{
       'position': instance.position,
@@ -130,15 +149,20 @@ const _$IndicatorEnumMap = {
   Indicator.NONE: 'NONE',
 };
 
-SwipeTopAlbum _$SwipeTopAlbumFromJson(Map<String, dynamic> json) =>
-    SwipeTopAlbum()
-      ..position = json['position'] as int
-      ..swipes = json['swipes'] as int
-      ..decision =
-          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
-      ..decisionMs =
-          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
-      ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+SwipeTopAlbum _$SwipeTopAlbumFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['album'],
+  );
+  return SwipeTopAlbum()
+    ..position = json['position'] as int
+    ..swipes = json['swipes'] as int
+    ..decision =
+        SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+    ..decisionMs =
+        SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+    ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$SwipeTopAlbumToJson(SwipeTopAlbum instance) =>
     <String, dynamic>{
@@ -149,16 +173,23 @@ Map<String, dynamic> _$SwipeTopAlbumToJson(SwipeTopAlbum instance) =>
       'album': instance.album.toJson(),
     };
 
-Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist()
-  ..id = json['id'] as int
-  ..name = json['name'] as String
-  ..followers = json['followers'] as int? ?? 0
-  ..image = json['image'] as String?
-  ..spotifyPopularity = json['spotifyPopularity'] as int
-  ..genres = (json['genres'] as List<dynamic>).map((e) => e as String).toList()
-  ..externalIds = json['externalIds'] == null
-      ? null
-      : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+Artist _$ArtistFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name'],
+  );
+  return Artist()
+    ..id = json['id'] as int
+    ..name = json['name'] as String
+    ..followers = json['followers'] as int? ?? 0
+    ..image = json['image'] as String?
+    ..spotifyPopularity = json['spotifyPopularity'] as int
+    ..genres =
+        (json['genres'] as List<dynamic>).map((e) => e as String).toList()
+    ..externalIds = json['externalIds'] == null
+        ? null
+        : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
       'id': instance.id,
@@ -170,9 +201,15 @@ Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
       'externalIds': instance.externalIds?.toJson(),
     };
 
-ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) => ArtistSimple()
-  ..id = json['id'] as int
-  ..name = json['name'] as String;
+ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name'],
+  );
+  return ArtistSimple()
+    ..id = json['id'] as int
+    ..name = json['name'] as String;
+}
 
 Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
     <String, dynamic>{
@@ -180,12 +217,18 @@ Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
       'name': instance.name,
     };
 
-TopArtist _$TopArtistFromJson(Map<String, dynamic> json) => TopArtist()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
-  ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+TopArtist _$TopArtistFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['artist'],
+  );
+  return TopArtist()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
+    ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$TopArtistToJson(TopArtist instance) => <String, dynamic>{
       'position': instance.position,
@@ -195,15 +238,20 @@ Map<String, dynamic> _$TopArtistToJson(TopArtist instance) => <String, dynamic>{
       'artist': instance.artist.toJson(),
     };
 
-SwipeTopArtist _$SwipeTopArtistFromJson(Map<String, dynamic> json) =>
-    SwipeTopArtist()
-      ..position = json['position'] as int
-      ..swipes = json['swipes'] as int
-      ..decision =
-          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
-      ..decisionMs =
-          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
-      ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+SwipeTopArtist _$SwipeTopArtistFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['artist'],
+  );
+  return SwipeTopArtist()
+    ..position = json['position'] as int
+    ..swipes = json['swipes'] as int
+    ..decision =
+        SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+    ..decisionMs =
+        SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+    ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$SwipeTopArtistToJson(SwipeTopArtist instance) =>
     <String, dynamic>{
@@ -253,14 +301,20 @@ Value? _$JsonConverterFromJson<Json, Value>(
 ) =>
     json == null ? null : fromJson(json as Json);
 
-ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) => ArtistRecord()
-  ..id = json['id'] as int
-  ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
-  ..active = json['active'] as bool
-  ..userId = json['userId'] as String
-  ..createdAt =
-      const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-  ..artistId = json['artistId'] as int;
+ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'userId', 'createdAt'],
+  );
+  return ArtistRecord()
+    ..id = json['id'] as int
+    ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
+    ..active = json['active'] as bool? ?? false
+    ..userId = json['userId'] as String
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..artistId = json['artistId'] as int;
+}
 
 const _$RecordTypeEnumMap = {
   RecordType.PLATINUM: 'PLATINUM',
@@ -269,13 +323,19 @@ const _$RecordTypeEnumMap = {
   RecordType.BRONZE: 'BRONZE',
 };
 
-Record _$RecordFromJson(Map<String, dynamic> json) => Record()
-  ..id = json['id'] as int
-  ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
-  ..active = json['active'] as bool
-  ..userId = json['userId'] as String
-  ..createdAt =
-      const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+Record _$RecordFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'userId', 'createdAt'],
+  );
+  return Record()
+    ..id = json['id'] as int
+    ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
+    ..active = json['active'] as bool? ?? false
+    ..userId = json['userId'] as String
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
+}
 
 DatabaseSize _$DatabaseSizeFromJson(Map<String, dynamic> json) => DatabaseSize()
   ..users = DatabaseSizeItem.fromJson(json['users'] as Map<String, dynamic>)
@@ -384,38 +444,58 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [];
 
-Soulmate _$SoulmateFromJson(Map<String, dynamic> json) => Soulmate()
-  ..score = (json['score'] as num).toDouble()
-  ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+Soulmate _$SoulmateFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['score', 'user'],
+  );
+  return Soulmate()
+    ..score = (json['score'] as num).toDouble()
+    ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$SoulmateToJson(Soulmate instance) => <String, dynamic>{
       'score': instance.score,
       'user': instance.user,
     };
 
-Stream _$StreamFromJson(Map<String, dynamic> json) => Stream()
-  ..id = json['id'] as String
-  ..userId = json['userId'] as String
-  ..endTime = const LocalDateTimeConverter().fromJson(json['endTime'] as String)
-  ..playedMs = json['playedMs'] as int
-  ..trackId = json['trackId'] as int
-  ..trackName = json['trackName'] as String
-  ..artists = (json['artistIds'] as List<dynamic>).map((e) => e as int).toList()
-  ..albumId = json['albumId'] as int?
-  ..importId = json['importId'] as int?;
+Stream _$StreamFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'userId'],
+  );
+  return Stream()
+    ..id = json['id'] as String
+    ..userId = json['userId'] as String
+    ..endTime =
+        const LocalDateTimeConverter().fromJson(json['endTime'] as String)
+    ..playedMs = json['playedMs'] as int
+    ..trackId = json['trackId'] as int
+    ..trackName = json['trackName'] as String
+    ..artists =
+        (json['artistIds'] as List<dynamic>).map((e) => e as int).toList()
+    ..albumId = json['albumId'] as int?
+    ..importId = json['importId'] as int?;
+}
 
-Swipe _$SwipeFromJson(Map<String, dynamic> json) => Swipe()
-  ..id = json['id'] as String
-  ..createdAt = DateTime.parse(json['createdAt'] as String)
-  ..decision = json['decision'] as String
-  ..decisionMs = json['decisionMs'] as int
-  ..algorithmId = json['algorithmId'] as int
-  ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
-  ..collections = (json['collections'] as List<dynamic>?)
-          ?.map(
-              (e) => SwipeCollectionSimple.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      [];
+Swipe _$SwipeFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'createdAt', 'decision', 'track'],
+  );
+  return Swipe()
+    ..id = json['id'] as String
+    ..createdAt = DateTime.parse(json['createdAt'] as String)
+    ..decision = json['decision'] as String
+    ..decisionMs = json['decisionMs'] as int? ?? 0
+    ..algorithmId = json['algorithmId'] as int
+    ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
+    ..collections = (json['collections'] as List<dynamic>?)
+            ?.map((e) =>
+                SwipeCollectionSimple.fromJson(e as Map<String, dynamic>))
+            .toList() ??
+        [];
+}
 
 SwipeStats _$SwipeStatsFromJson(Map<String, dynamic> json) => SwipeStats()
   ..decision = SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
@@ -495,11 +575,16 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
       ..userId = json['userId'] as String;
 
 SwipeCollectionSimple _$SwipeCollectionSimpleFromJson(
-        Map<String, dynamic> json) =>
-    SwipeCollectionSimple()
-      ..id = json['id'] as int
-      ..addedAt =
-          const LocalDateTimeConverter().fromJson(json['addedAt'] as String);
+    Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'addedAt'],
+  );
+  return SwipeCollectionSimple()
+    ..id = json['id'] as int
+    ..addedAt =
+        const LocalDateTimeConverter().fromJson(json['addedAt'] as String);
+}
 
 Map<String, dynamic> _$SwipeCollectionSimpleToJson(
         SwipeCollectionSimple instance) =>
@@ -520,14 +605,19 @@ SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
           const LocalDateTimeConverter().fromJson(json['syncedAt'] as String)
       ..userId = json['userId'] as String;
 
-RecommendedSwipe _$RecommendedSwipeFromJson(Map<String, dynamic> json) =>
-    RecommendedSwipe()
-      ..id = json['swipeId'] as String
-      ..recommendationId = json['recommendationId'] as String
-      ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
-      ..metadata = json['metadata'] == null
-          ? null
-          : SwipeMetadata.fromJson(json['metadata'] as Map<String, dynamic>);
+RecommendedSwipe _$RecommendedSwipeFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['swipeId', 'recommendationId', 'track'],
+  );
+  return RecommendedSwipe()
+    ..id = json['swipeId'] as String
+    ..recommendationId = json['recommendationId'] as String
+    ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
+    ..metadata = json['metadata'] == null
+        ? null
+        : SwipeMetadata.fromJson(json['metadata'] as Map<String, dynamic>);
+}
 
 SwipeMetadata _$SwipeMetadataFromJson(Map<String, dynamic> json) =>
     SwipeMetadata()
@@ -612,22 +702,28 @@ Map<String, dynamic> _$SwipeTopObjectToJson(SwipeTopObject instance) =>
       'decisionMs': instance.decisionMs.toJson(),
     };
 
-Track _$TrackFromJson(Map<String, dynamic> json) => Track()
-  ..id = json['id'] as int
-  ..name = json['name'] as String
-  ..explicit = json['explicit'] as bool
-  ..durationMs = json['durationMs'] as int
-  ..spotifyPopularity = json['spotifyPopularity'] as int?
-  ..spotifyPreview = json['spotifyPreview'] as String?
-  ..artists = (json['artists'] as List<dynamic>)
-      .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..albums = (json['albums'] as List<dynamic>)
-      .map((e) => AlbumSimple.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..externalIds = json['externalIds'] == null
-      ? null
-      : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+Track _$TrackFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name'],
+  );
+  return Track()
+    ..id = json['id'] as int
+    ..name = json['name'] as String
+    ..explicit = json['explicit'] as bool
+    ..durationMs = json['durationMs'] as int
+    ..spotifyPopularity = json['spotifyPopularity'] as int?
+    ..spotifyPreview = json['spotifyPreview'] as String?
+    ..artists = (json['artists'] as List<dynamic>)
+        .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..albums = (json['albums'] as List<dynamic>)
+        .map((e) => AlbumSimple.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..externalIds = json['externalIds'] == null
+        ? null
+        : ExternalIds.fromJson(json['externalIds'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'id': instance.id,
@@ -658,12 +754,18 @@ RecentlyStreamedTrack _$RecentlyStreamedTrackFromJson(
           const LocalDateTimeConverter().fromJson(json['endTime'] as String)
       ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 
-TopTrack _$TopTrackFromJson(Map<String, dynamic> json) => TopTrack()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
-  ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+TopTrack _$TopTrackFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['track'],
+  );
+  return TopTrack()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
+    ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
       'position': instance.position,
@@ -673,15 +775,20 @@ Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
       'track': instance.track.toJson(),
     };
 
-SwipeTopTrack _$SwipeTopTrackFromJson(Map<String, dynamic> json) =>
-    SwipeTopTrack()
-      ..position = json['position'] as int
-      ..swipes = json['swipes'] as int
-      ..decision =
-          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
-      ..decisionMs =
-          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
-      ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+SwipeTopTrack _$SwipeTopTrackFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['track'],
+  );
+  return SwipeTopTrack()
+    ..position = json['position'] as int
+    ..swipes = json['swipes'] as int
+    ..decision =
+        SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+    ..decisionMs =
+        SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
+    ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$SwipeTopTrackToJson(SwipeTopTrack instance) =>
     <String, dynamic>{
