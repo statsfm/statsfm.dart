@@ -145,43 +145,43 @@ class UserPrivacySettings extends Object {
   factory UserPrivacySettings.fromJson(Map<String, dynamic> json) =>
       _$UserPrivacySettingsFromJson(json);
 
-  @JsonKey(name: 'profile')
+  @JsonKey(name: 'profile', defaultValue: true)
   late bool profile;
 
-  @JsonKey(name: 'message')
+  @JsonKey(name: 'message', defaultValue: true)
   late bool message;
 
-  @JsonKey(name: 'currentlyPlaying')
+  @JsonKey(name: 'currentlyPlaying', defaultValue: true)
   late bool currentlyPlaying;
 
-  @JsonKey(name: 'recentlyPlayed')
+  @JsonKey(name: 'recentlyPlayed', defaultValue: true)
   late bool recentlyPlayed;
 
-  @JsonKey(name: 'topTracks')
+  @JsonKey(name: 'topTracks', defaultValue: true)
   late bool topTracks;
 
-  @JsonKey(name: 'topArtists')
+  @JsonKey(name: 'topArtists', defaultValue: true)
   late bool topArtists;
 
-  @JsonKey(name: 'topAlbums')
+  @JsonKey(name: 'topAlbums', defaultValue: true)
   late bool topAlbums;
 
-  @JsonKey(name: 'topGenres')
+  @JsonKey(name: 'topGenres', defaultValue: true)
   late bool topGenres;
 
-  @JsonKey(name: 'streams')
+  @JsonKey(name: 'streams', defaultValue: true)
   late bool streams;
 
-  @JsonKey(name: 'streamStats')
+  @JsonKey(name: 'streamStats', defaultValue: true)
   late bool streamStats;
 
-  @JsonKey(name: 'leaderboards')
+  @JsonKey(name: 'leaderboards', defaultValue: true)
   late bool leaderboards;
 
-  @JsonKey(name: 'connections')
+  @JsonKey(name: 'connections', defaultValue: true)
   late bool connections;
 
-  @JsonKey(name: 'friends')
+  @JsonKey(name: 'friends', defaultValue: true)
   late bool friends;
 }
 

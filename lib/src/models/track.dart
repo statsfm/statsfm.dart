@@ -77,10 +77,10 @@ class RecentlyStreamedTrack extends Object {
   factory RecentlyStreamedTrack.fromJson(Map<String, dynamic> json) =>
       _$RecentlyStreamedTrackFromJson(json);
 
-  @JsonKey(name: 'endTime')
+  @JsonKey(name: 'endTime', required: true)
   late DateTime endTime;
 
-  @JsonKey(name: 'track')
+  @JsonKey(name: 'track', required: true)
   late Track track;
 }
 

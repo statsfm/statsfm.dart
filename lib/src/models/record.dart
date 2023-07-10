@@ -8,7 +8,7 @@ class ArtistRecord extends Record {
   factory ArtistRecord.fromJson(Map<String, dynamic> json) =>
       _$ArtistRecordFromJson(json);
 
-  @JsonKey(name: 'artistId')
+  @JsonKey(name: 'artistId', required: true)
   late int artistId;
 }
 
@@ -22,7 +22,7 @@ class Record extends Object {
   @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'type', required: true)
   late RecordType type;
 
   @JsonKey(name: 'active', defaultValue: false)

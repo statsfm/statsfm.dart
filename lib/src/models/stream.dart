@@ -22,13 +22,13 @@ class Stream extends Object {
   @JsonKey(ignore: true)
   Duration? get played => Duration(milliseconds: this.playedMs);
 
-  @JsonKey(name: 'trackId')
+  @JsonKey(name: 'trackId', required: true)
   late int trackId;
 
-  @JsonKey(name: 'trackName')
+  @JsonKey(name: 'trackName', required: true)
   late String trackName;
 
-  @JsonKey(name: 'artistIds')
+  @JsonKey(name: 'artistIds', required: true)
   late List<int> artists;
 
   @JsonKey(name: 'albumId')

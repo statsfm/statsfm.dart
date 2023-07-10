@@ -67,15 +67,15 @@ class RangeAdapter extends TypeAdapter<Range> {
 Album _$AlbumFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'name'],
+    requiredKeys: const ['id', 'name', 'type', 'artists'],
   );
   return Album()
     ..id = json['id'] as int
     ..name = json['name'] as String
     ..image = json['image'] as String?
     ..label = json['label'] as String?
-    ..spotifyPopularity = json['spotifyPopularity'] as int
-    ..totalTracks = json['totalTracks'] as int
+    ..spotifyPopularity = json['spotifyPopularity'] as int? ?? 0
+    ..totalTracks = json['totalTracks'] as int? ?? 0
     ..type = json['type'] as String
     ..releaseDate = dateTimeFromTimestamp(json['releaseDate'] as int)
     ..genres =
@@ -123,7 +123,7 @@ Map<String, dynamic> _$AlbumSimpleToJson(AlbumSimple instance) =>
 TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['album'],
+    requiredKeys: const ['position', 'album'],
   );
   return TopAlbum()
     ..position = json['position'] as int
@@ -152,7 +152,7 @@ const _$IndicatorEnumMap = {
 SwipeTopAlbum _$SwipeTopAlbumFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['album'],
+    requiredKeys: const ['position', 'swipes', 'album'],
   );
   return SwipeTopAlbum()
     ..position = json['position'] as int
@@ -183,7 +183,7 @@ Artist _$ArtistFromJson(Map<String, dynamic> json) {
     ..name = json['name'] as String
     ..followers = json['followers'] as int? ?? 0
     ..image = json['image'] as String?
-    ..spotifyPopularity = json['spotifyPopularity'] as int
+    ..spotifyPopularity = json['spotifyPopularity'] as int? ?? 0
     ..genres =
         (json['genres'] as List<dynamic>).map((e) => e as String).toList()
     ..externalIds = json['externalIds'] == null
@@ -220,7 +220,7 @@ Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
 TopArtist _$TopArtistFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['artist'],
+    requiredKeys: const ['position', 'artist'],
   );
   return TopArtist()
     ..position = json['position'] as int
@@ -241,7 +241,7 @@ Map<String, dynamic> _$TopArtistToJson(TopArtist instance) => <String, dynamic>{
 SwipeTopArtist _$SwipeTopArtistFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['artist'],
+    requiredKeys: const ['position', 'swipes', 'artist'],
   );
   return SwipeTopArtist()
     ..position = json['position'] as int
@@ -304,7 +304,7 @@ Value? _$JsonConverterFromJson<Json, Value>(
 ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'userId', 'createdAt'],
+    requiredKeys: const ['id', 'type', 'userId', 'createdAt', 'artistId'],
   );
   return ArtistRecord()
     ..id = json['id'] as int
@@ -326,7 +326,7 @@ const _$RecordTypeEnumMap = {
 Record _$RecordFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'userId', 'createdAt'],
+    requiredKeys: const ['id', 'type', 'userId', 'createdAt'],
   );
   return Record()
     ..id = json['id'] as int
@@ -417,13 +417,19 @@ Genre _$GenreFromJson(Map<String, dynamic> json) => Genre()
 GenreSimple _$GenreSimpleFromJson(Map<String, dynamic> json) =>
     GenreSimple()..tag = json['tag'] as String?;
 
-TopGenre _$TopGenreFromJson(Map<String, dynamic> json) => TopGenre()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
-  ..genre = GenreSimple.fromJson(json['genre'] as Map<String, dynamic>)
-  ..artistCount = json['artistCount'] as int?;
+TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['position'],
+  );
+  return TopGenre()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
+    ..genre = GenreSimple.fromJson(json['genre'] as Map<String, dynamic>)
+    ..artistCount = json['artistCount'] as int?;
+}
 
 SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
     SearchResults()
@@ -462,7 +468,7 @@ Map<String, dynamic> _$SoulmateToJson(Soulmate instance) => <String, dynamic>{
 Stream _$StreamFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'userId'],
+    requiredKeys: const ['id', 'userId', 'trackId', 'trackName', 'artistIds'],
   );
   return Stream()
     ..id = json['id'] as String
@@ -556,23 +562,28 @@ Map<String, dynamic> _$SwipeCardinalityToJson(SwipeCardinality instance) =>
       'users': instance.users,
     };
 
-SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) =>
-    SwipeCollection()
-      ..id = json['id'] as int
-      ..name = json['name'] as String
-      ..description = json['description'] as String?
-      ..image = json['image'] as String?
-      ..swipeCount = json['swipeCount'] as int
-      ..public = json['public'] as bool
-      ..createdAt =
-          const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-      ..updatedAt =
-          const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
-      ..spotifySync = json['spotifySync'] == null
-          ? null
-          : SwipeCollectionSpotifySync.fromJson(
-              json['spotifySync'] as Map<String, dynamic>)
-      ..userId = json['userId'] as String;
+SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['id', 'name', 'swipeCount', 'createdAt', 'userId'],
+  );
+  return SwipeCollection()
+    ..id = json['id'] as int
+    ..name = json['name'] as String
+    ..description = json['description'] as String?
+    ..image = json['image'] as String?
+    ..swipeCount = json['swipeCount'] as int
+    ..public = json['public'] as bool? ?? true
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..updatedAt =
+        const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
+    ..spotifySync = json['spotifySync'] == null
+        ? null
+        : SwipeCollectionSpotifySync.fromJson(
+            json['spotifySync'] as Map<String, dynamic>)
+    ..userId = json['userId'] as String;
+}
 
 SwipeCollectionSimple _$SwipeCollectionSimpleFromJson(
     Map<String, dynamic> json) {
@@ -594,16 +605,27 @@ Map<String, dynamic> _$SwipeCollectionSimpleToJson(
     };
 
 SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
-        Map<String, dynamic> json) =>
-    SwipeCollectionSpotifySync()
-      ..collectionId = json['collectionId'] as int
-      ..spotifyId = json['spotifyId'] as String
-      ..syncEnabled = json['syncEnabled'] as bool
-      ..createdAt =
-          const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-      ..syncedAt =
-          const LocalDateTimeConverter().fromJson(json['syncedAt'] as String)
-      ..userId = json['userId'] as String;
+    Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const [
+      'collectionId',
+      'spotifyId',
+      'createdAt',
+      'syncedAt',
+      'userId'
+    ],
+  );
+  return SwipeCollectionSpotifySync()
+    ..collectionId = json['collectionId'] as int
+    ..spotifyId = json['spotifyId'] as String
+    ..syncEnabled = json['syncEnabled'] as bool? ?? false
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..syncedAt =
+        const LocalDateTimeConverter().fromJson(json['syncedAt'] as String)
+    ..userId = json['userId'] as String;
+}
 
 RecommendedSwipe _$RecommendedSwipeFromJson(Map<String, dynamic> json) {
   $checkKeys(
@@ -679,20 +701,31 @@ StreamStatsWithPrecision _$StreamStatsWithPrecisionFromJson(
       ..durationMs = (json['durationMs'] as num?)?.toDouble() ?? 0
       ..count = (json['count'] as num?)?.toDouble() ?? 0;
 
-TopObject _$TopObjectFromJson(Map<String, dynamic> json) => TopObject()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
+TopObject _$TopObjectFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['position'],
+  );
+  return TopObject()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
+}
 
-SwipeTopObject _$SwipeTopObjectFromJson(Map<String, dynamic> json) =>
-    SwipeTopObject()
-      ..position = json['position'] as int
-      ..swipes = json['swipes'] as int
-      ..decision =
-          SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
-      ..decisionMs =
-          SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>);
+SwipeTopObject _$SwipeTopObjectFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['position', 'swipes'],
+  );
+  return SwipeTopObject()
+    ..position = json['position'] as int
+    ..swipes = json['swipes'] as int
+    ..decision =
+        SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
+    ..decisionMs =
+        SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>);
+}
 
 Map<String, dynamic> _$SwipeTopObjectToJson(SwipeTopObject instance) =>
     <String, dynamic>{
@@ -748,16 +781,21 @@ CurrentlyStreamingTrack _$CurrentlyStreamingTrackFromJson(
       ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 
 RecentlyStreamedTrack _$RecentlyStreamedTrackFromJson(
-        Map<String, dynamic> json) =>
-    RecentlyStreamedTrack()
-      ..endTime =
-          const LocalDateTimeConverter().fromJson(json['endTime'] as String)
-      ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+    Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['endTime', 'track'],
+  );
+  return RecentlyStreamedTrack()
+    ..endTime =
+        const LocalDateTimeConverter().fromJson(json['endTime'] as String)
+    ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
+}
 
 TopTrack _$TopTrackFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['track'],
+    requiredKeys: const ['position', 'track'],
   );
   return TopTrack()
     ..position = json['position'] as int
@@ -778,7 +816,7 @@ Map<String, dynamic> _$TopTrackToJson(TopTrack instance) => <String, dynamic>{
 SwipeTopTrack _$SwipeTopTrackFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['track'],
+    requiredKeys: const ['position', 'swipes', 'track'],
   );
   return SwipeTopTrack()
     ..position = json['position'] as int
@@ -972,19 +1010,19 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
 
 UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
     UserPrivacySettings()
-      ..profile = json['profile'] as bool
-      ..message = json['message'] as bool
-      ..currentlyPlaying = json['currentlyPlaying'] as bool
-      ..recentlyPlayed = json['recentlyPlayed'] as bool
-      ..topTracks = json['topTracks'] as bool
-      ..topArtists = json['topArtists'] as bool
-      ..topAlbums = json['topAlbums'] as bool
-      ..topGenres = json['topGenres'] as bool
-      ..streams = json['streams'] as bool
-      ..streamStats = json['streamStats'] as bool
-      ..leaderboards = json['leaderboards'] as bool
-      ..connections = json['connections'] as bool
-      ..friends = json['friends'] as bool;
+      ..profile = json['profile'] as bool? ?? true
+      ..message = json['message'] as bool? ?? true
+      ..currentlyPlaying = json['currentlyPlaying'] as bool? ?? true
+      ..recentlyPlayed = json['recentlyPlayed'] as bool? ?? true
+      ..topTracks = json['topTracks'] as bool? ?? true
+      ..topArtists = json['topArtists'] as bool? ?? true
+      ..topAlbums = json['topAlbums'] as bool? ?? true
+      ..topGenres = json['topGenres'] as bool? ?? true
+      ..streams = json['streams'] as bool? ?? true
+      ..streamStats = json['streamStats'] as bool? ?? true
+      ..leaderboards = json['leaderboards'] as bool? ?? true
+      ..connections = json['connections'] as bool? ?? true
+      ..friends = json['friends'] as bool? ?? true;
 
 Map<String, dynamic> _$UserPrivacySettingsToJson(
         UserPrivacySettings instance) =>
@@ -1100,14 +1138,20 @@ Map<String, dynamic> _$SocialMediaPlatformToJson(
       'icon': instance.icon,
     };
 
-TopUser _$TopUserFromJson(Map<String, dynamic> json) => TopUser()
-  ..position = json['position'] as int
-  ..streams = json['streams'] as int?
-  ..playedMs = json['playedMs'] as int?
-  ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
-  ..user = json['user'] == null
-      ? null
-      : UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+TopUser _$TopUserFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['position'],
+  );
+  return TopUser()
+    ..position = json['position'] as int
+    ..streams = json['streams'] as int?
+    ..playedMs = json['playedMs'] as int?
+    ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
+    ..user = json['user'] == null
+        ? null
+        : UserPublic.fromJson(json['user'] as Map<String, dynamic>);
+}
 
 UserSpotifyPlaylist _$UserSpotifyPlaylistFromJson(Map<String, dynamic> json) =>
     UserSpotifyPlaylist()

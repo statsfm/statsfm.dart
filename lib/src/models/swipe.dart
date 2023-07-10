@@ -119,10 +119,10 @@ class SwipeCollection extends Object {
   factory SwipeCollection.fromJson(Map<String, dynamic> json) =>
       _$SwipeCollectionFromJson(json);
 
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'id', required: true)
   late int id;
 
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', required: true)
   late String name;
 
   @JsonKey(name: 'description')
@@ -131,13 +131,13 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'image')
   late String? image;
 
-  @JsonKey(name: 'swipeCount')
+  @JsonKey(name: 'swipeCount', required: true)
   late int swipeCount;
 
-  @JsonKey(name: 'public')
+  @JsonKey(name: 'public', defaultValue: true)
   late bool public;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 
   @JsonKey(name: 'updatedAt')
@@ -146,7 +146,7 @@ class SwipeCollection extends Object {
   @JsonKey(name: 'spotifySync')
   late SwipeCollectionSpotifySync? spotifySync;
 
-  @JsonKey(name: 'userId')
+  @JsonKey(name: 'userId', required: true)
   late String userId;
 }
 
@@ -174,22 +174,22 @@ class SwipeCollectionSpotifySync extends Object {
   factory SwipeCollectionSpotifySync.fromJson(Map<String, dynamic> json) =>
       _$SwipeCollectionSpotifySyncFromJson(json);
 
-  @JsonKey(name: 'collectionId')
+  @JsonKey(name: 'collectionId', required: true)
   late int collectionId;
 
-  @JsonKey(name: 'spotifyId')
+  @JsonKey(name: 'spotifyId', required: true)
   late String spotifyId;
 
-  @JsonKey(name: 'syncEnabled')
+  @JsonKey(name: 'syncEnabled', defaultValue: false)
   late bool syncEnabled;
 
-  @JsonKey(name: 'createdAt')
+  @JsonKey(name: 'createdAt', required: true)
   late DateTime createdAt;
 
-  @JsonKey(name: 'syncedAt')
+  @JsonKey(name: 'syncedAt', required: true)
   late DateTime syncedAt;
 
-  @JsonKey(name: 'userId')
+  @JsonKey(name: 'userId', required: true)
   late String userId;
 }
 

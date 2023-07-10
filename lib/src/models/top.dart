@@ -24,7 +24,7 @@ class TopObject extends Object {
   factory TopObject.fromJson(Map<String, dynamic> json) =>
       _$TopObjectFromJson(json);
 
-  @JsonKey(name: 'position')
+  @JsonKey(name: 'position', required: true)
   late int position;
 
   @JsonKey(name: 'streams')
@@ -45,10 +45,10 @@ class SwipeTopObject extends Object {
       _$SwipeTopObjectFromJson(json);
   Map<String, dynamic> toJson() => _$SwipeTopObjectToJson(this);
 
-  @JsonKey(name: 'position')
+  @JsonKey(name: 'position', required: true)
   late int position;
 
-  @JsonKey(name: 'swipes')
+  @JsonKey(name: 'swipes', required: true)
   late int swipes;
 
   @JsonKey(name: 'decision')

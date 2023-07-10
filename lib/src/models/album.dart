@@ -11,13 +11,13 @@ class Album extends AlbumSimple {
   @JsonKey(name: 'label')
   late String? label;
 
-  @JsonKey(name: 'spotifyPopularity')
+  @JsonKey(name: 'spotifyPopularity', defaultValue: 0)
   late int spotifyPopularity;
 
-  @JsonKey(name: 'totalTracks')
+  @JsonKey(name: 'totalTracks', defaultValue: 0)
   late int totalTracks;
 
-  @JsonKey(name: 'type')
+  @JsonKey(name: 'type', required: true)
   late String type;
 
   @JsonKey(name: 'releaseDate', fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
@@ -26,7 +26,7 @@ class Album extends AlbumSimple {
   @JsonKey(name: 'genres')
   late List<String> genres;
 
-  @JsonKey(name: 'artists')
+  @JsonKey(name: 'artists', required: true)
   late List<ArtistSimple> artists;
 
   @JsonKey(name: 'externalIds')

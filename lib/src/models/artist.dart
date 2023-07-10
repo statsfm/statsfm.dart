@@ -13,7 +13,7 @@ class Artist extends ArtistSimple {
   @JsonKey(name: 'image')
   late String? image;
 
-  @JsonKey(name: 'spotifyPopularity')
+  @JsonKey(name: 'spotifyPopularity', defaultValue: 0)
   late int spotifyPopularity;
 
   @JsonKey(name: 'genres')
