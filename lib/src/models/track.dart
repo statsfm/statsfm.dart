@@ -31,10 +31,10 @@ class Track extends Object {
   @JsonKey(name: 'spotifyPreview')
   late String? spotifyPreview;
 
-  @JsonKey(name: 'artists')
+  @JsonKey(name: 'artists', required: true)
   late List<ArtistSimple> artists;
 
-  @JsonKey(name: 'albums')
+  @JsonKey(name: 'albums', required: true)
   late List<AlbumSimple> albums;
 
   @JsonKey(name: 'externalIds')

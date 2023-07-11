@@ -738,7 +738,7 @@ Map<String, dynamic> _$SwipeTopObjectToJson(SwipeTopObject instance) =>
 Track _$TrackFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'name'],
+    requiredKeys: const ['id', 'name', 'artists', 'albums'],
   );
   return Track()
     ..id = json['id'] as int
