@@ -455,28 +455,28 @@ class SpotifyAuth extends Object {
   factory SpotifyAuth.fromJson(Map<String, dynamic> json) =>
       _$SpotifyAuthFromJson(json);
 
-  @JsonKey(name: 'disabled')
+  @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', required: true)
   late String email;
 
-  @JsonKey(name: 'displayName')
+  @JsonKey(name: 'displayName', required: true)
   late String displayName;
 
-  @JsonKey(name: 'platformUserId')
+  @JsonKey(name: 'platformUserId', required: true)
   late String platformUserId;
 
   @JsonKey(name: 'image')
   late String? image;
 
-  @JsonKey(name: 'country')
+  @JsonKey(name: 'country', required: true)
   late String country;
 
-  @JsonKey(name: 'sync')
+  @JsonKey(name: 'sync', defaultValue: false)
   late bool syncStreams;
 
-  @JsonKey(name: 'imported')
+  @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
 }
 
@@ -489,22 +489,22 @@ class AppleMusicAuth extends Object {
   factory AppleMusicAuth.fromJson(Map<String, dynamic> json) =>
       _$AppleMusicAuthFromJson(json);
 
-  @JsonKey(name: 'disabled')
+  @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 
-  @JsonKey(name: 'email')
+  @JsonKey(name: 'email', required: true)
   late String email;
 
-  @JsonKey(name: 'emailVerified')
+  @JsonKey(name: 'emailVerified', defaultValue: false)
   late bool emailVerified;
 
-  @JsonKey(name: 'appleUserId')
+  @JsonKey(name: 'appleUserId', required: true)
   late String appleUserId;
 
-  @JsonKey(name: 'sync')
+  @JsonKey(name: 'sync', defaultValue: false)
   late bool syncStreams;
 
-  @JsonKey(name: 'imported')
+  @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
 }
 

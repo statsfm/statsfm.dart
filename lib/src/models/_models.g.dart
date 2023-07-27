@@ -1267,15 +1267,21 @@ Map<String, dynamic> _$AuthConnectionsToJson(AuthConnections instance) =>
       'appleMusicAuth': instance.appleMusicAuth,
     };
 
-SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) => SpotifyAuth()
-  ..disabled = json['disabled'] as bool
-  ..email = json['email'] as String
-  ..displayName = json['displayName'] as String
-  ..platformUserId = json['platformUserId'] as String
-  ..image = json['image'] as String?
-  ..country = json['country'] as String
-  ..syncStreams = json['sync'] as bool
-  ..imported = json['imported'] as bool;
+SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['email', 'displayName', 'platformUserId', 'country'],
+  );
+  return SpotifyAuth()
+    ..disabled = json['disabled'] as bool? ?? false
+    ..email = json['email'] as String
+    ..displayName = json['displayName'] as String
+    ..platformUserId = json['platformUserId'] as String
+    ..image = json['image'] as String?
+    ..country = json['country'] as String
+    ..syncStreams = json['sync'] as bool? ?? false
+    ..imported = json['imported'] as bool? ?? false;
+}
 
 Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
     <String, dynamic>{
@@ -1289,14 +1295,19 @@ Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
       'imported': instance.imported,
     };
 
-AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
-    AppleMusicAuth()
-      ..disabled = json['disabled'] as bool
-      ..email = json['email'] as String
-      ..emailVerified = json['emailVerified'] as bool
-      ..appleUserId = json['appleUserId'] as String
-      ..syncStreams = json['sync'] as bool
-      ..imported = json['imported'] as bool;
+AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['email', 'appleUserId'],
+  );
+  return AppleMusicAuth()
+    ..disabled = json['disabled'] as bool? ?? false
+    ..email = json['email'] as String
+    ..emailVerified = json['emailVerified'] as bool? ?? false
+    ..appleUserId = json['appleUserId'] as String
+    ..syncStreams = json['sync'] as bool? ?? false
+    ..imported = json['imported'] as bool? ?? false;
+}
 
 Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
     <String, dynamic>{
