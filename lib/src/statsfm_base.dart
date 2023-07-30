@@ -79,22 +79,24 @@ abstract class StatsfmApiBase {
         handler.next(err);
       },
     ));
-    //Dio cache interceptor Disabled till caching issue is fixed
-    // getTemporaryDirectory().then((dir) {
-    //   dio.interceptors.add(
-    //     DioCacheInterceptor(
-    //       options: CacheOptions(
-    //         store: HiveCacheStore(
-    //           dir.path,
-    //           hiveBoxName: 'statsfm_dio_cache',
-    //         ),
-    //         policy: CachePolicy.request,
-    //         keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-    //         allowPostMethod: false,
-    //       ),
-    //     ),
-    //   );
-    // });
+    //Dio cache
+    getTemporaryDirectory().then((dir) {
+      dio.interceptors.add(
+        DioCacheInterceptor(
+          options: CacheOptions(
+            store: HiveCacheStore(
+              dir.path,
+              hiveBoxName: 'statsfm_dio_cache',
+            ),
+            policy: CachePolicy.request,
+            hitCacheOnErrorExcept: [403],
+            keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+            allowPostMethod: false,
+            maxStale: Duration(hours: 1),
+          ),
+        ),
+      );
+    });
 
     //Dio retry interceptor
     final myStatuses = {
