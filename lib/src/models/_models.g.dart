@@ -1280,7 +1280,8 @@ SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) {
     ..image = json['image'] as String?
     ..country = json['country'] as String
     ..syncStreams = json['sync'] as bool? ?? false
-    ..imported = json['imported'] as bool? ?? false;
+    ..imported = json['imported'] as bool? ?? false
+    ..status = json['status'] as int? ?? 0;
 }
 
 Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
@@ -1293,6 +1294,7 @@ Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
       'country': instance.country,
       'sync': instance.syncStreams,
       'imported': instance.imported,
+      'status': instance.status,
     };
 
 AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) {
@@ -1306,7 +1308,8 @@ AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) {
     ..emailVerified = json['emailVerified'] as bool? ?? false
     ..appleUserId = json['appleUserId'] as String
     ..syncStreams = json['sync'] as bool? ?? false
-    ..imported = json['imported'] as bool? ?? false;
+    ..imported = json['imported'] as bool? ?? false
+    ..status = json['status'] as int? ?? 0;
 }
 
 Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
@@ -1317,6 +1320,7 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
+      'status': instance.status,
     };
 
 ConnectedServices _$ConnectedServicesFromJson(Map<String, dynamic> json) =>
@@ -1335,10 +1339,12 @@ Map<String, dynamic> _$ConnectedServicesToJson(ConnectedServices instance) =>
 StreamingService _$StreamingServiceFromJson(Map<String, dynamic> json) =>
     StreamingService()
       ..connected = json['connected'] as bool? ?? false
-      ..hasImported = json['hasImported'] as bool? ?? false;
+      ..hasImported = json['hasImported'] as bool? ?? false
+      ..status = json['status'] as int? ?? 0;
 
 Map<String, dynamic> _$StreamingServiceToJson(StreamingService instance) =>
     <String, dynamic>{
       'connected': instance.connected,
       'hasImported': instance.hasImported,
+      'status': instance.status,
     };

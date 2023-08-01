@@ -478,6 +478,9 @@ class SpotifyAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
+
+  @JsonKey(name: 'status', defaultValue: 0)
+  late int status;
 }
 
 @JsonSerializable(createToJson: true)
@@ -506,6 +509,9 @@ class AppleMusicAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
+
+  @JsonKey(name: 'status', defaultValue: 0)
+  late int status;
 }
 
 @JsonSerializable(createToJson: true)
@@ -538,4 +544,7 @@ class StreamingService extends Object {
 
   @JsonKey(name: 'hasImported', defaultValue: false)
   late bool hasImported;
+
+  @JsonKey(name: 'status', defaultValue: 0)
+  late int status;
 }
