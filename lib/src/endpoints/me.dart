@@ -7,13 +7,14 @@ class Me extends EndpointBase {
   Me(StatsfmApiBase api) : super(api);
 
   Future<UserPrivate> get() async {
-    final map = (await dio.get(_path)).data;
+    Response response = await dio.get(_path);
 
-    if (map['item'] == null) {
-      throw StatsfmException(400, 'User Id in token is not valid');
+    if (response.statusCode != 200) {
+      throw StatsfmException(response.statusCode ?? 400,
+          response.statusMessage ?? 'No status message');
     }
-
-    return UserPrivate.fromJson(map['item']);
+    
+    return UserPrivate.fromJson(response.data['item']);
   }
 
   Future<UserPrivate> updateMe(UserPrivate me) async {
