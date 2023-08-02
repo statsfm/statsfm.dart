@@ -9,6 +9,7 @@ import 'src/models/_models.dart';
 export 'src/models/_models.dart';
 
 part 'src/endpoints/albums.dart';
+part 'src/endpoints/auth.dart';
 part 'src/endpoints/artists.dart';
 part 'src/endpoints/charts.dart';
 part 'src/endpoints/records.dart';

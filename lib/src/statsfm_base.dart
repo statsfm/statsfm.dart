@@ -41,6 +41,9 @@ abstract class StatsfmApiBase {
 
   late Me _me;
   Me get me => _me;
+  
+  late Auth _auth;
+  Auth get auth => _auth;
 
   StatsfmApiBase.fromAccessToken(
     String accessToken, {
@@ -90,6 +93,7 @@ abstract class StatsfmApiBase {
     );
 
     _artists = Artists(this);
+    _auth = Auth(this);
     _albums = Albums(this);
     _charts = Charts(this);
     _records = Records(this);
