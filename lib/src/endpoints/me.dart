@@ -268,4 +268,17 @@ class Me extends EndpointBase {
   Future<bool> deleteProfileImage() async {
     return (await dio.delete('$_path/image')).statusCode == 200;
   }
+
+  ///Update a services sync and import settings
+  Future<bool> updateServiceSettings(
+      String service, bool syncStreams, bool hasImported) async {
+    final Response response = await dio.post(
+      '$_path/service/$service/settings',
+      data: {
+        "sync": syncStreams,
+        "hasImported": hasImported,
+      },
+    );
+    return response.statusCode == 201;
+  }
 }
