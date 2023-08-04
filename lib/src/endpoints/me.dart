@@ -13,7 +13,7 @@ class Me extends EndpointBase {
       throw StatsfmException(response.statusCode ?? 400,
           response.statusMessage ?? 'No status message');
     }
-    
+
     return UserPrivate.fromJson(response.data['item']);
   }
 
@@ -112,7 +112,7 @@ class Me extends EndpointBase {
     return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
   }
 
-  Future<UserSpotifyPlaylist?> createSpotifyPlaylist(
+  Future<UserSpotifyPlaylist> createSpotifyPlaylist(
     int size,
     OrderBySetting orderBy,
     bool syncEnabled,
