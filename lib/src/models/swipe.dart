@@ -222,3 +222,17 @@ class SwipeMetadata extends Object {
   @JsonKey(name: 'createdAt')
   late DateTime? createdAt;
 }
+
+@JsonSerializable(createToJson: false)
+class FriendSwipe extends Object {
+  FriendSwipe();
+
+  factory FriendSwipe.fromJson(Map<String, dynamic> json) =>
+      _$FriendSwipeFromJson(json);
+
+  @JsonKey(name: 'user')
+  late UserPublic user;
+
+  @JsonKey(name: 'swipe')
+  late Swipe swipe;
+}

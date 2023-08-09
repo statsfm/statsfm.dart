@@ -281,4 +281,27 @@ class Me extends EndpointBase {
     );
     return response.statusCode == 201;
   }
+  
+  ///Gets the Swipes for the current users friends of the item
+  Future<List<FriendSwipe>> getFriendsSwipes(int id, dynamic type) async {
+    //Get item type
+    String? typeString;
+    switch (type.runtimeType) {
+      case Track:
+        typeString = 'tracks';
+        break;
+      case Artist:
+        typeString = 'artists';
+        break;
+      case Album:
+        typeString = 'albums';
+        break;
+      default:
+        throw Exception('Not a valid type');
+    }
+    final Map map = (await dio.get('$_path/swipefy/friends/$typeString/$id/swipes')).data;
+
+    var devicesMap = map['items'] as Iterable<dynamic>;
+    return devicesMap.map((m) => FriendSwipe.fromJson(m)).toList();
+  }
 }

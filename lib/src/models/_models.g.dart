@@ -666,6 +666,10 @@ SwipeMetadata _$SwipeMetadataFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['createdAt'] as String);
 
+FriendSwipe _$FriendSwipeFromJson(Map<String, dynamic> json) => FriendSwipe()
+  ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
+  ..swipe = Swipe.fromJson(json['swipe'] as Map<String, dynamic>);
+
 PerDayStats _$PerDayStatsFromJson(Map<String, dynamic> json) => PerDayStats()
   ..average =
       StreamStatsWithPrecision.fromJson(json['average'] as Map<String, dynamic>)
