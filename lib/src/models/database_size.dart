@@ -1,11 +1,11 @@
 part of statsfm.models;
 
 @JsonSerializable(createToJson: false)
-class DatabaseSize extends Object {
-  DatabaseSize();
+class DatabaseSizeStatsfm extends Object {
+  DatabaseSizeStatsfm();
 
-  factory DatabaseSize.fromJson(Map<String, dynamic> json) =>
-      _$DatabaseSizeFromJson(json);
+  factory DatabaseSizeStatsfm.fromJson(Map<String, dynamic> json) =>
+      _$DatabaseSizeStatsfmFromJson(json);
 
   @JsonKey(name: 'users')
   late DatabaseSizeItem users;
@@ -15,6 +15,32 @@ class DatabaseSize extends Object {
 
   @JsonKey(name: 'streams')
   late DatabaseSizeItem streams;
+
+  @JsonKey(name: 'tracks')
+  late DatabaseSizeItem tracks;
+
+  @JsonKey(name: 'artists')
+  late DatabaseSizeItem artists;
+
+  @JsonKey(name: 'albums')
+  late DatabaseSizeItem albums;
+}
+
+@JsonSerializable(createToJson: false)
+class DatabaseSizeSwipefy extends Object {
+  DatabaseSizeSwipefy();
+
+  factory DatabaseSizeSwipefy.fromJson(Map<String, dynamic> json) =>
+      _$DatabaseSizeSwipefyFromJson(json);
+
+  @JsonKey(name: 'users')
+  late DatabaseSizeItem users;
+
+  @JsonKey(name: 'proUsers')
+  late DatabaseSizeItem proUsers;
+
+  @JsonKey(name: 'swipes')
+  late DatabaseSizeItem swipes;
 
   @JsonKey(name: 'tracks')
   late DatabaseSizeItem tracks;

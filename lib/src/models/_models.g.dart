@@ -337,14 +337,33 @@ Record _$RecordFromJson(Map<String, dynamic> json) {
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String);
 }
 
-DatabaseSize _$DatabaseSizeFromJson(Map<String, dynamic> json) => DatabaseSize()
-  ..users = DatabaseSizeItem.fromJson(json['users'] as Map<String, dynamic>)
-  ..plusUsers =
-      DatabaseSizeItem.fromJson(json['plusUsers'] as Map<String, dynamic>)
-  ..streams = DatabaseSizeItem.fromJson(json['streams'] as Map<String, dynamic>)
-  ..tracks = DatabaseSizeItem.fromJson(json['tracks'] as Map<String, dynamic>)
-  ..artists = DatabaseSizeItem.fromJson(json['artists'] as Map<String, dynamic>)
-  ..albums = DatabaseSizeItem.fromJson(json['albums'] as Map<String, dynamic>);
+DatabaseSizeStatsfm _$DatabaseSizeStatsfmFromJson(Map<String, dynamic> json) =>
+    DatabaseSizeStatsfm()
+      ..users = DatabaseSizeItem.fromJson(json['users'] as Map<String, dynamic>)
+      ..plusUsers =
+          DatabaseSizeItem.fromJson(json['plusUsers'] as Map<String, dynamic>)
+      ..streams =
+          DatabaseSizeItem.fromJson(json['streams'] as Map<String, dynamic>)
+      ..tracks =
+          DatabaseSizeItem.fromJson(json['tracks'] as Map<String, dynamic>)
+      ..artists =
+          DatabaseSizeItem.fromJson(json['artists'] as Map<String, dynamic>)
+      ..albums =
+          DatabaseSizeItem.fromJson(json['albums'] as Map<String, dynamic>);
+
+DatabaseSizeSwipefy _$DatabaseSizeSwipefyFromJson(Map<String, dynamic> json) =>
+    DatabaseSizeSwipefy()
+      ..users = DatabaseSizeItem.fromJson(json['users'] as Map<String, dynamic>)
+      ..proUsers =
+          DatabaseSizeItem.fromJson(json['proUsers'] as Map<String, dynamic>)
+      ..swipes =
+          DatabaseSizeItem.fromJson(json['swipes'] as Map<String, dynamic>)
+      ..tracks =
+          DatabaseSizeItem.fromJson(json['tracks'] as Map<String, dynamic>)
+      ..artists =
+          DatabaseSizeItem.fromJson(json['artists'] as Map<String, dynamic>)
+      ..albums =
+          DatabaseSizeItem.fromJson(json['albums'] as Map<String, dynamic>);
 
 DatabaseSizeItem _$DatabaseSizeItemFromJson(Map<String, dynamic> json) =>
     DatabaseSizeItem()
