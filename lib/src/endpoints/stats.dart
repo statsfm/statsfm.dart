@@ -12,9 +12,9 @@ class Stats extends EndpointBase {
     return DatabaseSizeStatsfm.fromJson(map['item']);
   }
 
-  Future<DatabaseSizeStatsfm> databaseSizeSwipefy() async {
+  Future<DatabaseSizeSwipefy> databaseSizeSwipefy() async {
     final Map map = (await dio.get('$_path/swipefy/database/size')).data;
 
-    return DatabaseSizeStatsfm.fromJson(map['item']);
+    return DatabaseSizeSwipefy.fromJson(map['item']);
   }
 }
