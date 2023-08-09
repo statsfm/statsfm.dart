@@ -66,4 +66,14 @@ class Albums extends EndpointBase {
     var topListeners = map['items'] as Iterable<dynamic>;
     return topListeners.map((m) => TopUser.fromJson(m)).toList();
   }
+
+  ///Gets a artists Swipefy stats
+  Future<SwipeStats> swipefyStats(int albumId) async {
+    final Map map = (await dio.get(
+      '$_path/$albumId/swipefy/stats',
+    ))
+        .data;
+
+    return SwipeStats.fromJson(map['items']);
+  }
 }

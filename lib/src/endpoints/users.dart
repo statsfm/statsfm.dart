@@ -540,6 +540,17 @@ class Users extends EndpointBase {
     return map['item'];
   }
 
+  ///Gets a users Swipefy stats
+  Future<SwipeStats> swipefyStats(
+      String userId) async {
+    final Map map = (await dio.get(
+      '$_path/${Uri.encodeComponent(userId)}/swipefy/stats',
+    ))
+        .data;
+
+    return SwipeStats.fromJson(map['items']);
+  }
+
   ///Gets users Swipefy collections
   Future<List<SwipeCollection>> swipefyCollections(String userId) async {
     final Map map = (await dio.get(
