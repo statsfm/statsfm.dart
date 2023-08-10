@@ -81,6 +81,10 @@ class UserPublic extends Object {
 
   @JsonKey(name: 'socialMediaConnections')
   late List<UserProfileSocialMediaConnection> socialMediaConnections;
+
+  //This is only here if a user has been banned from stats.fm
+  @JsonKey(name: 'userBan')
+  late UserBan? userBan;
 }
 
 enum OrderBySetting {
@@ -547,4 +551,20 @@ class StreamingService extends Object {
 
   @JsonKey(name: 'status', defaultValue: 0)
   late int status;
+}
+
+@JsonSerializable(createToJson: true)
+class UserBan extends Object {
+  UserBan();
+
+  Map<String, dynamic> toJson() => _$UserBanToJson(this);
+
+  factory UserBan.fromJson(Map<String, dynamic> json) =>
+      _$UserBanFromJson(json);
+
+  @JsonKey(name: 'createdAt')
+  late DateTime createdAt;
+
+  @JsonKey(name: 'active')
+  late bool active;
 }

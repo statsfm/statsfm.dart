@@ -906,6 +906,9 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         .map((e) => UserProfileSocialMediaConnection.fromJson(
             e as Map<String, dynamic>))
         .toList()
+    ..userBan = json['userBan'] == null
+        ? null
+        : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..email = json['email'] as String
     ..country = json['country'] as String
     ..disabled = json['disabled'] as bool? ?? false;
@@ -930,6 +933,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
+      'userBan': instance.userBan,
       'email': instance.email,
       'country': instance.country,
       'disabled': instance.disabled,
@@ -986,7 +990,10 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
     ..socialMediaConnections = (json['socialMediaConnections'] as List<dynamic>)
         .map((e) => UserProfileSocialMediaConnection.fromJson(
             e as Map<String, dynamic>))
-        .toList();
+        .toList()
+    ..userBan = json['userBan'] == null
+        ? null
+        : UserBan.fromJson(json['userBan'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
@@ -1008,6 +1015,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'privacySettings': instance.privacySettings,
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
+      'userBan': instance.userBan,
     };
 
 UserImport _$UserImportFromJson(Map<String, dynamic> json) {
@@ -1370,4 +1378,13 @@ Map<String, dynamic> _$StreamingServiceToJson(StreamingService instance) =>
       'connected': instance.connected,
       'hasImported': instance.hasImported,
       'status': instance.status,
+    };
+
+UserBan _$UserBanFromJson(Map<String, dynamic> json) => UserBan()
+  ..createdAt = DateTime.parse(json['createdAt'] as String)
+  ..active = json['active'] as bool;
+
+Map<String, dynamic> _$UserBanToJson(UserBan instance) => <String, dynamic>{
+      'createdAt': instance.createdAt.toIso8601String(),
+      'active': instance.active,
     };
