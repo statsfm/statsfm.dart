@@ -82,9 +82,13 @@ class UserPublic extends Object {
   @JsonKey(name: 'socialMediaConnections')
   late List<UserProfileSocialMediaConnection> socialMediaConnections;
 
-  //This is only here if a user has been banned from stats.fm
+  ///This is only here if a user has been banned from stats.fm
   @JsonKey(name: 'userBan')
   late UserBan? userBan;
+
+  ///Users streams are stored in a different database (Normally happens if they sleep stream)
+  @JsonKey(name: 'quarantined', defaultValue: false)
+  late bool quarantined;
 }
 
 enum OrderBySetting {

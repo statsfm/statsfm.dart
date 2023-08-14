@@ -909,6 +909,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..userBan = json['userBan'] == null
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
+    ..quarantined = json['quarantined'] as bool? ?? false
     ..email = json['email'] as String
     ..country = json['country'] as String
     ..disabled = json['disabled'] as bool? ?? false;
@@ -934,6 +935,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
+      'quarantined': instance.quarantined,
       'email': instance.email,
       'country': instance.country,
       'disabled': instance.disabled,
@@ -993,7 +995,8 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
         .toList()
     ..userBan = json['userBan'] == null
         ? null
-        : UserBan.fromJson(json['userBan'] as Map<String, dynamic>);
+        : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
+    ..quarantined = json['quarantined'] as bool? ?? false;
 }
 
 Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
@@ -1016,6 +1019,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'profile': instance.profile,
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
+      'quarantined': instance.quarantined,
     };
 
 UserImport _$UserImportFromJson(Map<String, dynamic> json) {
