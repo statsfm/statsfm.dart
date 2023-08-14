@@ -61,9 +61,11 @@ class UserPublic extends Object {
   @JsonKey(name: 'connectedServices')
   late ConnectedServices? connectedServices;
 
+  ///NOTE: Will be deprecated after the Apple Music update.
   @JsonKey(name: 'hasImported', defaultValue: false)
   late bool hasImported;
 
+  ///NOTE: Will be deprecated after the Apple Music update.
   @JsonKey(name: 'syncEnabled', defaultValue: false)
   late bool syncEnabled;
 
