@@ -98,36 +98,6 @@ abstract class StatsfmApiBase {
       );
     });
 
-    //Dio retry interceptor
-    final myStatuses = {
-      status408RequestTimeout,
-      status502BadGateway,
-      status503ServiceUnavailable,
-      status504GatewayTimeout,
-      status440LoginTimeout,
-      status499ClientClosedRequest,
-      status460ClientClosedRequest,
-      status598NetworkReadTimeoutError,
-      status599NetworkConnectTimeoutError,
-      status520WebServerReturnedUnknownError,
-      status521WebServerIsDown,
-      status522ConnectionTimedOut,
-      status523OriginIsUnreachable,
-      status524TimeoutOccurred,
-      status525SSLHandshakeFailed,
-      status527RailgunError,
-    };
-    dio.interceptors.add(RetryInterceptor(
-      dio: dio,
-      logPrint: print,
-      retries: 2,
-      retryEvaluator: DefaultRetryEvaluator(myStatuses).evaluate,
-      retryDelays: const [
-        Duration(seconds: 1), // wait 1 sec before first retry
-        Duration(seconds: 2), // wait 2 sec before second retry
-      ],
-    ));
-
     _artists = Artists(this);
     _albums = Albums(this);
     _charts = Charts(this);
