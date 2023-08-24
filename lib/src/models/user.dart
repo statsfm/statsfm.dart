@@ -9,8 +9,9 @@ class UserPrivate extends UserPublic {
   factory UserPrivate.fromJson(Map<String, dynamic> json) =>
       _$UserPrivateFromJson(json);
 
+  ///Sometimes there is no email provided by Apple's Sign in
   @JsonKey(name: 'email')
-  late String email;
+  late String? email;
 
   @JsonKey(name: 'country')
   late String country;
@@ -505,8 +506,9 @@ class AppleMusicAuth extends Object {
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 
-  @JsonKey(name: 'email', required: true)
-  late String email;
+  ///Sometimes there is no email provided by Apple's Sign in
+  @JsonKey(name: 'email')
+  late String? email;
 
   @JsonKey(name: 'emailVerified', defaultValue: false)
   late bool emailVerified;

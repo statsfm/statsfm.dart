@@ -910,7 +910,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
-    ..email = json['email'] as String
+    ..email = json['email'] as String?
     ..country = json['country'] as String
     ..disabled = json['disabled'] as bool? ?? false;
 }
@@ -1335,11 +1335,11 @@ Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
 AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['email', 'appleUserId'],
+    requiredKeys: const ['appleUserId'],
   );
   return AppleMusicAuth()
     ..disabled = json['disabled'] as bool? ?? false
-    ..email = json['email'] as String
+    ..email = json['email'] as String?
     ..emailVerified = json['emailVerified'] as bool? ?? false
     ..appleUserId = json['appleUserId'] as String
     ..syncStreams = json['sync'] as bool? ?? false
