@@ -85,10 +85,12 @@ class Friends extends EndpointBase {
 
   /// Check if the current user has blocked the other user
   Future<bool> blockStatus(UserPublic user) async {
-    return (await dio
-                .get('$_path/block-status/${Uri.encodeComponent(user.id)}'))
-            .statusCode ==
-        200;
+    Response temp = await dio
+                .get('$_path/block-status/${Uri.encodeComponent(user.id)}');
+    if (temp.statusCode == 200) {
+      return temp.data['item'];
+    }
+    return false;
   }
 
   /// Check if the current users friend status with another user
