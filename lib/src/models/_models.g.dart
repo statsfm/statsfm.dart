@@ -812,6 +812,7 @@ RecentlyStreamedTrack _$RecentlyStreamedTrackFromJson(
   return RecentlyStreamedTrack()
     ..endTime =
         const LocalDateTimeConverter().fromJson(json['endTime'] as String)
+    ..platform = json['platform'] as String? ?? 'spotify'
     ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 }
 

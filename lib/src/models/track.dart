@@ -80,6 +80,9 @@ class RecentlyStreamedTrack extends Object {
   @JsonKey(name: 'endTime', required: true)
   late DateTime endTime;
 
+  @JsonKey(name: 'platform', defaultValue: 'spotify')
+  late String platform;
+
   @JsonKey(name: 'track', required: true)
   late Track track;
 }
