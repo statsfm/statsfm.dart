@@ -38,6 +38,11 @@ class UserPublic extends Object {
   @JsonKey(name: 'displayName', required: true)
   late String displayName;
 
+  ///Creation date of the account
+  ///If the date is 2022-09-03T16:49:16.405Z, the account was created before we started tracking join dates.
+  @JsonKey(name: 'createdAt', required: true)
+  late DateTime createdAt;
+
   @JsonKey(name: 'image', required: true)
   late String? image;
 

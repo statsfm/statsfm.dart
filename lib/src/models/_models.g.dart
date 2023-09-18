@@ -868,6 +868,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
       'id',
       'customId',
       'displayName',
+      'createdAt',
       'image',
       'isPlus',
       'isPro'
@@ -877,6 +878,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..customId = json['customId'] as String?
     ..displayName = json['displayName'] as String
+    ..createdAt = DateTime.parse(json['createdAt'] as String)
     ..image = json['image'] as String?
     ..isPlus = json['isPlus'] as bool? ?? false
     ..isPro = json['isPro'] as bool? ?? false
@@ -921,6 +923,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'id': instance.id,
       'customId': instance.customId,
       'displayName': instance.displayName,
+      'createdAt': instance.createdAt.toIso8601String(),
       'image': instance.image,
       'isPlus': instance.isPlus,
       'isPro': instance.isPro,
@@ -955,6 +958,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
       'id',
       'customId',
       'displayName',
+      'createdAt',
       'image',
       'isPlus',
       'isPro'
@@ -964,6 +968,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..customId = json['customId'] as String?
     ..displayName = json['displayName'] as String
+    ..createdAt = DateTime.parse(json['createdAt'] as String)
     ..image = json['image'] as String?
     ..isPlus = json['isPlus'] as bool? ?? false
     ..isPro = json['isPro'] as bool? ?? false
@@ -1005,6 +1010,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'id': instance.id,
       'customId': instance.customId,
       'displayName': instance.displayName,
+      'createdAt': instance.createdAt.toIso8601String(),
       'image': instance.image,
       'isPlus': instance.isPlus,
       'isPro': instance.isPro,
