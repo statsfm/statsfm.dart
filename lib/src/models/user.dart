@@ -33,7 +33,7 @@ class UserPublic extends Object {
   late String id;
 
   @JsonKey(name: 'customId', required: true)
-  late String? customId;
+  late String customId;
 
   @JsonKey(name: 'displayName', required: true)
   late String displayName;
