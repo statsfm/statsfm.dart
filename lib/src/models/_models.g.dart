@@ -876,7 +876,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
   );
   return UserPrivate()
     ..id = json['id'] as String
-    ..customId = json['customId'] as String?
+    ..customId = json['customId'] as String
     ..displayName = json['displayName'] as String
     ..createdAt = DateTime.parse(json['createdAt'] as String)
     ..image = json['image'] as String?
@@ -966,7 +966,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
   );
   return UserPublic()
     ..id = json['id'] as String
-    ..customId = json['customId'] as String?
+    ..customId = json['customId'] as String
     ..displayName = json['displayName'] as String
     ..createdAt = DateTime.parse(json['createdAt'] as String)
     ..image = json['image'] as String?
