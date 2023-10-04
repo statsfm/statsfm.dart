@@ -63,10 +63,6 @@ class UserPublic extends Object {
   @JsonKey(name: 'lastSwipe')
   late DateTime? lastSwipe;
 
-  ///Currently only not null if on the Apple Music supported api.
-  @JsonKey(name: 'connectedServices')
-  late ConnectedServices? connectedServices;
-
   ///NOTE: Will be deprecated after the Apple Music update.
   @JsonKey(name: 'hasImported', defaultValue: false)
   late bool hasImported;
@@ -97,6 +93,14 @@ class UserPublic extends Object {
   ///Users streams are stored in a different database (Normally happens if they sleep stream)
   @JsonKey(name: 'quarantined', defaultValue: false)
   late bool quarantined;
+
+  ///Only available on the new multi service api beta
+  @JsonKey(name: 'spotifyAuth')
+  late SpotifyAuth? spotifyAuth;
+
+  ///Only available on the new multi service api beta
+  @JsonKey(name: 'appleMusicAuth')
+  late AppleMusicAuth? appleMusicAuth;
 }
 
 enum OrderBySetting {
@@ -471,23 +475,27 @@ class SpotifyAuth extends Object {
   factory SpotifyAuth.fromJson(Map<String, dynamic> json) =>
       _$SpotifyAuthFromJson(json);
 
+  ///disabled only available for current user on /me
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 
-  @JsonKey(name: 'email', required: true)
-  late String email;
+  ///Email only available for current user on /me
+  @JsonKey(name: 'email')
+  late String? email;
 
   @JsonKey(name: 'displayName', required: true)
   late String displayName;
 
-  @JsonKey(name: 'platformUserId', required: true)
-  late String platformUserId;
+  ///platformUserId only available for current user on /me or if the user has connections set to public
+  @JsonKey(name: 'platformUserId')
+  late String? platformUserId;
 
   @JsonKey(name: 'image')
   late String? image;
 
-  @JsonKey(name: 'country', required: true)
-  late String country;
+  ///Country only available for current user on /me
+  @JsonKey(name: 'country')
+  late String? country;
 
   @JsonKey(name: 'sync', defaultValue: false)
   late bool syncStreams;
@@ -495,6 +503,7 @@ class SpotifyAuth extends Object {
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
 
+  ///Status only available for current user on /me
   @JsonKey(name: 'status', defaultValue: 0)
   late int status;
 }
@@ -508,18 +517,21 @@ class AppleMusicAuth extends Object {
   factory AppleMusicAuth.fromJson(Map<String, dynamic> json) =>
       _$AppleMusicAuthFromJson(json);
 
+  ///disabled only available for current user on /me
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 
-  ///Sometimes there is no email provided by Apple's Sign in
+  ///Sometimes there is no email provided by Apple's Sign in and only available for current user on /me
   @JsonKey(name: 'email')
   late String? email;
 
+  ///emailVerified only available for current user on /me
   @JsonKey(name: 'emailVerified', defaultValue: false)
   late bool emailVerified;
 
-  @JsonKey(name: 'appleUserId', required: true)
-  late String appleUserId;
+  ///appleUserId only available for current user on /me
+  @JsonKey(name: 'appleUserId')
+  late String? appleUserId;
 
   @JsonKey(name: 'sync', defaultValue: false)
   late bool syncStreams;
@@ -527,41 +539,7 @@ class AppleMusicAuth extends Object {
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
 
-  @JsonKey(name: 'status', defaultValue: 0)
-  late int status;
-}
-
-@JsonSerializable(createToJson: true)
-class ConnectedServices extends Object {
-  ConnectedServices();
-
-  Map<String, dynamic> toJson() => _$ConnectedServicesToJson(this);
-
-  factory ConnectedServices.fromJson(Map<String, dynamic> json) =>
-      _$ConnectedServicesFromJson(json);
-
-  @JsonKey(name: 'spotify')
-  late StreamingService spotify;
-
-  @JsonKey(name: 'appleMusic')
-  late StreamingService appleMusic;
-}
-
-@JsonSerializable(createToJson: true)
-class StreamingService extends Object {
-  StreamingService();
-
-  Map<String, dynamic> toJson() => _$StreamingServiceToJson(this);
-
-  factory StreamingService.fromJson(Map<String, dynamic> json) =>
-      _$StreamingServiceFromJson(json);
-
-  @JsonKey(name: 'connected', defaultValue: false)
-  late bool connected;
-
-  @JsonKey(name: 'hasImported', defaultValue: false)
-  late bool hasImported;
-
+  ///status only available for current user on /me
   @JsonKey(name: 'status', defaultValue: 0)
   late int status;
 }

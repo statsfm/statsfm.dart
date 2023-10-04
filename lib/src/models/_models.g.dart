@@ -889,10 +889,6 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..lastSwipe = json['lastSwipe'] == null
         ? null
         : DateTime.parse(json['lastSwipe'] as String)
-    ..connectedServices = json['connectedServices'] == null
-        ? null
-        : ConnectedServices.fromJson(
-            json['connectedServices'] as Map<String, dynamic>)
     ..hasImported = json['hasImported'] as bool? ?? false
     ..syncEnabled = json['syncEnabled'] as bool? ?? false
     ..timezone = json['timezone'] as String?
@@ -913,6 +909,13 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
+    ..spotifyAuth = json['spotifyAuth'] == null
+        ? null
+        : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
+    ..appleMusicAuth = json['appleMusicAuth'] == null
+        ? null
+        : AppleMusicAuth.fromJson(
+            json['appleMusicAuth'] as Map<String, dynamic>)
     ..email = json['email'] as String?
     ..country = json['country'] as String
     ..disabled = json['disabled'] as bool? ?? false;
@@ -930,7 +933,6 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
       'lastSwipe': instance.lastSwipe?.toIso8601String(),
-      'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -940,6 +942,8 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
+      'spotifyAuth': instance.spotifyAuth,
+      'appleMusicAuth': instance.appleMusicAuth,
       'email': instance.email,
       'country': instance.country,
       'disabled': instance.disabled,
@@ -979,10 +983,6 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
     ..lastSwipe = json['lastSwipe'] == null
         ? null
         : DateTime.parse(json['lastSwipe'] as String)
-    ..connectedServices = json['connectedServices'] == null
-        ? null
-        : ConnectedServices.fromJson(
-            json['connectedServices'] as Map<String, dynamic>)
     ..hasImported = json['hasImported'] as bool? ?? false
     ..syncEnabled = json['syncEnabled'] as bool? ?? false
     ..timezone = json['timezone'] as String?
@@ -1002,7 +1002,14 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
     ..userBan = json['userBan'] == null
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
-    ..quarantined = json['quarantined'] as bool? ?? false;
+    ..quarantined = json['quarantined'] as bool? ?? false
+    ..spotifyAuth = json['spotifyAuth'] == null
+        ? null
+        : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
+    ..appleMusicAuth = json['appleMusicAuth'] == null
+        ? null
+        : AppleMusicAuth.fromJson(
+            json['appleMusicAuth'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
@@ -1017,7 +1024,6 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'hasSwipefy': instance.hasSwipefy,
       'firstSwipe': instance.firstSwipe?.toIso8601String(),
       'lastSwipe': instance.lastSwipe?.toIso8601String(),
-      'connectedServices': instance.connectedServices,
       'hasImported': instance.hasImported,
       'syncEnabled': instance.syncEnabled,
       'timezone': instance.timezone,
@@ -1027,6 +1033,8 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
+      'spotifyAuth': instance.spotifyAuth,
+      'appleMusicAuth': instance.appleMusicAuth,
     };
 
 UserImport _$UserImportFromJson(Map<String, dynamic> json) {
@@ -1312,15 +1320,15 @@ Map<String, dynamic> _$AuthConnectionsToJson(AuthConnections instance) =>
 SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['email', 'displayName', 'platformUserId', 'country'],
+    requiredKeys: const ['displayName'],
   );
   return SpotifyAuth()
     ..disabled = json['disabled'] as bool? ?? false
-    ..email = json['email'] as String
+    ..email = json['email'] as String?
     ..displayName = json['displayName'] as String
-    ..platformUserId = json['platformUserId'] as String
+    ..platformUserId = json['platformUserId'] as String?
     ..image = json['image'] as String?
-    ..country = json['country'] as String
+    ..country = json['country'] as String?
     ..syncStreams = json['sync'] as bool? ?? false
     ..imported = json['imported'] as bool? ?? false
     ..status = json['status'] as int? ?? 0;
@@ -1339,20 +1347,15 @@ Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
       'status': instance.status,
     };
 
-AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    requiredKeys: const ['appleUserId'],
-  );
-  return AppleMusicAuth()
-    ..disabled = json['disabled'] as bool? ?? false
-    ..email = json['email'] as String?
-    ..emailVerified = json['emailVerified'] as bool? ?? false
-    ..appleUserId = json['appleUserId'] as String
-    ..syncStreams = json['sync'] as bool? ?? false
-    ..imported = json['imported'] as bool? ?? false
-    ..status = json['status'] as int? ?? 0;
-}
+AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
+    AppleMusicAuth()
+      ..disabled = json['disabled'] as bool? ?? false
+      ..email = json['email'] as String?
+      ..emailVerified = json['emailVerified'] as bool? ?? false
+      ..appleUserId = json['appleUserId'] as String?
+      ..syncStreams = json['sync'] as bool? ?? false
+      ..imported = json['imported'] as bool? ?? false
+      ..status = json['status'] as int? ?? 0;
 
 Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
     <String, dynamic>{
@@ -1362,32 +1365,6 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
-      'status': instance.status,
-    };
-
-ConnectedServices _$ConnectedServicesFromJson(Map<String, dynamic> json) =>
-    ConnectedServices()
-      ..spotify =
-          StreamingService.fromJson(json['spotify'] as Map<String, dynamic>)
-      ..appleMusic =
-          StreamingService.fromJson(json['appleMusic'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$ConnectedServicesToJson(ConnectedServices instance) =>
-    <String, dynamic>{
-      'spotify': instance.spotify,
-      'appleMusic': instance.appleMusic,
-    };
-
-StreamingService _$StreamingServiceFromJson(Map<String, dynamic> json) =>
-    StreamingService()
-      ..connected = json['connected'] as bool? ?? false
-      ..hasImported = json['hasImported'] as bool? ?? false
-      ..status = json['status'] as int? ?? 0;
-
-Map<String, dynamic> _$StreamingServiceToJson(StreamingService instance) =>
-    <String, dynamic>{
-      'connected': instance.connected,
-      'hasImported': instance.hasImported,
       'status': instance.status,
     };
 
