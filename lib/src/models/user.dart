@@ -104,6 +104,7 @@ class UserPublic extends Object {
 }
 
 enum OrderBySetting {
+  ///This is also Spotify, will be switching to SPOTIFY sort
   @JsonValue("PLATFORM")
   PLATFORM,
 
@@ -111,7 +112,13 @@ enum OrderBySetting {
   COUNT,
 
   @JsonValue("TIME")
-  TIME
+  TIME,
+
+  @JsonValue("SPOTIFY")
+  SPOTIFY,
+
+  @JsonValue("APPLEMUSIC")
+  APPLEMUSIC
 }
 
 @JsonSerializable(createToJson: false)

@@ -953,6 +953,8 @@ const _$OrderBySettingEnumMap = {
   OrderBySetting.PLATFORM: 'PLATFORM',
   OrderBySetting.COUNT: 'COUNT',
   OrderBySetting.TIME: 'TIME',
+  OrderBySetting.SPOTIFY: 'SPOTIFY',
+  OrderBySetting.APPLEMUSIC: 'APPLEMUSIC',
 };
 
 UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
