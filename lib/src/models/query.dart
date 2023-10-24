@@ -4,7 +4,10 @@ class QueryOptions {
   final int? limit;
   final int? offset;
   final DateTimeRange? range;
-  final Range? rangeString;
+  
+  ///Use Range object for Spotify today, 4 weeks, 6 months, and lifetime
+  ///For Apple music use a valid int year for the user.
+  final dynamic rangeString;
   final OrderBySetting? orderBy;
   final Order? order;
 
@@ -32,6 +35,9 @@ class QueryOptions {
     }
     if (rangeString is Range) {
       query['range'] = rangeString.toString().substring(6).toLowerCase();
+    }
+    if (rangeString is int && orderBy == OrderBySetting.APPLEMUSIC) {
+      query['range'] = rangeString.toString();
     }
 
     if (orderBy is OrderBySetting) {
