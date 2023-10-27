@@ -79,6 +79,9 @@ class StreamStats extends Object {
 
   @JsonKey(name: 'count', defaultValue: 0)
   late int count;
+
+  @JsonKey(name: 'cumulative')
+  late StreamStats? cumulative;
 }
 
 @JsonSerializable(createToJson: false)
