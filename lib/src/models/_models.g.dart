@@ -706,7 +706,8 @@ ExtendedStreamStats _$ExtendedStreamStatsFromJson(Map<String, dynamic> json) =>
       ..count = json['count'] as int? ?? 0
       ..cumulative = json['cumulative'] == null
           ? null
-          : StreamStats.fromJson(json['cumulative'] as Map<String, dynamic>)
+          : CumulativeStreamStats.fromJson(
+              json['cumulative'] as Map<String, dynamic>)
       ..cardinality = ExtendedStreamStatsCardinality.fromJson(
           json['cardinality'] as Map<String, dynamic>);
 
@@ -722,7 +723,14 @@ StreamStats _$StreamStatsFromJson(Map<String, dynamic> json) => StreamStats()
   ..count = json['count'] as int? ?? 0
   ..cumulative = json['cumulative'] == null
       ? null
-      : StreamStats.fromJson(json['cumulative'] as Map<String, dynamic>);
+      : CumulativeStreamStats.fromJson(
+          json['cumulative'] as Map<String, dynamic>);
+
+CumulativeStreamStats _$CumulativeStreamStatsFromJson(
+        Map<String, dynamic> json) =>
+    CumulativeStreamStats()
+      ..durationMs = json['durationMs'] as int? ?? 0
+      ..count = json['count'] as int? ?? 0;
 
 StreamStatsWithPrecision _$StreamStatsWithPrecisionFromJson(
         Map<String, dynamic> json) =>

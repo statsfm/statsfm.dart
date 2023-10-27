@@ -81,7 +81,23 @@ class StreamStats extends Object {
   late int count;
 
   @JsonKey(name: 'cumulative')
-  late StreamStats? cumulative;
+  late CumulativeStreamStats? cumulative;
+}
+
+@JsonSerializable(createToJson: false)
+class CumulativeStreamStats extends Object {
+  CumulativeStreamStats();
+
+  factory CumulativeStreamStats.fromJson(Map<String, dynamic> json) =>
+      _$CumulativeStreamStatsFromJson(json);
+
+  @JsonKey(name: 'durationMs', defaultValue: 0)
+  late int durationMs;
+
+  Duration get duration => Duration(milliseconds: durationMs);
+
+  @JsonKey(name: 'count', defaultValue: 0)
+  late int count;
 }
 
 @JsonSerializable(createToJson: false)
