@@ -93,6 +93,14 @@ class Friends extends EndpointBase {
     return false;
   }
 
+  /// Get the list of the current users blocks
+  Future<List<UserPublic>> blocks() async {
+    final Map map = (await dio.get('$_path/blocks')).data;
+
+    var itemsMap = map['items'] as Iterable<dynamic>;
+    return itemsMap.map((m) => UserPublic.fromJson(m)).toList();
+  }
+
   /// Check if the current users friend status with another user
   Future<FriendStatus> status(UserPublic user) async {
     final Map map =
