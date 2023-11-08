@@ -923,6 +923,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
+    ..recentlyActive = json['recentlyActive'] as bool? ?? false
     ..spotifyAuth = json['spotifyAuth'] == null
         ? null
         : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
@@ -956,6 +957,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
+      'recentlyActive': instance.recentlyActive,
       'spotifyAuth': instance.spotifyAuth,
       'appleMusicAuth': instance.appleMusicAuth,
       'email': instance.email,
@@ -1019,6 +1021,7 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
         ? null
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
+    ..recentlyActive = json['recentlyActive'] as bool? ?? false
     ..spotifyAuth = json['spotifyAuth'] == null
         ? null
         : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
@@ -1049,6 +1052,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'socialMediaConnections': instance.socialMediaConnections,
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
+      'recentlyActive': instance.recentlyActive,
       'spotifyAuth': instance.spotifyAuth,
       'appleMusicAuth': instance.appleMusicAuth,
     };

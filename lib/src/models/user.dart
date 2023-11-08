@@ -94,6 +94,10 @@ class UserPublic extends Object {
   @JsonKey(name: 'quarantined', defaultValue: false)
   late bool quarantined;
 
+  ///User was active in the last 72h
+  @JsonKey(name: 'recentlyActive', defaultValue: false)
+  late bool recentlyActive;
+
   ///Only available on the new multi service api beta
   @JsonKey(name: 'spotifyAuth')
   late SpotifyAuth? spotifyAuth;
