@@ -266,6 +266,7 @@ enum FriendStatus {
   FRIENDS,
   REQUEST_INCOMING,
   REQUEST_OUTGOING,
+  ERROR,
 }
 
 @JsonSerializable(createToJson: true)
