@@ -265,12 +265,40 @@ class OutgoingFriendRequest extends Object {
   late DateTime createdAt;
 }
 
+@JsonSerializable(createToJson: true)
+class UserStatus extends Object {
+  UserStatus();
+
+  factory UserStatus.fromJson(Map<String, dynamic> json) =>
+      _$UserStatusFromJson(json);
+
+  @JsonKey(name: 'status', defaultValue: FriendStatus.NONE)
+  late FriendStatus status;
+
+  @JsonKey(name: 'blocked', defaultValue: false)
+  late bool blocked;
+}
+
 enum FriendStatus {
   NONE,
   FRIENDS,
   REQUEST_INCOMING,
   REQUEST_OUTGOING,
   ERROR,
+}
+
+@JsonSerializable(createToJson: true)
+class FriendRequests extends Object {
+  FriendRequests();
+
+  factory FriendRequests.fromJson(Map<String, dynamic> json) =>
+      _$FriendRequestsFromJson(json);
+
+  @JsonKey(name: 'incoming', required: true)
+  late List<IncomingFriendRequest> incoming;
+
+  @JsonKey(name: 'outgoing', required: true)
+  late List<OutgoingFriendRequest> outgoing;
 }
 
 @JsonSerializable(createToJson: true)

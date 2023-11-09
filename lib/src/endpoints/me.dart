@@ -281,7 +281,7 @@ class Me extends EndpointBase {
     );
     return response.statusCode == 201;
   }
-  
+
   ///Gets the Swipes for the current users friends of the item
   Future<List<FriendSwipe>> getFriendsSwipes(int id, dynamic type) async {
     //Get item type
@@ -299,9 +299,81 @@ class Me extends EndpointBase {
       default:
         throw Exception('Not a valid type');
     }
-    final Map map = (await dio.get('$_path/swipefy/friends/$typeString/$id/swipes')).data;
+    final Map map =
+        (await dio.get('$_path/swipefy/friends/$typeString/$id/swipes')).data;
 
     var devicesMap = map['items'] as Iterable<dynamic>;
     return devicesMap.map((m) => FriendSwipe.fromJson(m)).toList();
+  }
+
+  //--------- Friends ------------
+
+  /// [friends]
+  /// Get current users friends
+  Future<List<UserPublic>> friends() async {
+    final Map map = (await dio.get('$_path/friends')).data;
+
+    var itemsMap = map['items'] as Iterable<dynamic>;
+    return itemsMap.map((m) => UserPublic.fromJson(m)).toList();
+  }
+
+  /// [blocks]
+  /// Get the list of the current users blocks
+  Future<List<UserPublic>> blocks() async {
+    final Map map = (await dio.get('$_path/friends/blocks')).data;
+
+    var itemsMap = map['items'] as Iterable<dynamic>;
+    return itemsMap.map((m) => UserPublic.fromJson(m)).toList();
+  }
+
+  /// [userStatus]
+  /// Check if the current user has blocked the other user
+  Future<UserStatus> userStatus(UserPublic user) async {
+    Response temp =
+        await dio.get('$_path/friends/${Uri.encodeComponent(user.id)}');
+    return UserStatus.fromJson(temp.data['item']);
+  }
+
+  /// [blockUser]
+  /// Block a user
+  Future<bool> blockUser(UserPublic user) async {
+    return (await dio
+                .post('$_path/friends/${Uri.encodeComponent(user.id)}/block'))
+            .statusCode ==
+        200;
+  }
+
+  /// [unblockUser]
+  /// Unblock a user
+  Future<bool> unblockUser(UserPublic user) async {
+    return (await dio
+                .delete('$_path/friends/${Uri.encodeComponent(user.id)}/block'))
+            .statusCode ==
+        200;
+  }
+
+  /// [addFriend]
+  /// Add friend from current users friends list
+  /// This also accepts a incoming friend request
+  Future<bool> addFriend(UserPublic user) async {
+    return (await dio.post('$_path/friends/${Uri.encodeComponent(user.id)}'))
+            .statusCode ==
+        200;
+  }
+
+  /// [removeFriend]
+  /// Remove a friend from current users friends list
+  /// This also denys or cancels a friend request
+  Future<bool> removeFriend(UserPublic user) async {
+    return (await dio.delete('$_path/friends/${Uri.encodeComponent(user.id)}'))
+            .statusCode ==
+        200;
+  }
+
+  /// [requests]
+  /// Get the users incoming and outgoing requests
+  Future<FriendRequests> requests() async {
+    Response temp = await dio.get('$_path/friends/requests');
+    return FriendRequests.fromJson(temp.data['items']);
   }
 }

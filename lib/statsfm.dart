@@ -19,7 +19,6 @@ part 'src/endpoints/me.dart';
 part 'src/endpoints/search.dart';
 part 'src/endpoints/stats.dart';
 part 'src/endpoints/tracks.dart';
-part 'src/endpoints/friends.dart';
 part 'src/endpoints/users.dart';
 part 'src/statsfm.dart';
 part 'src/statsfm_base.dart';

@@ -33,9 +33,6 @@ abstract class StatsfmApiBase {
   late Tracks _tracks;
   Tracks get tracks => _tracks;
 
-  late Friends _friends;
-  Friends get friends => _friends;
-
   late Users _users;
   Users get users => _users;
 
@@ -102,7 +99,6 @@ abstract class StatsfmApiBase {
     _stats = Stats(this);
     _tracks = Tracks(this);
     _me = Me(this);
-    _friends = Friends(this);
     _users = Users(this);
   }
 }

@@ -1168,6 +1168,45 @@ Map<String, dynamic> _$OutgoingFriendRequestToJson(
       'createdAt': const LocalDateTimeConverter().toJson(instance.createdAt),
     };
 
+UserStatus _$UserStatusFromJson(Map<String, dynamic> json) => UserStatus()
+  ..status = $enumDecodeNullable(_$FriendStatusEnumMap, json['status']) ??
+      FriendStatus.NONE
+  ..blocked = json['blocked'] as bool? ?? false;
+
+Map<String, dynamic> _$UserStatusToJson(UserStatus instance) =>
+    <String, dynamic>{
+      'status': _$FriendStatusEnumMap[instance.status]!,
+      'blocked': instance.blocked,
+    };
+
+const _$FriendStatusEnumMap = {
+  FriendStatus.NONE: 'NONE',
+  FriendStatus.FRIENDS: 'FRIENDS',
+  FriendStatus.REQUEST_INCOMING: 'REQUEST_INCOMING',
+  FriendStatus.REQUEST_OUTGOING: 'REQUEST_OUTGOING',
+  FriendStatus.ERROR: 'ERROR',
+};
+
+FriendRequests _$FriendRequestsFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['incoming', 'outgoing'],
+  );
+  return FriendRequests()
+    ..incoming = (json['incoming'] as List<dynamic>)
+        .map((e) => IncomingFriendRequest.fromJson(e as Map<String, dynamic>))
+        .toList()
+    ..outgoing = (json['outgoing'] as List<dynamic>)
+        .map((e) => OutgoingFriendRequest.fromJson(e as Map<String, dynamic>))
+        .toList();
+}
+
+Map<String, dynamic> _$FriendRequestsToJson(FriendRequests instance) =>
+    <String, dynamic>{
+      'incoming': instance.incoming,
+      'outgoing': instance.outgoing,
+    };
+
 UserProfileSocialMediaConnection _$UserProfileSocialMediaConnectionFromJson(
         Map<String, dynamic> json) =>
     UserProfileSocialMediaConnection()
