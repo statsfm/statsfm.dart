@@ -323,7 +323,7 @@ class Me extends EndpointBase {
     }
 
     final Map map = (await dio.get(
-      '$_path/soulmates',
+      '$_path/friends/discover',
       queryParameters: queryParams,
     ))
         .data;
