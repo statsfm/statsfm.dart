@@ -14,4 +14,7 @@ class Soulmate extends Object {
 
   @JsonKey(name: 'user', required: true)
   late UserPublic user;
+
+  @JsonKey(name: 'artists')
+  late List<TopArtist>? artists;
 }

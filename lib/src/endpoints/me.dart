@@ -306,6 +306,32 @@ class Me extends EndpointBase {
     return devicesMap.map((m) => FriendSwipe.fromJson(m)).toList();
   }
 
+  /// [discoverFriends]
+  /// Discover new user
+  Future<List<Soulmate>> discoverFriends({
+    bool? plusOnly,
+    String? country,
+  }) async {
+    Map<String, dynamic> queryParams = {};
+    //Filters to only plus users
+    if (plusOnly == true) {
+      queryParams.addAll({'plus': plusOnly});
+    }
+    //Filters to matches by country iso code. Leave null for global results
+    if (country != null) {
+      queryParams.addAll({'country': country});
+    }
+
+    final Map map = (await dio.get(
+      '$_path/soulmates',
+      queryParameters: queryParams,
+    ))
+        .data;
+
+    var soulmatesMap = map['items'] as Iterable<dynamic>;
+    return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
+  }
+
   //--------- Friends ------------
 
   /// [friends]
