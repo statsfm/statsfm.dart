@@ -18,3 +18,22 @@ class Soulmate extends Object {
   @JsonKey(name: 'artists', required: true)
   late List<TopArtist> artists;
 }
+
+@JsonSerializable(createToJson: true)
+class SoulmateSwipe extends Object {
+  SoulmateSwipe();
+
+  Map<String, dynamic> toJson() => _$SoulmateSwipeToJson(this);
+
+  factory SoulmateSwipe.fromJson(Map<String, dynamic> json) =>
+      _$SoulmateSwipeFromJson(json);
+
+  @JsonKey(name: 'recommendationId', required: true)
+  late String recommendationId;
+
+  @JsonKey(name: 'decision', required: true)
+  late String decision;
+
+  @JsonKey(name: 'decisionMs', defaultValue: -1)
+  late int decisionMs;
+}

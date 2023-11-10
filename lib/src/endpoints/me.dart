@@ -273,6 +273,8 @@ class Me extends EndpointBase {
     return devicesMap.map((m) => FriendSwipe.fromJson(m)).toList();
   }
 
+  //--------- Soulmates ---------
+
   /// [soulmatesFriends]
   /// Soulmates friends
   Future<List<Soulmate>> soulmatesFriends({
@@ -297,6 +299,23 @@ class Me extends EndpointBase {
 
     var soulmatesMap = map['items'] as Iterable<dynamic>;
     return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
+  }
+
+  /// [soulmatesFriendsSwipe]
+  /// Send out a soulmates swipe
+  Future<bool> soulmatesFriendsSwipe(SoulmateSwipe swipe) async {
+    return (await dio.post(
+          '$_path/soulmates/friends/matches',
+          data: jsonEncode(
+            {
+              'recommendationId': swipe.recommendationId,
+              'decision': swipe.decision,
+              'decisionMs': swipe.decisionMs,
+            },
+          ),
+        ))
+            .statusCode ==
+        201;
   }
 
   //--------- Friends ------------

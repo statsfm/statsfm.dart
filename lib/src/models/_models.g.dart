@@ -488,6 +488,24 @@ Map<String, dynamic> _$SoulmateToJson(Soulmate instance) => <String, dynamic>{
       'artists': instance.artists,
     };
 
+SoulmateSwipe _$SoulmateSwipeFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['recommendationId', 'decision'],
+  );
+  return SoulmateSwipe()
+    ..recommendationId = json['recommendationId'] as String
+    ..decision = json['decision'] as String
+    ..decisionMs = json['decisionMs'] as int? ?? -1;
+}
+
+Map<String, dynamic> _$SoulmateSwipeToJson(SoulmateSwipe instance) =>
+    <String, dynamic>{
+      'recommendationId': instance.recommendationId,
+      'decision': instance.decision,
+      'decisionMs': instance.decisionMs,
+    };
+
 Stream _$StreamFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
