@@ -332,7 +332,7 @@ class Me extends EndpointBase {
   /// [blocks]
   /// Get the list of the current users blocks
   Future<List<UserPublic>> blocks() async {
-    final Map map = (await dio.get('$_path/friends/blocks')).data;
+    final Map map = (await dio.get('$_path/friends/blocked')).data;
 
     var itemsMap = map['items'] as Iterable<dynamic>;
     return itemsMap.map((m) => UserPublic.fromJson(m)).toList();
