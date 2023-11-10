@@ -187,39 +187,6 @@ class Me extends EndpointBase {
     return UserDevice.fromJson(map['item']);
   }
 
-  Future<List<Soulmate>> soulmates(
-      {bool forceRefresh = false,
-      bool? plusOnly,
-      String? country,
-      List<int>? artistIds}) async {
-    Map<String, dynamic> queryParams = {};
-    //Refreshes soulmates matches
-    if (forceRefresh) {
-      queryParams.addAll({'force': forceRefresh});
-    }
-    //Filters to only plus users
-    if (plusOnly == true) {
-      queryParams.addAll({'plus': plusOnly});
-    }
-    //Filters to matches by country iso code. Leave null for global results
-    if (country != null) {
-      queryParams.addAll({'country': country});
-    }
-    //Match with users who listen to the listed artists (Max 50 artists ids)
-    if (artistIds != null) {
-      queryParams.addAll({'artistIds': artistIds.join(',')});
-    }
-
-    final Map map = (await dio.get(
-      '$_path/soulmates',
-      queryParameters: queryParams,
-    ))
-        .data;
-
-    var soulmatesMap = map['items'] as Iterable<dynamic>;
-    return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
-  }
-
   Future<List<ChatMessage>> chats({
     QueryOptions options = const QueryOptions(),
   }) async {
@@ -306,9 +273,9 @@ class Me extends EndpointBase {
     return devicesMap.map((m) => FriendSwipe.fromJson(m)).toList();
   }
 
-  /// [discoverFriends]
-  /// Discover new user
-  Future<List<Soulmate>> discoverFriends({
+  /// [soulmatesFriends]
+  /// Soulmates friends
+  Future<List<Soulmate>> soulmatesFriends({
     bool? plusOnly,
     String? country,
   }) async {
@@ -323,7 +290,7 @@ class Me extends EndpointBase {
     }
 
     final Map map = (await dio.get(
-      '$_path/friends/discover',
+      '$_path/soulmates/friends',
       queryParameters: queryParams,
     ))
         .data;

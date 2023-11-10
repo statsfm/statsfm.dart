@@ -472,18 +472,18 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
 Soulmate _$SoulmateFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['score', 'user'],
+    requiredKeys: const ['recommendationId', 'user', 'artists'],
   );
   return Soulmate()
-    ..score = (json['score'] as num).toDouble()
+    ..recommendationId = json['recommendationId'] as String
     ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
-    ..artists = (json['artists'] as List<dynamic>?)
-        ?.map((e) => TopArtist.fromJson(e as Map<String, dynamic>))
+    ..artists = (json['artists'] as List<dynamic>)
+        .map((e) => TopArtist.fromJson(e as Map<String, dynamic>))
         .toList();
 }
 
 Map<String, dynamic> _$SoulmateToJson(Soulmate instance) => <String, dynamic>{
-      'score': instance.score,
+      'recommendationId': instance.recommendationId,
       'user': instance.user,
       'artists': instance.artists,
     };

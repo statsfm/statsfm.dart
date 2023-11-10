@@ -9,12 +9,12 @@ class Soulmate extends Object {
   factory Soulmate.fromJson(Map<String, dynamic> json) =>
       _$SoulmateFromJson(json);
 
-  @JsonKey(name: 'score', required: true)
-  late double score;
+  @JsonKey(name: 'recommendationId', required: true)
+  late String recommendationId;
 
   @JsonKey(name: 'user', required: true)
   late UserPublic user;
 
-  @JsonKey(name: 'artists')
-  late List<TopArtist>? artists;
+  @JsonKey(name: 'artists', required: true)
+  late List<TopArtist> artists;
 }
