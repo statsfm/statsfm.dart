@@ -38,6 +38,26 @@ class SoulmateSwipe extends Object {
   late int decisionMs;
 }
 
+@JsonSerializable(createToJson: true)
+@LocalDateTimeConverter()
+class SoulmateMatch extends Object {
+  SoulmateMatch();
+
+  Map<String, dynamic> toJson() => _$SoulmateMatchToJson(this);
+
+  factory SoulmateMatch.fromJson(Map<String, dynamic> json) =>
+      _$SoulmateMatchFromJson(json);
+
+  @JsonKey(name: 'createdAt', required: true)
+  late DateTime createdAt;
+
+  @JsonKey(name: 'user', required: true)
+  late UserPublic user;
+
+  @JsonKey(name: 'recommendationId', required: true)
+  late String recommendationId;
+}
+
 enum SoulmateMatchStatus {
   @JsonValue("LIKE_SENT")
   LIKE_SENT,

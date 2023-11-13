@@ -506,6 +506,25 @@ Map<String, dynamic> _$SoulmateSwipeToJson(SoulmateSwipe instance) =>
       'decisionMs': instance.decisionMs,
     };
 
+SoulmateMatch _$SoulmateMatchFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['createdAt', 'user', 'recommendationId'],
+  );
+  return SoulmateMatch()
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
+    ..recommendationId = json['recommendationId'] as String;
+}
+
+Map<String, dynamic> _$SoulmateMatchToJson(SoulmateMatch instance) =>
+    <String, dynamic>{
+      'createdAt': const LocalDateTimeConverter().toJson(instance.createdAt),
+      'user': instance.user,
+      'recommendationId': instance.recommendationId,
+    };
+
 Stream _$StreamFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,

@@ -326,6 +326,36 @@ class Me extends EndpointBase {
     return SoulmateMatchStatus.NO_MATCH;
   }
 
+
+  /// [soulmatesMatches]
+  /// Get the users soulmate matches
+  Future<List<SoulmateMatch>> soulmatesMatches({
+    QueryOptions options = const QueryOptions(),
+  }) async {
+    final Map<String, dynamic> query = options.toQuery();
+    final Map map = (await dio.get(
+      '$_path/soulmates/friends/matches',
+      queryParameters: {
+        ...query,
+      },
+    ))
+        .data;
+
+    var soulmatesMatchesMap = map['items'] as Iterable<dynamic>;
+    return soulmatesMatchesMap.map((m) => SoulmateMatch.fromJson(m)).toList();
+  }
+
+  /// [soulmateRemoveMatch]
+  /// Remove a match in soulmates
+  Future<bool> soulmateRemoveMatch({
+    required String id
+  }) async {
+    return (await dio
+                .delete('$_path/soulmates/friends/matches/${Uri.encodeComponent(id)}'))
+            .statusCode ==
+        200;
+  }
+
   //--------- Friends ------------
 
   /// [friends]
