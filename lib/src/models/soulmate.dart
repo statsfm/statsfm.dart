@@ -37,3 +37,17 @@ class SoulmateSwipe extends Object {
   @JsonKey(name: 'decisionMs', defaultValue: -1)
   late int decisionMs;
 }
+
+enum SoulmateMatchStatus {
+  @JsonValue("LIKE_SENT")
+  LIKE_SENT,
+
+  @JsonValue("DISLIKE_SENT")
+  DISLIKE_SENT,
+
+  @JsonValue("MATCH")
+  MATCH,
+
+  @JsonValue("NO_MATCH")
+  NO_MATCH
+}

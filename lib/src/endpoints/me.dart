@@ -303,19 +303,27 @@ class Me extends EndpointBase {
 
   /// [soulmatesFriendsSwipe]
   /// Send out a soulmates swipe
-  Future<bool> soulmatesFriendsSwipe(SoulmateSwipe swipe) async {
-    return (await dio.post(
-          '$_path/soulmates/friends/matches',
-          data: jsonEncode(
-            {
-              'recommendationId': swipe.recommendationId,
-              'decision': swipe.decision,
-              'decisionMs': swipe.decisionMs,
-            },
-          ),
-        ))
-            .statusCode ==
-        201;
+  Future<SoulmateMatchStatus> soulmatesFriendsSwipe(SoulmateSwipe swipe) async {
+    Response response = await dio.post(
+      '$_path/soulmates/friends/matches',
+      data: jsonEncode(
+        {
+          'recommendationId': swipe.recommendationId,
+          'decision': swipe.decision,
+          'decisionMs': swipe.decisionMs,
+        },
+      ),
+    );
+
+    if (response.data['item']['status'] == 'LIKE_SENT') {
+      return SoulmateMatchStatus.LIKE_SENT;
+    } else if (response.data['item']['status'] == 'DISLIKE_SENT') {
+      return SoulmateMatchStatus.DISLIKE_SENT;
+    } else if (response.data['item']['status'] == 'MATCH') {
+      return SoulmateMatchStatus.MATCH;
+    }
+    
+    return SoulmateMatchStatus.NO_MATCH;
   }
 
   //--------- Friends ------------
