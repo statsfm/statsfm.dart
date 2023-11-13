@@ -1133,7 +1133,8 @@ UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
       ..streamStats = json['streamStats'] as bool? ?? true
       ..leaderboards = json['leaderboards'] as bool? ?? true
       ..connections = json['connections'] as bool? ?? true
-      ..friends = json['friends'] as bool? ?? true;
+      ..friends = json['friends'] as bool? ?? true
+      ..soulmates = json['soulmates'] as bool? ?? true;
 
 Map<String, dynamic> _$UserPrivacySettingsToJson(
         UserPrivacySettings instance) =>
@@ -1151,6 +1152,7 @@ Map<String, dynamic> _$UserPrivacySettingsToJson(
       'leaderboards': instance.leaderboards,
       'connections': instance.connections,
       'friends': instance.friends,
+      'soulmates': instance.soulmates,
     };
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {

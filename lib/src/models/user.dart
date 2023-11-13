@@ -214,6 +214,10 @@ class UserPrivacySettings extends Object {
 
   @JsonKey(name: 'friends', defaultValue: true)
   late bool friends;
+
+  ///The user is shown in soulmates
+  @JsonKey(name: 'soulmates', defaultValue: true)
+  late bool soulmates;
 }
 
 @JsonSerializable(createToJson: true)
