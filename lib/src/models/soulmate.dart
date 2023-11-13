@@ -54,8 +54,9 @@ class SoulmateMatch extends Object {
   @JsonKey(name: 'user', required: true)
   late UserPublic user;
 
-  @JsonKey(name: 'recommendationId', required: true)
-  late String recommendationId;
+  ///Is null on the normal soumates endpoint
+  @JsonKey(name: 'recommendationId')
+  late String? recommendationId;
 }
 
 enum SoulmateMatchStatus {

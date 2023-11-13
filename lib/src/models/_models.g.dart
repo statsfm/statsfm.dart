@@ -509,13 +509,13 @@ Map<String, dynamic> _$SoulmateSwipeToJson(SoulmateSwipe instance) =>
 SoulmateMatch _$SoulmateMatchFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['createdAt', 'user', 'recommendationId'],
+    requiredKeys: const ['createdAt', 'user'],
   );
   return SoulmateMatch()
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
     ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
-    ..recommendationId = json['recommendationId'] as String;
+    ..recommendationId = json['recommendationId'] as String?;
 }
 
 Map<String, dynamic> _$SoulmateMatchToJson(SoulmateMatch instance) =>
