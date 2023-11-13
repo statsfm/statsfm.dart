@@ -275,6 +275,32 @@ class Me extends EndpointBase {
 
   //--------- Soulmates ---------
 
+  /// [soulmates]
+  /// Soulmates
+  Future<List<Soulmate>> soulmates({
+    bool? plusOnly,
+    String? country,
+  }) async {
+    Map<String, dynamic> queryParams = {};
+    //Filters to only plus users
+    if (plusOnly == true) {
+      queryParams.addAll({'plus': plusOnly});
+    }
+    //Filters to matches by country iso code. Leave null for global results
+    if (country != null) {
+      queryParams.addAll({'country': country});
+    }
+
+    final Map map = (await dio.get(
+      '$_path/soulmates/v2',
+      queryParameters: queryParams,
+    ))
+        .data;
+
+    var soulmatesMap = map['items'] as Iterable<dynamic>;
+    return soulmatesMap.map((m) => Soulmate.fromJson(m)).toList();
+  }
+
   /// [soulmatesFriends]
   /// Soulmates friends
   Future<List<Soulmate>> soulmatesFriends({
