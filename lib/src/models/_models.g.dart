@@ -472,10 +472,10 @@ SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
 Soulmate _$SoulmateFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['recommendationId', 'user', 'artists'],
+    requiredKeys: const ['user', 'artists'],
   );
   return Soulmate()
-    ..recommendationId = json['recommendationId'] as String
+    ..recommendationId = json['recommendationId'] as String?
     ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
     ..artists = (json['artists'] as List<dynamic>)
         .map((e) => TopArtist.fromJson(e as Map<String, dynamic>))
@@ -509,13 +509,13 @@ Map<String, dynamic> _$SoulmateSwipeToJson(SoulmateSwipe instance) =>
 SoulmateMatch _$SoulmateMatchFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['createdAt', 'user'],
+    requiredKeys: const ['createdAt', 'user', 'recommendationId'],
   );
   return SoulmateMatch()
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
     ..user = UserPublic.fromJson(json['user'] as Map<String, dynamic>)
-    ..recommendationId = json['recommendationId'] as String?;
+    ..recommendationId = json['recommendationId'] as String;
 }
 
 Map<String, dynamic> _$SoulmateMatchToJson(SoulmateMatch instance) =>
