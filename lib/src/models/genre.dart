@@ -42,4 +42,7 @@ class TopGenre extends TopObject {
 
   @JsonKey(name: 'artistCount')
   late int? artistCount;
+
+  @JsonKey(name: 'previewArtists', defaultValue: <TopArtist> [])
+  late List<TopArtist> previewArtists;
 }

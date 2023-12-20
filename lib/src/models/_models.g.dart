@@ -447,7 +447,11 @@ TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
     ..playedMs = json['playedMs'] as int?
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..genre = GenreSimple.fromJson(json['genre'] as Map<String, dynamic>)
-    ..artistCount = json['artistCount'] as int?;
+    ..artistCount = json['artistCount'] as int?
+    ..previewArtists = (json['previewArtists'] as List<dynamic>?)
+            ?.map((e) => TopArtist.fromJson(e as Map<String, dynamic>))
+            .toList() ??
+        [];
 }
 
 SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
