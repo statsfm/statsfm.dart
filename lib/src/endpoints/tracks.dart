@@ -12,6 +12,13 @@ class Tracks extends EndpointBase {
     return Track.fromJson(map['item']);
   }
 
+  ///Get tracks linked albums
+  Future<List<Album>> albums(int trackId) async {
+    final Map map = (await dio.get('$_path/$trackId/albums')).data;
+    var albumsMap = map['items'] as Iterable<dynamic>;
+    return albumsMap.map((m) => Album.fromJson(m)).toList();
+  }
+
   Future<List<Track>> list(Iterable<int> trackIds) async {
     final Map map = (await dio.get(
       '$_path/list',
