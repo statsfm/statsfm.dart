@@ -89,36 +89,36 @@ abstract class StatsfmApiBase {
       ).interceptor,
     );
 
-    Set<int> retryList = {
-      408,
-      502,
-      503,
-      504,
-      460,
-      499,
-      520,
-      521,
-      522,
-      523,
-      524,
-      525,
-      527,
-      598,
-      599
-    };
+    // Set<int> retryList = {
+    //   408,
+    //   502,
+    //   503,
+    //   504,
+    //   460,
+    //   499,
+    //   520,
+    //   521,
+    //   522,
+    //   523,
+    //   524,
+    //   525,
+    //   527,
+    //   598,
+    //   599
+    // };
 
-    dio.interceptors.add(RetryInterceptor(
-      dio: dio,
-      logPrint: print, // specify log function (optional)
-      retries: 3, // retry count (optional)
-      retryDelays: const [
-        // set delays between retries (optional)
-        Duration(seconds: 1), // wait 1 sec before first retry
-        Duration(seconds: 2), // wait 2 sec before second retry
-        Duration(seconds: 3), // wait 3 sec before third retry
-      ],
-      retryEvaluator: DefaultRetryEvaluator(retryList).evaluate,
-    ));
+    // dio.interceptors.add(RetryInterceptor(
+    //   dio: dio,
+    //   logPrint: print, // specify log function (optional)
+    //   retries: 3, // retry count (optional)
+    //   retryDelays: const [
+    //     // set delays between retries (optional)
+    //     Duration(seconds: 1), // wait 1 sec before first retry
+    //     Duration(seconds: 2), // wait 2 sec before second retry
+    //     Duration(seconds: 3), // wait 3 sec before third retry
+    //   ],
+    //   retryEvaluator: DefaultRetryEvaluator(retryList).evaluate,
+    // ));
 
     _artists = Artists(this);
     _auth = Auth(this);
