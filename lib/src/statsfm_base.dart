@@ -90,7 +90,6 @@ abstract class StatsfmApiBase {
     );
 
     List<int> retryList = [
-      400,
       408,
       502,
       503,
@@ -121,9 +120,9 @@ abstract class StatsfmApiBase {
       retryEvaluator: (error, attempt) {
         if (error.response != null &&
             retryList.contains((error.response?.statusCode ?? 0))) {
-          return false;
-        } else {
           return true;
+        } else {
+          return false;
         }
       },
     ));
