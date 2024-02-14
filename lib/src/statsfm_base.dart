@@ -90,6 +90,7 @@ abstract class StatsfmApiBase {
     );
 
     List<int> retryList = [
+      400,
       408,
       502,
       503,
