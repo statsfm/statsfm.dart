@@ -89,7 +89,7 @@ abstract class StatsfmApiBase {
       ).interceptor,
     );
 
-    List<int> retryList = [
+    Set<int> retryList = {
       408,
       502,
       503,
@@ -105,7 +105,7 @@ abstract class StatsfmApiBase {
       527,
       598,
       599
-    ];
+    };
 
     dio.interceptors.add(RetryInterceptor(
       dio: dio,
@@ -117,14 +117,7 @@ abstract class StatsfmApiBase {
         Duration(seconds: 2), // wait 2 sec before second retry
         Duration(seconds: 3), // wait 3 sec before third retry
       ],
-      retryEvaluator: (error, attempt) {
-        if (error.response != null &&
-            retryList.contains((error.response?.statusCode ?? 0))) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+      retryEvaluator: DefaultRetryEvaluator(retryList).evaluate,
     ));
 
     _artists = Artists(this);
