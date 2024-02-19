@@ -1114,6 +1114,9 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
     ..path = json['path'] as String?
     ..count = json['count'] as int? ?? 0
     ..status = json['status'] as int
+    ..service =
+        $enumDecodeNullable(_$StreamingServiceEnumMap, json['service']) ??
+            StreamingService.SPOTIFY
     ..updatedAt =
         const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
     ..createdAt =
@@ -1122,6 +1125,11 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
     ..error = json['error'] as String?
     ..name = json['name'] as String?;
 }
+
+const _$StreamingServiceEnumMap = {
+  StreamingService.SPOTIFY: 'SPOTIFY',
+  StreamingService.APPLEMUSIC: 'APPLEMUSIC',
+};
 
 UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
     UserPrivacySettings()

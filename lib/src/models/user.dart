@@ -125,6 +125,14 @@ enum OrderBySetting {
   APPLEMUSIC
 }
 
+enum StreamingService {
+  @JsonValue("SPOTIFY")
+  SPOTIFY,
+
+  @JsonValue("APPLEMUSIC")
+  APPLEMUSIC
+}
+
 @JsonSerializable(createToJson: false)
 @LocalDateTimeConverter()
 class UserImport extends Object {
@@ -150,6 +158,10 @@ class UserImport extends Object {
 
   @JsonKey(name: 'status')
   late int status;
+
+  ///Streaming service the file is for
+  @JsonKey(name: 'service', defaultValue: StreamingService.SPOTIFY)
+  late StreamingService service;
 
   @JsonKey(name: 'updatedAt')
   late DateTime updatedAt;
