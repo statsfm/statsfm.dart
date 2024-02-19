@@ -42,83 +42,65 @@ abstract class StatsfmApiBase {
   late Auth _auth;
   Auth get auth => _auth;
 
+  late CacheOptions _cacheOptions;
+
   StatsfmApiBase.fromAccessToken(
     String accessToken, {
     String baseUrl = "https://beta.stats.fm/api",
   }) {
     _accessToken = accessToken;
     _baseUrl = baseUrl;
-
-    init();
   }
 
-  void init() {
+  Future<void> init() async {
+    print('SFM: Setting up SDK');
     _dio.options.baseUrl = _baseUrl;
     _dio.options.headers = {
       'Authorization': _accessToken,
-      'Connection': 'Keep-Alive'
     };
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        options.queryParameters = Map<String, dynamic>.from(
-            SplayTreeMap.from(options.queryParameters));
-        return handler.next(options);
+
+    // Global options
+    await getApplicationCacheDirectory().then(
+      (value) async {
+        _cacheOptions = CacheOptions(
+          store: IsarCacheStore(value.path, name: 'statsfm_sdk_cache'),
+          policy: CachePolicy.request,
+          hitCacheOnErrorExcept: [400, 401, 403, 500],
+          maxStale: const Duration(days: 7),
+          priority: CachePriority.normal,
+          cipher: null,
+          keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+          allowPostMethod: false,
+        );
       },
-      onResponse: (response, handler) {
-        print(
-            'DIO: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
-        return handler.next(response);
-      },
-      onError: (err, handler) {
-        print(
-            "DIO: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
-        if (err.response?.data != null) {
-          String message = Map.from(err.response?.data)['message'];
-          throw Exception(message);
-        }
-        handler.next(err);
-      },
-    ));
-    //Dio cache interceptor
-    dio.interceptors.add(
-      DioCacheManager(
-        CacheConfig(
-          baseUrl: _baseUrl,
-          skipDiskCache: true,
-        ),
-      ).interceptor,
     );
 
-    // Set<int> retryList = {
-    //   408,
-    //   502,
-    //   503,
-    //   504,
-    //   460,
-    //   499,
-    //   520,
-    //   521,
-    //   522,
-    //   523,
-    //   524,
-    //   525,
-    //   527,
-    //   598,
-    //   599
-    // };
-
-    // dio.interceptors.add(RetryInterceptor(
-    //   dio: dio,
-    //   logPrint: print, // specify log function (optional)
-    //   retries: 3, // retry count (optional)
-    //   retryDelays: const [
-    //     // set delays between retries (optional)
-    //     Duration(seconds: 1), // wait 1 sec before first retry
-    //     Duration(seconds: 2), // wait 2 sec before second retry
-    //     Duration(seconds: 3), // wait 3 sec before third retry
-    //   ],
-    //   retryEvaluator: DefaultRetryEvaluator(retryList).evaluate,
-    // ));
+    dio.interceptors.addAll(
+      [
+        DioCacheInterceptor(options: _cacheOptions),
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            options.queryParameters = Map<String, dynamic>.from(
+                SplayTreeMap.from(options.queryParameters));
+            return handler.next(options);
+          },
+          onResponse: (response, handler) {
+            print(
+                'SFM: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
+            return handler.next(response);
+          },
+          onError: (err, handler) {
+            print(
+                "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
+            if (err.response?.data != null) {
+              String message = Map.from(err.response?.data)['message'];
+              throw Exception(message);
+            }
+            handler.next(err);
+          },
+        ),
+      ],
+    );
 
     _artists = Artists(this);
     _auth = Auth(this);
@@ -131,5 +113,7 @@ abstract class StatsfmApiBase {
     _tracks = Tracks(this);
     _me = Me(this);
     _users = Users(this);
+
+    print('SFM: Finished setup');
   }
 }
