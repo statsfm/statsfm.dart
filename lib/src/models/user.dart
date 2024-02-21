@@ -569,9 +569,9 @@ class AppleMusicAuth extends Object {
   @JsonKey(name: 'emailVerified', defaultValue: false)
   late bool emailVerified;
 
-  ///First year user used Apple Music
-  @JsonKey(name: 'firstYear')
-  late int firstYear;
+  ///Available data years
+  @JsonKey(name: 'availableYears', defaultValue: <int>[])
+  late List<int> availableYears;
 
   ///appleUserId only available for current user on /me
   @JsonKey(name: 'appleUserId')

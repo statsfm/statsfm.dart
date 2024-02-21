@@ -1450,7 +1450,10 @@ AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
       ..disabled = json['disabled'] as bool? ?? false
       ..email = json['email'] as String?
       ..emailVerified = json['emailVerified'] as bool? ?? false
-      ..firstYear = json['firstYear'] as int
+      ..availableYears = (json['availableYears'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          []
       ..appleUserId = json['appleUserId'] as String?
       ..syncStreams = json['sync'] as bool? ?? false
       ..imported = json['imported'] as bool? ?? false
@@ -1461,7 +1464,7 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'disabled': instance.disabled,
       'email': instance.email,
       'emailVerified': instance.emailVerified,
-      'firstYear': instance.firstYear,
+      'availableYears': instance.availableYears,
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
