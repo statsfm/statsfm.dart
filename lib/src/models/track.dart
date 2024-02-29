@@ -31,6 +31,10 @@ class Track extends Object {
   @JsonKey(name: 'spotifyPreview')
   late String? spotifyPreview;
 
+  ///Preview m4a url provided by Apple Music (Not all tracks have a preview url)
+  @JsonKey(name: 'appleMusicPreview')
+  late String? appleMusicPreview;
+
   @JsonKey(name: 'artists', required: true)
   late List<ArtistSimple> artists;
 
