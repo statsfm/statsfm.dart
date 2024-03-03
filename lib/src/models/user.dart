@@ -125,6 +125,14 @@ enum OrderBySetting {
   APPLEMUSIC
 }
 
+enum StreamingService {
+  @JsonValue("SPOTIFY")
+  SPOTIFY,
+
+  @JsonValue("APPLEMUSIC")
+  APPLEMUSIC
+}
+
 @JsonSerializable(createToJson: false)
 @LocalDateTimeConverter()
 class UserImport extends Object {
@@ -150,6 +158,10 @@ class UserImport extends Object {
 
   @JsonKey(name: 'status')
   late int status;
+
+  ///Streaming service the file is for
+  @JsonKey(name: 'service', defaultValue: StreamingService.SPOTIFY)
+  late StreamingService service;
 
   @JsonKey(name: 'updatedAt')
   late DateTime updatedAt;
@@ -557,9 +569,9 @@ class AppleMusicAuth extends Object {
   @JsonKey(name: 'emailVerified', defaultValue: false)
   late bool emailVerified;
 
-  ///First year user used Apple Music
-  @JsonKey(name: 'firstYear')
-  late int firstYear;
+  ///Available data years
+  @JsonKey(name: 'availableYears', defaultValue: <int>[])
+  late List<int> availableYears;
 
   ///appleUserId only available for current user on /me
   @JsonKey(name: 'appleUserId')

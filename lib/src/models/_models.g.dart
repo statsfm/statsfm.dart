@@ -829,6 +829,7 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
     ..durationMs = json['durationMs'] as int
     ..spotifyPopularity = json['spotifyPopularity'] as int?
     ..spotifyPreview = json['spotifyPreview'] as String?
+    ..appleMusicPreview = json['appleMusicPreview'] as String?
     ..artists = (json['artists'] as List<dynamic>)
         .map((e) => ArtistSimple.fromJson(e as Map<String, dynamic>))
         .toList()
@@ -847,6 +848,7 @@ Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'durationMs': instance.durationMs,
       'spotifyPopularity': instance.spotifyPopularity,
       'spotifyPreview': instance.spotifyPreview,
+      'appleMusicPreview': instance.appleMusicPreview,
       'artists': instance.artists.map((e) => e.toJson()).toList(),
       'albums': instance.albums.map((e) => e.toJson()).toList(),
       'externalIds': instance.externalIds?.toJson(),
@@ -1114,6 +1116,9 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
     ..path = json['path'] as String?
     ..count = json['count'] as int? ?? 0
     ..status = json['status'] as int
+    ..service =
+        $enumDecodeNullable(_$StreamingServiceEnumMap, json['service']) ??
+            StreamingService.SPOTIFY
     ..updatedAt =
         const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
     ..createdAt =
@@ -1122,6 +1127,11 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
     ..error = json['error'] as String?
     ..name = json['name'] as String?;
 }
+
+const _$StreamingServiceEnumMap = {
+  StreamingService.SPOTIFY: 'SPOTIFY',
+  StreamingService.APPLEMUSIC: 'APPLEMUSIC',
+};
 
 UserPrivacySettings _$UserPrivacySettingsFromJson(Map<String, dynamic> json) =>
     UserPrivacySettings()
@@ -1442,7 +1452,10 @@ AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
       ..disabled = json['disabled'] as bool? ?? false
       ..email = json['email'] as String?
       ..emailVerified = json['emailVerified'] as bool? ?? false
-      ..firstYear = json['firstYear'] as int
+      ..availableYears = (json['availableYears'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          []
       ..appleUserId = json['appleUserId'] as String?
       ..syncStreams = json['sync'] as bool? ?? false
       ..imported = json['imported'] as bool? ?? false
@@ -1453,7 +1466,7 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'disabled': instance.disabled,
       'email': instance.email,
       'emailVerified': instance.emailVerified,
-      'firstYear': instance.firstYear,
+      'availableYears': instance.availableYears,
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
