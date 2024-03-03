@@ -68,6 +68,18 @@ abstract class StatsfmApiBase {
           hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
           maxStale: const Duration(hours: 2),
           priority: CachePriority.normal,
+          keyBuilder: (RequestOptions request) {
+            Map<String, List<String>> queryParams =
+                request.uri.queryParametersAll;
+
+            // Sort the query parameters alphabetically
+            var sortedParams =
+                SplayTreeMap<String, List<String>>.from(queryParams);
+
+            // Reconstruct the URI with sorted query parameters
+            Uri sortedUri = request.uri.replace(queryParameters: sortedParams);
+            return sortedUri.toString();
+          },
           allowPostMethod: false,
         );
       },
