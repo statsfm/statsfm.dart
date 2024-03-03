@@ -65,11 +65,9 @@ abstract class StatsfmApiBase {
         _cacheOptions = CacheOptions(
           store: IsarCacheStore(value.path, name: 'statsfm_sdk_cache'),
           policy: CachePolicy.request,
-          hitCacheOnErrorExcept: [400, 401, 403, 500],
-          maxStale: const Duration(days: 7),
+          hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
+          maxStale: const Duration(hours: 2),
           priority: CachePriority.normal,
-          cipher: null,
-          keyBuilder: CacheOptions.defaultCacheKeyBuilder,
           allowPostMethod: false,
         );
       },
