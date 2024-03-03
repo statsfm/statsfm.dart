@@ -9,7 +9,7 @@ class Me extends EndpointBase {
   Future<UserPrivate> get() async {
     Response response = await dio.get(_path);
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 && response.statusCode != 304) {
       throw StatsfmException(response.statusCode ?? 400,
           response.statusMessage ?? 'No status message');
     }
@@ -348,10 +348,9 @@ class Me extends EndpointBase {
     } else if (response.data['item']['status'] == 'MATCH') {
       return SoulmateMatchStatus.MATCH;
     }
-    
+
     return SoulmateMatchStatus.NO_MATCH;
   }
-
 
   /// [soulmatesMatches]
   /// Get the users soulmate matches
@@ -373,11 +372,9 @@ class Me extends EndpointBase {
 
   /// [soulmateRemoveMatch]
   /// Remove a match in soulmates
-  Future<bool> soulmateRemoveMatch({
-    required String id
-  }) async {
-    return (await dio
-                .delete('$_path/soulmates/friends/matches/${Uri.encodeComponent(id)}'))
+  Future<bool> soulmateRemoveMatch({required String id}) async {
+    return (await dio.delete(
+                '$_path/soulmates/friends/matches/${Uri.encodeComponent(id)}'))
             .statusCode ==
         200;
   }
