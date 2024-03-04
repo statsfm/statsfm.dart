@@ -44,6 +44,8 @@ abstract class StatsfmApiBase {
 
   late CacheOptions _cacheOptions;
 
+  bool _setup = false;
+
   StatsfmApiBase.fromAccessToken(
     String accessToken, {
     String baseUrl = "https://beta.stats.fm/api",
@@ -53,6 +55,8 @@ abstract class StatsfmApiBase {
   }
 
   Future<void> init() async {
+    if (_setup) return;
+
     print('SFM: Setting up SDK');
     _dio.options.baseUrl = _baseUrl;
     _dio.options.headers = {
@@ -123,6 +127,8 @@ abstract class StatsfmApiBase {
     _tracks = Tracks(this);
     _me = Me(this);
     _users = Users(this);
+
+    _setup = true;
 
     print('SFM: Finished setup');
   }
