@@ -128,10 +128,14 @@ abstract class StatsfmApiBase {
   }
 
   ///Dispose needs to be called before statsfm.StatsfmApi.fromAccessToken is set again
-  dispose() {
-    if (_cacheOptions.store != null) {
-      _cacheOptions.store!.close();
-      print('SFM: disposed SDK');
+  void dispose() {
+    try {
+      if (_cacheOptions.store != null) {
+        _cacheOptions.store!.close();
+        print('SFM: disposed SDK');
+      }
+    } catch (e) {
+      print('SFM: nothing to dispose');
     }
   }
 }
