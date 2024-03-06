@@ -85,9 +85,21 @@ abstract class StatsfmApiBase {
       },
     );
 
+    final myStatuses = { 400, 409, 522, 523, 524 , 525, 527, 598, 599};
+
     dio.interceptors.addAll(
       [
         DioCacheInterceptor(options: _cacheOptions),
+        RetryInterceptor(
+          dio: dio,
+          retries: 3, // retry count
+          retryEvaluator: DefaultRetryEvaluator(myStatuses).evaluate,
+          retryDelays: const [
+            Duration(seconds: 1), // wait 1 sec before first retry
+            Duration(seconds: 2), // wait 2 sec before second retry
+            Duration(seconds: 3), // wait 3 sec before third retry
+          ],
+        ),
         InterceptorsWrapper(
           onRequest: (options, handler) {
             options.queryParameters = Map<String, dynamic>.from(

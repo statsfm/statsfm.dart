@@ -12,6 +12,7 @@ dependencies:
   dio: ^5.4.1
   dio_cache_interceptor: ^3.5.0
   dio_cache_interceptor_isar_store: ^1.0.1
+  dio_smart_retry: ^6.0.0
   path_provider: ^2.1.1
 
 dependency_overrides:
