@@ -85,7 +85,7 @@ abstract class StatsfmApiBase {
       },
     );
 
-    final myStatuses = { 400, 409, 522, 523, 524 , 525, 527, 598, 599};
+    final myStatuses = {400, 409, 522, 523, 524, 525, 527, 598, 599};
 
     dio.interceptors.addAll(
       [
@@ -115,8 +115,13 @@ abstract class StatsfmApiBase {
             print(
                 "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
             if (err.response?.data != null) {
-              String message = Map.from(err.response?.data)['message'];
-              throw Exception(message);
+              //Check if error is in message format
+              if (err.response?.data is Map) {
+                String message = Map.from(err.response?.data)['message'];
+                throw Exception(message);
+              } else {
+                throw Exception('SFM: ${err.response?.data.toString()}');
+              }
             }
             handler.next(err);
           },
