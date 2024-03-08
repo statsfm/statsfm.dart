@@ -542,10 +542,6 @@ class SpotifyAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
-
-  ///Status only available for current user on /me
-  @JsonKey(name: 'status', defaultValue: 0)
-  late int status;
 }
 
 @JsonSerializable(createToJson: true)
@@ -582,10 +578,6 @@ class AppleMusicAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
-
-  ///status only available for current user on /me
-  @JsonKey(name: 'status', defaultValue: 0)
-  late int status;
 }
 
 @JsonSerializable(createToJson: true)
