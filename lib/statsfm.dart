@@ -8,6 +8,7 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_isar_store/dio_cache_interceptor_isar_store.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sentry_dio/sentry_dio.dart';
 import 'src/models/_models.dart';
 
 export 'src/models/_models.dart';
