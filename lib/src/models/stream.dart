@@ -19,7 +19,7 @@ class Stream extends Object {
   @JsonKey(name: 'playedMs')
   late int playedMs;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false)
   Duration? get played => Duration(milliseconds: this.playedMs);
 
   @JsonKey(name: 'trackId', required: true)
