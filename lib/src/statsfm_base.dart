@@ -5,8 +5,11 @@ abstract class StatsfmApiBase {
 
   late String _accessToken;
 
-  Dio _dio = Dio();
-
+  Dio _dio = Dio(
+    BaseOptions(
+      receiveTimeout: Duration(seconds: 50),
+    ),
+  );
   Dio get dio => _dio;
 
   late Artists _artists;
@@ -128,6 +131,9 @@ abstract class StatsfmApiBase {
         ),
       ],
     );
+
+    //Track with Sentry
+    dio.addSentry();
 
     _artists = Artists(this);
     _auth = Auth(this);
