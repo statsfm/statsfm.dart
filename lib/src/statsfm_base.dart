@@ -49,7 +49,7 @@ abstract class StatsfmApiBase {
 
   StatsfmApiBase.fromAccessToken(
     String accessToken, {
-    String baseUrl = "https://beta.stats.fm/api",
+    String baseUrl = "https://staging-api.stats.fm/api",
   }) {
     _accessToken = accessToken;
     _baseUrl = baseUrl;
@@ -150,7 +150,7 @@ abstract class StatsfmApiBase {
     print('SFM: Finished setup');
   }
 
-  ///Dispose needs to be called before statsfm.StatsfmApi.fromAccessToken is set again
+  ///Dispose needs to be called before StatsfmApi.fromAccessToken is set again
   void dispose() {
     try {
       if (_cacheOptions.store != null) {
