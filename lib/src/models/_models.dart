@@ -16,6 +16,7 @@ part 'external_ids.dart';
 part 'genre.dart';
 part 'query.dart';
 part 'range.dart';
+part 'report.dart';
 part 'search.dart';
 part 'soulmate.dart';
 part 'stream.dart';

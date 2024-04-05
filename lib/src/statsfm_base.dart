@@ -45,6 +45,9 @@ abstract class StatsfmApiBase {
   late Auth _auth;
   Auth get auth => _auth;
 
+  late Reports _reports;
+  Reports get reports => _reports;
+
   late CacheOptions _cacheOptions;
 
   StatsfmApiBase.fromAccessToken(

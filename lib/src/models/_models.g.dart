@@ -454,6 +454,45 @@ TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
         [];
 }
 
+CatalogReport _$CatalogReportFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const [
+      'id',
+      'createdAt',
+      'updatedAt',
+      'type',
+      'typeId',
+      'reason'
+    ],
+  );
+  return CatalogReport()
+    ..id = json['id'] as int
+    ..createdAt =
+        const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
+    ..updatedAt =
+        const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
+    ..type = $enumDecode(_$CatalogTypeEnumMap, json['type'])
+    ..typeId = json['typeId'] as int
+    ..reason = $enumDecode(_$CatalogReportReasonEnumMap, json['reason'])
+    ..description = json['description'] as String?
+    ..userId = json['userId'] as String?;
+}
+
+const _$CatalogTypeEnumMap = {
+  CatalogType.ARTIST: 'ARTIST',
+  CatalogType.ALBUM: 'ALBUM',
+  CatalogType.TRACK: 'TRACK',
+};
+
+const _$CatalogReportReasonEnumMap = {
+  CatalogReportReason.MISSING_ARTWORK: 'MISSING_ARTWORK',
+  CatalogReportReason.WRONGLY_MERGED: 'WRONGLY_MERGED',
+  CatalogReportReason.INCOMPLETE: 'INCOMPLETE',
+  CatalogReportReason.DUPLICATE: 'DUPLICATE',
+  CatalogReportReason.OTHER: 'OTHER',
+};
+
 SearchResults _$SearchResultsFromJson(Map<String, dynamic> json) =>
     SearchResults()
       ..tracks = (json['tracks'] as List<dynamic>?)
