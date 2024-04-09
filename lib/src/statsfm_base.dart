@@ -126,8 +126,6 @@ abstract class StatsfmApiBase {
             } else if (err.response != null) {
               throw StatsfmException(err.response!.statusCode ?? 400,
                   err.response!.data.toString());
-            } else {
-              handler.next(err);
             }
             handler.next(err);
           },
