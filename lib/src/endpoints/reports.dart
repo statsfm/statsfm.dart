@@ -24,6 +24,11 @@ class Reports extends EndpointBase {
       },
     );
 
+    if (response.statusCode != 201) {
+      throw StatsfmException(response.statusCode ?? 400,
+          response.statusMessage ?? 'No status message');
+    }
+
     return CatalogReport.fromJson(response.data);
   }
 }
