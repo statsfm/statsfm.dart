@@ -14,3 +14,7 @@ DateTime dateTimeFromTimestamp(int timestamp) {
 int dateTimeToTimestamp(DateTime timestamp) {
   return timestamp.millisecondsSinceEpoch;
 }
+
+String enumToString(dynamic e) {
+  return e.toString().split('.').last;
+}

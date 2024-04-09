@@ -17,9 +17,9 @@ class Reports extends EndpointBase {
     final Response response = await await dio.post(
       '$_path/catalog',
       data: {
-        "type": type,
+        "type": enumToString(type),
         "typeId": typeId,
-        "reason": reason,
+        "reason": enumToString(reason),
         "description": description,
       },
     );
