@@ -145,6 +145,7 @@ abstract class StatsfmApiBase {
     _albums = Albums(this);
     _charts = Charts(this);
     _records = Records(this);
+    _reports = Reports(this);
     _genres = Genres(this);
     _search = Search(this);
     _stats = Stats(this);
