@@ -120,16 +120,14 @@ abstract class StatsfmApiBase {
           onError: (err, handler) {
             print(
                 "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
-            if (err.response?.data != null) {
-              if (err.response?.data is Map) {
-                throw StatsfmException(err.response!.data['statusCode'],
-                    err.response!.data['message']);
-              } else if (err.response != null) {
-                throw StatsfmException(err.response!.statusCode ?? 400,
-                    err.response!.data.toString());
-              } else {
-                throw err;
-              }
+            if (err.response?.data is Map) {
+              throw StatsfmException(err.response!.data['statusCode'],
+                  err.response!.data['message']);
+            } else if (err.response != null) {
+              throw StatsfmException(err.response!.statusCode ?? 400,
+                  err.response!.data.toString());
+            } else {
+              handler.next(err);
             }
             handler.next(err);
           },
