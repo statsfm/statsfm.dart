@@ -8,7 +8,7 @@ class Reports extends EndpointBase {
 
   /// [submitCatalogReport]
   /// Submits a catalog report to stats.fm to be reviewed for incorrect metadata
-  Future<CatalogReport> submitCatalogReport({
+  Future<void> submitCatalogReport({
     required int typeId,
     required CatalogType type,
     required CatalogReportReason reason,
@@ -29,6 +29,6 @@ class Reports extends EndpointBase {
           response.statusMessage ?? 'No status message');
     }
 
-    return CatalogReport.fromJson(response.data);
+    return;
   }
 }
