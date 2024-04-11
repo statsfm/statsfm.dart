@@ -1020,9 +1020,8 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..email = json['email'] as String?
     ..country = json['country'] as String
     ..gender = $enumDecodeNullable(_$GenderEnumMap, json['gender'])
-    ..birthday = json['birthday'] == null
-        ? null
-        : DateTime.parse(json['birthday'] as String)
+    ..birthday = _$JsonConverterFromJson<String, DateTime>(
+        json['birthday'], const LocalDateTimeConverter().fromJson)
     ..disabled = json['disabled'] as bool? ?? false;
 }
 
@@ -1053,7 +1052,8 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'email': instance.email,
       'country': instance.country,
       'gender': _$GenderEnumMap[instance.gender],
-      'birthday': instance.birthday?.toIso8601String(),
+      'birthday': _$JsonConverterToJson<String, DateTime>(
+          instance.birthday, const LocalDateTimeConverter().toJson),
       'disabled': instance.disabled,
     };
 
@@ -1070,6 +1070,12 @@ const _$GenderEnumMap = {
   Gender.FEMALE: 'FEMALE',
   Gender.OTHER: 'OTHER',
 };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
 
 UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
   $checkKeys(
@@ -1441,12 +1447,6 @@ Map<String, dynamic> _$UserDeviceToJson(UserDevice instance) =>
       'notifications': instance.notifications,
       'fcmToken': instance.fcmToken,
     };
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
 
 UserDeviceNotifications _$UserDeviceNotificationsFromJson(
         Map<String, dynamic> json) =>
