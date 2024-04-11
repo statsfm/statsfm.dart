@@ -16,6 +16,14 @@ class UserPrivate extends UserPublic {
   @JsonKey(name: 'country')
   late String country;
 
+  ///Users gender
+  @JsonKey(name: 'gender')
+  late Gender? gender;
+
+  ///Users birthday
+  @JsonKey(name: 'birthday')
+  late DateTime? birthday;
+
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 }
@@ -594,4 +602,15 @@ class UserBan extends Object {
 
   @JsonKey(name: 'active')
   late bool active;
+}
+
+enum Gender {
+  @JsonValue("MALE")
+  MALE,
+
+  @JsonValue("FEMALE")
+  FEMALE,
+
+  @JsonValue("OTHER")
+  OTHER
 }
