@@ -23,7 +23,6 @@ class Me extends EndpointBase {
       data: me.toJson(),
     ))
         .data;
-    print(me.toJson());
 
     return UserPrivate.fromJson(map['item']);
   }
