@@ -1481,7 +1481,9 @@ SpotifyAuth _$SpotifyAuthFromJson(Map<String, dynamic> json) {
     ..image = json['image'] as String?
     ..country = json['country'] as String?
     ..syncStreams = json['sync'] as bool? ?? false
-    ..imported = json['imported'] as bool? ?? false;
+    ..imported = json['imported'] as bool? ?? false
+    ..requestedGdpr = _$JsonConverterFromJson<String, DateTime>(
+        json['requestedGdpr'], const LocalDateTimeConverter().fromJson);
 }
 
 Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
@@ -1494,6 +1496,8 @@ Map<String, dynamic> _$SpotifyAuthToJson(SpotifyAuth instance) =>
       'country': instance.country,
       'sync': instance.syncStreams,
       'imported': instance.imported,
+      'requestedGdpr': _$JsonConverterToJson<String, DateTime>(
+          instance.requestedGdpr, const LocalDateTimeConverter().toJson),
     };
 
 AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
@@ -1507,7 +1511,9 @@ AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
           []
       ..appleUserId = json['appleUserId'] as String?
       ..syncStreams = json['sync'] as bool? ?? false
-      ..imported = json['imported'] as bool? ?? false;
+      ..imported = json['imported'] as bool? ?? false
+      ..requestedGdpr = _$JsonConverterFromJson<String, DateTime>(
+          json['requestedGdpr'], const LocalDateTimeConverter().fromJson);
 
 Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
     <String, dynamic>{
@@ -1518,6 +1524,8 @@ Map<String, dynamic> _$AppleMusicAuthToJson(AppleMusicAuth instance) =>
       'appleUserId': instance.appleUserId,
       'sync': instance.syncStreams,
       'imported': instance.imported,
+      'requestedGdpr': _$JsonConverterToJson<String, DateTime>(
+          instance.requestedGdpr, const LocalDateTimeConverter().toJson),
     };
 
 UserBan _$UserBanFromJson(Map<String, dynamic> json) => UserBan()

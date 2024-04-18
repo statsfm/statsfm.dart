@@ -551,6 +551,14 @@ class SpotifyAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
+
+  /// [requestedGdpr]
+  ///When the user marked that they requested their Spotify data
+  ///Null if they have not requested their data.
+  ///Note: Only returned in /me
+  @JsonKey(name: 'requestedGdpr')
+  @LocalDateTimeConverter()
+  late DateTime? requestedGdpr;
 }
 
 @JsonSerializable(createToJson: true)
@@ -587,6 +595,14 @@ class AppleMusicAuth extends Object {
 
   @JsonKey(name: 'imported', defaultValue: false)
   late bool imported;
+
+  /// [requestedGdpr]
+  ///When the user marked that they requested their Apple Music data
+  ///Null if they have not requested their data.
+  ///Note: Only returned in /me
+  @JsonKey(name: 'requestedGdpr')
+  @LocalDateTimeConverter()
+  late DateTime? requestedGdpr;
 }
 
 @JsonSerializable(createToJson: true)
