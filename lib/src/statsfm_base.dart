@@ -69,7 +69,10 @@ abstract class StatsfmApiBase {
     await getApplicationCacheDirectory().then(
       (value) async {
         _cacheOptions = CacheOptions(
-          store: IsarCacheStore(value.path, name: 'statsfm_sdk_cache'),
+          store: DbCacheStore(
+            databasePath: value.path,
+            databaseName: 'statsfm_sdk_cache',
+          ),
           policy: CachePolicy.request,
           hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
           maxStale: const Duration(hours: 2),
@@ -121,8 +124,10 @@ abstract class StatsfmApiBase {
             print(
                 "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
             if (err.response?.data is Map) {
-              throw StatsfmException(err.response!.data['status'] ?? 400,
-                  err.response!.data['message'] ?? 'No server error message given');
+              throw StatsfmException(
+                  err.response!.data['status'] ?? 400,
+                  err.response!.data['message'] ??
+                      'No server error message given');
             } else if (err.response != null) {
               throw StatsfmException(err.response!.statusCode ?? 400,
                   err.response!.data.toString());
