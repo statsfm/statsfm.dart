@@ -22,7 +22,6 @@ class UserPrivate extends UserPublic {
 
   ///Users birthday
   @JsonKey(name: 'birthday')
-  @LocalDateTimeConverter()
   late DateTime? birthday;
 
   @JsonKey(name: 'disabled', defaultValue: false)
