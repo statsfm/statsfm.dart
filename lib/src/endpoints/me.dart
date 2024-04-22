@@ -250,7 +250,7 @@ class Me extends EndpointBase {
     }
     //requestedGdpr option
     if (requestedGdpr != null) {
-      temp.addAll({'requestedGdpr': requestedGdpr});
+      temp.addAll({'requestedGdpr': requestedGdpr.toString()});
     }
     //Make sure there is options
     if (temp.isEmpty) {
