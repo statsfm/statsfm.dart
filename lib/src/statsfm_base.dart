@@ -118,6 +118,9 @@ abstract class StatsfmApiBase {
           onResponse: (response, handler) {
             print(
                 'SFM: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
+            if (response.requestOptions.method == 'POST') {
+              print(response.data);
+            }
             return handler.next(response);
           },
           onError: (err, handler) {
