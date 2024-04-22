@@ -237,15 +237,29 @@ class Me extends EndpointBase {
   }
 
   ///Update a services sync and import settings
-  Future<bool> updateServiceSettings(String service, bool syncStreams,
-      bool hasImported, DateTime? requestedGdpr) async {
+  Future<bool> updateServiceSettings(String service,
+      {bool? syncStreams, bool? hasImported, DateTime? requestedGdpr}) async {
+    Map temp = {};
+    //Sync Streams option
+    if (syncStreams != null) {
+      temp.addAll({'sync': syncStreams});
+    }
+    //Has imported option
+    if (hasImported != null) {
+      temp.addAll({'hasImported': hasImported});
+    }
+    //requestedGdpr option
+    if (requestedGdpr != null) {
+      temp.addAll({'requestedGdpr': requestedGdpr});
+    }
+    //Make sure there is options
+    if (temp.isEmpty) {
+      throw StatsfmException(400, 'updateServiceSettings has no options set.');
+    }
+
     final Response response = await dio.post(
       '$_path/service/$service/settings',
-      data: {
-        "sync": syncStreams,
-        "hasImported": hasImported,
-        "requestedGdpr": requestedGdpr,
-      },
+      data: temp,
     );
     return response.statusCode == 201;
   }
