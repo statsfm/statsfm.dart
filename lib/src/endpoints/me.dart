@@ -237,13 +237,14 @@ class Me extends EndpointBase {
   }
 
   ///Update a services sync and import settings
-  Future<bool> updateServiceSettings(
-      String service, bool syncStreams, bool hasImported) async {
+  Future<bool> updateServiceSettings(String service, bool syncStreams,
+      bool hasImported, DateTime? requestedGdpr) async {
     final Response response = await dio.post(
       '$_path/service/$service/settings',
       data: {
         "sync": syncStreams,
         "hasImported": hasImported,
+        "requestedGdpr": requestedGdpr,
       },
     );
     return response.statusCode == 201;
