@@ -118,9 +118,6 @@ abstract class StatsfmApiBase {
           onResponse: (response, handler) {
             print(
                 'SFM: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
-            if (response.requestOptions.method == 'POST') {
-              print(response.data);
-            }
             return handler.next(response);
           },
           onError: (err, handler) {
@@ -135,7 +132,6 @@ abstract class StatsfmApiBase {
               throw StatsfmException(err.response!.statusCode ?? 400,
                   err.response!.data.toString());
             }
-            print(err);
             handler.next(err);
           },
         ),
