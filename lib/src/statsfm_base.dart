@@ -125,9 +125,9 @@ abstract class StatsfmApiBase {
                 "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
             if (err.response?.data is Map) {
               throw StatsfmException(
-                  err.response!.data['status'] ?? 400,
-                  err.response!.data['message'] ??
-                      'No server error message given');
+                err.response!.data['status'] ?? 500,
+                err.response!.data['message'] ?? err.response!.data.toString(),
+              );
             } else if (err.response != null) {
               throw StatsfmException(err.response!.statusCode ?? 400,
                   err.response!.data.toString());
