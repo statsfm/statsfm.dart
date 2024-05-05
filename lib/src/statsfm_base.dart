@@ -109,6 +109,13 @@ abstract class StatsfmApiBase {
             Duration(seconds: 3), // wait 3 sec before third retry
           ],
         ),
+        TalkerDioLogger(
+          settings: const TalkerDioLoggerSettings(
+            printRequestHeaders: true,
+            printResponseHeaders: true,
+            printResponseMessage: true,
+          ),
+        ),
         InterceptorsWrapper(
           onRequest: (options, handler) {
             options.queryParameters = Map<String, dynamic>.from(
