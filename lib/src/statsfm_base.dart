@@ -50,12 +50,16 @@ abstract class StatsfmApiBase {
 
   late CacheOptions _cacheOptions;
 
+  Talker? _talker;
+
   StatsfmApiBase.fromAccessToken(
     String accessToken, {
     String baseUrl = "https://staging-api.stats.fm/api",
+    Talker? talker = null,
   }) {
     _accessToken = accessToken;
     _baseUrl = baseUrl;
+    _talker = talker;
   }
 
   Future<void> init() async {
@@ -109,13 +113,16 @@ abstract class StatsfmApiBase {
             Duration(seconds: 3), // wait 3 sec before third retry
           ],
         ),
-        TalkerDioLogger(
-          settings: const TalkerDioLoggerSettings(
-            printRequestHeaders: true,
-            printResponseHeaders: true,
-            printResponseMessage: true,
+        //Setup talker
+        if (_talker != null)
+          TalkerDioLogger(
+            talker: _talker,
+            settings: const TalkerDioLoggerSettings(
+              printRequestHeaders: true,
+              printResponseHeaders: true,
+              printResponseMessage: true,
+            ),
           ),
-        ),
         InterceptorsWrapper(
           onRequest: (options, handler) {
             options.queryParameters = Map<String, dynamic>.from(

@@ -16,6 +16,7 @@ dependencies:
   dio_smart_retry: ^6.0.0
   sentry_dio: ^7.20.0
   path_provider: ^2.1.2
+  talker: ^4.2.0
   talker_dio_logger: ^4.1.5
 
 dependency_overrides:
