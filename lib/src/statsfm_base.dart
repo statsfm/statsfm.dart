@@ -118,9 +118,11 @@ abstract class StatsfmApiBase {
           TalkerDioLogger(
             talker: _talker,
             settings: const TalkerDioLoggerSettings(
-              printRequestHeaders: true,
-              printResponseHeaders: true,
+              printRequestHeaders: false,
+              printResponseHeaders: false,
               printResponseMessage: true,
+              printRequestData: false,
+              printResponseData: false,
             ),
           ),
         InterceptorsWrapper(
@@ -130,13 +132,9 @@ abstract class StatsfmApiBase {
             return handler.next(options);
           },
           onResponse: (response, handler) {
-            print(
-                'SFM: ${response.requestOptions.method} ${response.statusCode} - ${response.requestOptions.uri.toString()}');
             return handler.next(response);
           },
           onError: (err, handler) {
-            print(
-                "SFM: ERROR (${err.response?.statusCode}), URL: ${err.response?.requestOptions.uri.toString()} ERROR: ${err.response?.data}");
             if (err.response?.data is Map) {
               throw StatsfmException(
                 err.response!.data['status'] ?? 500,
