@@ -63,7 +63,7 @@ abstract class StatsfmApiBase {
   }
 
   Future<void> init() async {
-    print('SFM: Setting up SDK');
+    _printMessage('Setting up stats.fm SDK');
     _dio.options.baseUrl = _baseUrl;
     _dio.options.headers = {
       'Authorization': _accessToken,
@@ -166,7 +166,7 @@ abstract class StatsfmApiBase {
     _me = Me(this);
     _users = Users(this);
 
-    print('SFM: Finished setup');
+    _printMessage('Finished setup of stats.fm SDK');
   }
 
   ///Dispose needs to be called before StatsfmApi.fromAccessToken is set again
@@ -174,10 +174,18 @@ abstract class StatsfmApiBase {
     try {
       if (_cacheOptions.store != null) {
         _cacheOptions.store!.close();
-        print('SFM: disposed SDK');
+        _printMessage('Disposed stats.fm SDK');
       }
     } catch (e) {
-      print('SFM: nothing to dispose');
+      _printMessage('stats.fm SDK startup check ok');
+    }
+  }
+
+  void _printMessage(String string) {
+    if (_talker != null) {
+      _talker!.info(
+        string
+      );
     }
   }
 }
