@@ -24,6 +24,14 @@ class UserPrivate extends UserPublic {
   @JsonKey(name: 'birthday')
   late DateTime? birthday;
 
+  ///Last accepted terms verison
+  @JsonKey(name: 'acceptedTermsVersion', defaultValue: 1)
+  late int acceptedTermsVersion;
+
+  ///Last accepted privacy policy
+  @JsonKey(name: 'acceptedPrivacyPolicyVersion', defaultValue: 1)
+  late int acceptedTermsVeacceptedPrivacyPolicyVersionrsion;
+
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
 }
