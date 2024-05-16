@@ -30,7 +30,7 @@ class UserPrivate extends UserPublic {
 
   ///Last accepted privacy policy
   @JsonKey(name: 'acceptedPrivacyPolicyVersion', defaultValue: 1)
-  late int acceptedTermsVeacceptedPrivacyPolicyVersionrsion;
+  late int acceptedPrivacyPolicyVersion;
 
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;

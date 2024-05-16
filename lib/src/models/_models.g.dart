@@ -1047,7 +1047,7 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['birthday'] as String)
     ..acceptedTermsVersion = json['acceptedTermsVersion'] as int? ?? 1
-    ..acceptedTermsVeacceptedPrivacyPolicyVersionrsion =
+    ..acceptedPrivacyPolicyVersion =
         json['acceptedPrivacyPolicyVersion'] as int? ?? 1
     ..disabled = json['disabled'] as bool? ?? false;
 }
@@ -1081,8 +1081,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'gender': _$GenderEnumMap[instance.gender],
       'birthday': instance.birthday?.toIso8601String(),
       'acceptedTermsVersion': instance.acceptedTermsVersion,
-      'acceptedPrivacyPolicyVersion':
-          instance.acceptedTermsVeacceptedPrivacyPolicyVersionrsion,
+      'acceptedPrivacyPolicyVersion': instance.acceptedPrivacyPolicyVersion,
       'disabled': instance.disabled,
     };
 
