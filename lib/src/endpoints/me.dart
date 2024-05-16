@@ -466,12 +466,12 @@ class Me extends EndpointBase {
   }
 
   /// [acceptLegalVersion]
-  /// Accept the legal verison using the current users account
-  Future<bool> acceptLegalVersion(String legalType, int verison) async {
+  /// Accept the legal version using the current users account
+  Future<bool> acceptLegalVersion(String legalType, int version) async {
     return (await dio.put(
-          '$_path/legal/${Uri.encodeComponent(legalType)}',
+          '$_path/legal/$legalType}',
           data: {
-            "verison": verison,
+            "version": version,
           },
         ))
             .statusCode ==
