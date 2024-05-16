@@ -469,7 +469,7 @@ class Me extends EndpointBase {
   /// Accept the legal version using the current users account
   Future<bool> acceptLegalVersion(String legalType, int version) async {
     return (await dio.put(
-          '$_path/legal/$legalType}',
+          '$_path/legal/$legalType',
           data: {
             "version": version,
           },
