@@ -464,4 +464,17 @@ class Me extends EndpointBase {
     Response temp = await dio.get('$_path/friends/requests');
     return FriendRequests.fromJson(temp.data['items']);
   }
+
+  /// [acceptLegalVersion]
+  /// Accept the legal verison using the current users account
+  Future<bool> acceptLegalVersion(String legalType, int verison) async {
+    return (await dio.put(
+          '$_path/legal/${Uri.encodeComponent(legalType)}',
+          data: {
+            "verison": verison,
+          },
+        ))
+            .statusCode ==
+        204;
+  }
 }

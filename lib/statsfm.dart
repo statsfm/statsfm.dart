@@ -24,6 +24,7 @@ part 'src/endpoints/reports.dart';
 part 'src/endpoints/endpoint_base.dart';
 part 'src/endpoints/genres.dart';
 part 'src/endpoints/me.dart';
+part 'src/endpoints/private.dart';
 part 'src/endpoints/search.dart';
 part 'src/endpoints/stats.dart';
 part 'src/endpoints/tracks.dart';

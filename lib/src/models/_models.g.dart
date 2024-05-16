@@ -454,6 +454,29 @@ TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
         [];
 }
 
+LegalItems _$LegalItemsFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['privacy', 'terms'],
+  );
+  return LegalItems()
+    ..privacy = LegalItem.fromJson(json['privacy'] as Map<String, dynamic>)
+    ..terms = LegalItem.fromJson(json['terms'] as Map<String, dynamic>);
+}
+
+LegalItem _$LegalItemFromJson(Map<String, dynamic> json) {
+  $checkKeys(
+    json,
+    requiredKeys: const ['version', 'url', 'date', 'requiredAfter'],
+  );
+  return LegalItem()
+    ..version = json['version'] as int
+    ..url = json['url'] as String
+    ..date = const LocalDateTimeConverter().fromJson(json['date'] as String)
+    ..requiredAfter = const LocalDateTimeConverter()
+        .fromJson(json['requiredAfter'] as String);
+}
+
 CatalogReport _$CatalogReportFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,

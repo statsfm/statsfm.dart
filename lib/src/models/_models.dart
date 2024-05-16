@@ -14,6 +14,7 @@ part 'database_size.dart';
 part 'error.dart';
 part 'external_ids.dart';
 part 'genre.dart';
+part 'legal.dart';
 part 'query.dart';
 part 'range.dart';
 part 'report.dart';
