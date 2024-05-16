@@ -42,6 +42,9 @@ abstract class StatsfmApiBase {
   late Me _me;
   Me get me => _me;
 
+  late Private _private;
+  Private get private => _private;
+
   late Auth _auth;
   Auth get auth => _auth;
 
@@ -160,6 +163,7 @@ abstract class StatsfmApiBase {
     _records = Records(this);
     _reports = Reports(this);
     _genres = Genres(this);
+    _private = Private(this);
     _search = Search(this);
     _stats = Stats(this);
     _tracks = Tracks(this);
