@@ -8,7 +8,6 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_db_store/dio_cache_interceptor_db_store.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sentry_dio/sentry_dio.dart';
 import 'package:talker/talker.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'src/models/_models.dart';

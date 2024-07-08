@@ -153,9 +153,6 @@ abstract class StatsfmApiBase {
       ],
     );
 
-    //Track with Sentry
-    dio.addSentry();
-
     _artists = Artists(this);
     _auth = Auth(this);
     _albums = Albums(this);
