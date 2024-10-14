@@ -90,7 +90,11 @@ class UserPublic extends Object {
   @JsonKey(name: 'timezone')
   late String? timezone;
 
-  @JsonKey(name: 'orderBy', defaultValue: OrderBySetting.PLATFORM)
+  @JsonKey(
+    name: 'orderBy',
+    defaultValue: OrderBySetting.PLATFORM,
+    fromJson: orderFromJson,
+  )
   late OrderBySetting orderBy;
 
   @JsonKey(name: 'privacySettings')
@@ -121,6 +125,25 @@ class UserPublic extends Object {
   ///Only available on the new multi service api beta
   @JsonKey(name: 'appleMusicAuth')
   late AppleMusicAuth? appleMusicAuth;
+
+  static OrderBySetting orderFromJson(dynamic json) {
+    switch (json) {
+      case 'COUNT':
+        return OrderBySetting.COUNT;
+
+      case 'TIME':
+        return OrderBySetting.TIME;
+
+      case 'SPOTIFY':
+        return OrderBySetting.SPOTIFY;
+
+      case 'APPLEMUSIC':
+        return OrderBySetting.APPLEMUSIC;
+
+      default:
+        return OrderBySetting.PLATFORM;
+    }
+  }
 }
 
 enum OrderBySetting {

@@ -70,14 +70,14 @@ Album _$AlbumFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name', 'type', 'artists'],
   );
   return Album()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
     ..image = json['image'] as String?
     ..label = json['label'] as String?
-    ..spotifyPopularity = json['spotifyPopularity'] as int? ?? 0
-    ..totalTracks = json['totalTracks'] as int? ?? 0
+    ..spotifyPopularity = (json['spotifyPopularity'] as num?)?.toInt() ?? 0
+    ..totalTracks = (json['totalTracks'] as num?)?.toInt() ?? 0
     ..type = json['type'] as String
-    ..releaseDate = dateTimeFromTimestamp(json['releaseDate'] as int)
+    ..releaseDate = dateTimeFromTimestamp((json['releaseDate'] as num).toInt())
     ..genres =
         (json['genres'] as List<dynamic>).map((e) => e as String).toList()
     ..artists = (json['artists'] as List<dynamic>)
@@ -108,7 +108,7 @@ AlbumSimple _$AlbumSimpleFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name'],
   );
   return AlbumSimple()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
     ..image = json['image'] as String?;
 }
@@ -126,9 +126,9 @@ TopAlbum _$TopAlbumFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'album'],
   );
   return TopAlbum()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..album = Album.fromJson(json['album'] as Map<String, dynamic>);
 }
@@ -155,8 +155,8 @@ SwipeTopAlbum _$SwipeTopAlbumFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'swipes', 'album'],
   );
   return SwipeTopAlbum()
-    ..position = json['position'] as int
-    ..swipes = json['swipes'] as int
+    ..position = (json['position'] as num).toInt()
+    ..swipes = (json['swipes'] as num).toInt()
     ..decision =
         SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
     ..decisionMs =
@@ -179,11 +179,11 @@ Artist _$ArtistFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name'],
   );
   return Artist()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
-    ..followers = json['followers'] as int? ?? 0
+    ..followers = (json['followers'] as num?)?.toInt() ?? 0
     ..image = json['image'] as String?
-    ..spotifyPopularity = json['spotifyPopularity'] as int? ?? 0
+    ..spotifyPopularity = (json['spotifyPopularity'] as num?)?.toInt() ?? 0
     ..genres =
         (json['genres'] as List<dynamic>).map((e) => e as String).toList()
     ..externalIds = json['externalIds'] == null
@@ -207,7 +207,7 @@ ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name'],
   );
   return ArtistSimple()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String;
 }
 
@@ -223,9 +223,9 @@ TopArtist _$TopArtistFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'artist'],
   );
   return TopArtist()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..artist = Artist.fromJson(json['artist'] as Map<String, dynamic>);
 }
@@ -244,8 +244,8 @@ SwipeTopArtist _$SwipeTopArtistFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'swipes', 'artist'],
   );
   return SwipeTopArtist()
-    ..position = json['position'] as int
-    ..swipes = json['swipes'] as int
+    ..position = (json['position'] as num).toInt()
+    ..swipes = (json['swipes'] as num).toInt()
     ..decision =
         SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
     ..decisionMs =
@@ -266,21 +266,21 @@ AudioFeature _$AudioFeatureFromJson(Map<String, dynamic> json) => AudioFeature()
   ..acousticness = (json['acousticness'] as num?)?.toDouble()
   ..analysisUrl = json['analysis_url'] as String?
   ..danceability = (json['danceability'] as num?)?.toDouble()
-  ..durationMs = json['duration_ms'] as int?
+  ..durationMs = (json['duration_ms'] as num?)?.toInt()
   ..energy = (json['energy'] as num?)?.toDouble()
   ..id = json['id'] as String?
   ..instrumentalness = (json['instrumentalness'] as num?)?.toDouble()
-  ..key = json['key'] as int?
+  ..key = (json['key'] as num?)?.toInt()
   ..liveness = (json['liveness'] as num?)?.toDouble()
   ..loudness = (json['loudness'] as num?)?.toDouble()
-  ..mode = json['mode'] as int?
+  ..mode = (json['mode'] as num?)?.toInt()
   ..speechiness = (json['speechiness'] as num?)?.toDouble()
   ..tempo = (json['tempo'] as num?)?.toDouble()
-  ..timeSignature = json['time_signature'] as int?
+  ..timeSignature = (json['time_signature'] as num?)?.toInt()
   ..valence = (json['valence'] as num?)?.toDouble();
 
 ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
-  ..id = json['id'] as int
+  ..id = (json['id'] as num).toInt()
   ..chatId = json['chatId'] as String?
   ..content = json['content'] as String
   ..sentAt = const LocalDateTimeConverter().fromJson(json['sentAt'] as String)
@@ -307,13 +307,13 @@ ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'type', 'userId', 'createdAt', 'artistId'],
   );
   return ArtistRecord()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
     ..active = json['active'] as bool? ?? false
     ..userId = json['userId'] as String
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-    ..artistId = json['artistId'] as int;
+    ..artistId = (json['artistId'] as num).toInt();
 }
 
 const _$RecordTypeEnumMap = {
@@ -329,7 +329,7 @@ Record _$RecordFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'type', 'userId', 'createdAt'],
   );
   return Record()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..type = $enumDecode(_$RecordTypeEnumMap, json['type'])
     ..active = json['active'] as bool? ?? false
     ..userId = json['userId'] as String
@@ -375,11 +375,11 @@ DatabaseSizeItem _$DatabaseSizeItemFromJson(Map<String, dynamic> json) =>
 DatabaseSizeItemCount _$DatabaseSizeItemCountFromJson(
         Map<String, dynamic> json) =>
     DatabaseSizeItemCount()
-      ..count = json['count'] as int
+      ..count = (json['count'] as num).toInt()
       ..date = const LocalDateTimeConverter().fromJson(json['date'] as String);
 
 StatsfmError _$StatsfmErrorFromJson(Map<String, dynamic> json) => StatsfmError()
-  ..status = json['status'] as int
+  ..status = (json['status'] as num).toInt()
   ..path = json['path'] as String
   ..message = json['message'] as String;
 
@@ -442,12 +442,12 @@ TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position'],
   );
   return TopGenre()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..genre = GenreSimple.fromJson(json['genre'] as Map<String, dynamic>)
-    ..artistCount = json['artistCount'] as int?
+    ..artistCount = (json['artistCount'] as num?)?.toInt()
     ..previewArtists = (json['previewArtists'] as List<dynamic>?)
             ?.map((e) => TopArtist.fromJson(e as Map<String, dynamic>))
             .toList() ??
@@ -470,7 +470,7 @@ LegalItem _$LegalItemFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['version', 'url', 'date', 'requiredAfter'],
   );
   return LegalItem()
-    ..version = json['version'] as int
+    ..version = (json['version'] as num).toInt()
     ..url = json['url'] as String
     ..date = const LocalDateTimeConverter().fromJson(json['date'] as String)
     ..requiredAfter = const LocalDateTimeConverter()
@@ -490,13 +490,13 @@ CatalogReport _$CatalogReportFromJson(Map<String, dynamic> json) {
     ],
   );
   return CatalogReport()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
     ..updatedAt =
         const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
     ..type = $enumDecode(_$CatalogTypeEnumMap, json['type'])
-    ..typeId = json['typeId'] as int
+    ..typeId = (json['typeId'] as num).toInt()
     ..reason = $enumDecode(_$CatalogReportReasonEnumMap, json['reason'])
     ..description = json['description'] as String?
     ..userId = json['userId'] as String?;
@@ -562,7 +562,7 @@ SoulmateSwipe _$SoulmateSwipeFromJson(Map<String, dynamic> json) {
   return SoulmateSwipe()
     ..recommendationId = json['recommendationId'] as String
     ..decision = json['decision'] as String
-    ..decisionMs = json['decisionMs'] as int? ?? -1;
+    ..decisionMs = (json['decisionMs'] as num?)?.toInt() ?? -1;
 }
 
 Map<String, dynamic> _$SoulmateSwipeToJson(SoulmateSwipe instance) =>
@@ -601,13 +601,14 @@ Stream _$StreamFromJson(Map<String, dynamic> json) {
     ..userId = json['userId'] as String
     ..endTime =
         const LocalDateTimeConverter().fromJson(json['endTime'] as String)
-    ..playedMs = json['playedMs'] as int
-    ..trackId = json['trackId'] as int
+    ..playedMs = (json['playedMs'] as num).toInt()
+    ..trackId = (json['trackId'] as num).toInt()
     ..trackName = json['trackName'] as String
-    ..artists =
-        (json['artistIds'] as List<dynamic>).map((e) => e as int).toList()
-    ..albumId = json['albumId'] as int?
-    ..importId = json['importId'] as int?;
+    ..artists = (json['artistIds'] as List<dynamic>)
+        .map((e) => (e as num).toInt())
+        .toList()
+    ..albumId = (json['albumId'] as num?)?.toInt()
+    ..importId = (json['importId'] as num?)?.toInt();
 }
 
 Swipe _$SwipeFromJson(Map<String, dynamic> json) {
@@ -619,8 +620,8 @@ Swipe _$SwipeFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..createdAt = DateTime.parse(json['createdAt'] as String)
     ..decision = json['decision'] as String
-    ..decisionMs = json['decisionMs'] as int? ?? 0
-    ..algorithmId = json['algorithmId'] as int
+    ..decisionMs = (json['decisionMs'] as num?)?.toInt() ?? 0
+    ..algorithmId = (json['algorithmId'] as num).toInt()
     ..track = Track.fromJson(json['track'] as Map<String, dynamic>)
     ..collections = (json['collections'] as List<dynamic>?)
             ?.map((e) =>
@@ -633,7 +634,7 @@ SwipeStats _$SwipeStatsFromJson(Map<String, dynamic> json) => SwipeStats()
   ..decision = SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
   ..decisionMs =
       SwipeDecisionMs.fromJson(json['decisionMs'] as Map<String, dynamic>)
-  ..count = json['count'] as int
+  ..count = (json['count'] as num).toInt()
   ..cardinality =
       SwipeCardinality.fromJson(json['cardinality'] as Map<String, dynamic>);
 
@@ -647,9 +648,9 @@ Map<String, dynamic> _$SwipeStatsToJson(SwipeStats instance) =>
 
 SwipeDecision _$SwipeDecisionFromJson(Map<String, dynamic> json) =>
     SwipeDecision()
-      ..liked = json['liked'] as int? ?? 0
-      ..disliked = json['disliked'] as int? ?? 0
-      ..skips = json['skips'] as int? ?? 0;
+      ..liked = (json['liked'] as num?)?.toInt() ?? 0
+      ..disliked = (json['disliked'] as num?)?.toInt() ?? 0
+      ..skips = (json['skips'] as num?)?.toInt() ?? 0;
 
 Map<String, dynamic> _$SwipeDecisionToJson(SwipeDecision instance) =>
     <String, dynamic>{
@@ -660,10 +661,10 @@ Map<String, dynamic> _$SwipeDecisionToJson(SwipeDecision instance) =>
 
 SwipeDecisionMs _$SwipeDecisionMsFromJson(Map<String, dynamic> json) =>
     SwipeDecisionMs()
-      ..min = json['min'] as int?
-      ..max = json['max'] as int?
+      ..min = (json['min'] as num?)?.toInt()
+      ..max = (json['max'] as num?)?.toInt()
       ..avg = (json['avg'] as num?)?.toDouble()
-      ..sum = json['sum'] as int;
+      ..sum = (json['sum'] as num).toInt();
 
 Map<String, dynamic> _$SwipeDecisionMsToJson(SwipeDecisionMs instance) =>
     <String, dynamic>{
@@ -675,10 +676,10 @@ Map<String, dynamic> _$SwipeDecisionMsToJson(SwipeDecisionMs instance) =>
 
 SwipeCardinality _$SwipeCardinalityFromJson(Map<String, dynamic> json) =>
     SwipeCardinality()
-      ..tracks = json['tracks'] as int?
-      ..artists = json['artists'] as int?
-      ..albums = json['albums'] as int?
-      ..users = json['users'] as int?;
+      ..tracks = (json['tracks'] as num?)?.toInt()
+      ..artists = (json['artists'] as num?)?.toInt()
+      ..albums = (json['albums'] as num?)?.toInt()
+      ..users = (json['users'] as num?)?.toInt();
 
 Map<String, dynamic> _$SwipeCardinalityToJson(SwipeCardinality instance) =>
     <String, dynamic>{
@@ -694,11 +695,11 @@ SwipeCollection _$SwipeCollectionFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name', 'swipeCount', 'createdAt', 'userId'],
   );
   return SwipeCollection()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
     ..description = json['description'] as String?
     ..image = json['image'] as String?
-    ..swipeCount = json['swipeCount'] as int
+    ..swipeCount = (json['swipeCount'] as num).toInt()
     ..public = json['public'] as bool? ?? true
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
@@ -718,7 +719,7 @@ SwipeCollectionSimple _$SwipeCollectionSimpleFromJson(
     requiredKeys: const ['id', 'addedAt'],
   );
   return SwipeCollectionSimple()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..addedAt =
         const LocalDateTimeConverter().fromJson(json['addedAt'] as String);
 }
@@ -743,7 +744,7 @@ SwipeCollectionSpotifySync _$SwipeCollectionSpotifySyncFromJson(
     ],
   );
   return SwipeCollectionSpotifySync()
-    ..collectionId = json['collectionId'] as int
+    ..collectionId = (json['collectionId'] as num).toInt()
     ..spotifyId = json['spotifyId'] as String
     ..syncEnabled = json['syncEnabled'] as bool? ?? false
     ..createdAt =
@@ -809,8 +810,8 @@ DateStats _$DateStatsFromJson(Map<String, dynamic> json) => DateStats()
 
 ExtendedStreamStats _$ExtendedStreamStatsFromJson(Map<String, dynamic> json) =>
     ExtendedStreamStats()
-      ..durationMs = json['durationMs'] as int? ?? 0
-      ..count = json['count'] as int? ?? 0
+      ..durationMs = (json['durationMs'] as num?)?.toInt() ?? 0
+      ..count = (json['count'] as num?)?.toInt() ?? 0
       ..cumulative = json['cumulative'] == null
           ? null
           : CumulativeStreamStats.fromJson(
@@ -821,13 +822,13 @@ ExtendedStreamStats _$ExtendedStreamStatsFromJson(Map<String, dynamic> json) =>
 ExtendedStreamStatsCardinality _$ExtendedStreamStatsCardinalityFromJson(
         Map<String, dynamic> json) =>
     ExtendedStreamStatsCardinality()
-      ..tracks = json['tracks'] as int
-      ..artists = json['artists'] as int
-      ..albums = json['albums'] as int;
+      ..tracks = (json['tracks'] as num).toInt()
+      ..artists = (json['artists'] as num).toInt()
+      ..albums = (json['albums'] as num).toInt();
 
 StreamStats _$StreamStatsFromJson(Map<String, dynamic> json) => StreamStats()
-  ..durationMs = json['durationMs'] as int? ?? 0
-  ..count = json['count'] as int? ?? 0
+  ..durationMs = (json['durationMs'] as num?)?.toInt() ?? 0
+  ..count = (json['count'] as num?)?.toInt() ?? 0
   ..cumulative = json['cumulative'] == null
       ? null
       : CumulativeStreamStats.fromJson(
@@ -836,8 +837,8 @@ StreamStats _$StreamStatsFromJson(Map<String, dynamic> json) => StreamStats()
 CumulativeStreamStats _$CumulativeStreamStatsFromJson(
         Map<String, dynamic> json) =>
     CumulativeStreamStats()
-      ..durationMs = json['durationMs'] as int? ?? 0
-      ..count = json['count'] as int? ?? 0;
+      ..durationMs = (json['durationMs'] as num?)?.toInt() ?? 0
+      ..count = (json['count'] as num?)?.toInt() ?? 0;
 
 StreamStatsWithPrecision _$StreamStatsWithPrecisionFromJson(
         Map<String, dynamic> json) =>
@@ -851,9 +852,9 @@ TopObject _$TopObjectFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position'],
   );
   return TopObject()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
 }
 
@@ -863,8 +864,8 @@ SwipeTopObject _$SwipeTopObjectFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'swipes'],
   );
   return SwipeTopObject()
-    ..position = json['position'] as int
-    ..swipes = json['swipes'] as int
+    ..position = (json['position'] as num).toInt()
+    ..swipes = (json['swipes'] as num).toInt()
     ..decision =
         SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
     ..decisionMs =
@@ -885,11 +886,11 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['id', 'name', 'artists', 'albums'],
   );
   return Track()
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
     ..explicit = json['explicit'] as bool
-    ..durationMs = json['durationMs'] as int
-    ..spotifyPopularity = json['spotifyPopularity'] as int?
+    ..durationMs = (json['durationMs'] as num).toInt()
+    ..spotifyPopularity = (json['spotifyPopularity'] as num?)?.toInt()
     ..spotifyPreview = json['spotifyPreview'] as String?
     ..appleMusicPreview = json['appleMusicPreview'] as String?
     ..artists = (json['artists'] as List<dynamic>)
@@ -921,7 +922,7 @@ CurrentlyStreamingTrack _$CurrentlyStreamingTrackFromJson(
     CurrentlyStreamingTrack()
       ..date = const LocalDateTimeConverter().fromJson(json['date'] as String)
       ..isPlaying = json['isPlaying'] as bool? ?? false
-      ..progressMs = json['progressMs'] as int
+      ..progressMs = (json['progressMs'] as num).toInt()
       ..deviceName = json['deviceName'] as String?
       ..platform = json['platform'] as String
       ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
@@ -945,9 +946,9 @@ TopTrack _$TopTrackFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'track'],
   );
   return TopTrack()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..track = Track.fromJson(json['track'] as Map<String, dynamic>);
 }
@@ -966,8 +967,8 @@ SwipeTopTrack _$SwipeTopTrackFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position', 'swipes', 'track'],
   );
   return SwipeTopTrack()
-    ..position = json['position'] as int
-    ..swipes = json['swipes'] as int
+    ..position = (json['position'] as num).toInt()
+    ..swipes = (json['swipes'] as num).toInt()
     ..decision =
         SwipeDecision.fromJson(json['decision'] as Map<String, dynamic>)
     ..decisionMs =
@@ -1015,8 +1016,9 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..hasImported = json['hasImported'] as bool? ?? false
     ..syncEnabled = json['syncEnabled'] as bool? ?? false
     ..timezone = json['timezone'] as String?
-    ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
-        OrderBySetting.PLATFORM
+    ..orderBy = json['orderBy'] == null
+        ? OrderBySetting.PLATFORM
+        : UserPublic.orderFromJson(json['orderBy'])
     ..privacySettings = json['privacySettings'] == null
         ? null
         : UserPrivacySettings.fromJson(
@@ -1046,9 +1048,10 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..birthday = json['birthday'] == null
         ? null
         : DateTime.parse(json['birthday'] as String)
-    ..acceptedTermsVersion = json['acceptedTermsVersion'] as int? ?? 1
+    ..acceptedTermsVersion =
+        (json['acceptedTermsVersion'] as num?)?.toInt() ?? 1
     ..acceptedPrivacyPolicyVersion =
-        json['acceptedPrivacyPolicyVersion'] as int? ?? 1
+        (json['acceptedPrivacyPolicyVersion'] as num?)?.toInt() ?? 1
     ..disabled = json['disabled'] as bool? ?? false;
 }
 
@@ -1085,18 +1088,18 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'disabled': instance.disabled,
     };
 
+const _$GenderEnumMap = {
+  Gender.MALE: 'MALE',
+  Gender.FEMALE: 'FEMALE',
+  Gender.OTHER: 'OTHER',
+};
+
 const _$OrderBySettingEnumMap = {
   OrderBySetting.PLATFORM: 'PLATFORM',
   OrderBySetting.COUNT: 'COUNT',
   OrderBySetting.TIME: 'TIME',
   OrderBySetting.SPOTIFY: 'SPOTIFY',
   OrderBySetting.APPLEMUSIC: 'APPLEMUSIC',
-};
-
-const _$GenderEnumMap = {
-  Gender.MALE: 'MALE',
-  Gender.FEMALE: 'FEMALE',
-  Gender.OTHER: 'OTHER',
 };
 
 UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
@@ -1130,8 +1133,9 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
     ..hasImported = json['hasImported'] as bool? ?? false
     ..syncEnabled = json['syncEnabled'] as bool? ?? false
     ..timezone = json['timezone'] as String?
-    ..orderBy = $enumDecodeNullable(_$OrderBySettingEnumMap, json['orderBy']) ??
-        OrderBySetting.PLATFORM
+    ..orderBy = json['orderBy'] == null
+        ? OrderBySetting.PLATFORM
+        : UserPublic.orderFromJson(json['orderBy'])
     ..privacySettings = json['privacySettings'] == null
         ? null
         : UserPrivacySettings.fromJson(
@@ -1190,11 +1194,11 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
   );
   return UserImport()
     ..hash = json['hash'] as String
-    ..id = json['id'] as int
+    ..id = (json['id'] as num).toInt()
     ..userId = json['userId'] as String
     ..path = json['path'] as String?
-    ..count = json['count'] as int? ?? 0
-    ..status = json['status'] as int
+    ..count = (json['count'] as num?)?.toInt() ?? 0
+    ..status = (json['status'] as num).toInt()
     ..service =
         $enumDecodeNullable(_$StreamingServiceEnumMap, json['service']) ??
             StreamingService.SPOTIFY
@@ -1202,7 +1206,7 @@ UserImport _$UserImportFromJson(Map<String, dynamic> json) {
         const LocalDateTimeConverter().fromJson(json['updatedAt'] as String)
     ..createdAt =
         const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
-    ..serverId = json['serverId'] as int
+    ..serverId = (json['serverId'] as num).toInt()
     ..error = json['error'] as String?
     ..name = json['name'] as String?;
 }
@@ -1346,7 +1350,7 @@ Map<String, dynamic> _$FriendRequestsToJson(FriendRequests instance) =>
 UserProfileSocialMediaConnection _$UserProfileSocialMediaConnectionFromJson(
         Map<String, dynamic> json) =>
     UserProfileSocialMediaConnection()
-      ..id = json['id'] as int
+      ..id = (json['id'] as num).toInt()
       ..verified = json['verified'] as bool
       ..platformUserId = json['platformUserId'] as String
       ..platformUsername = json['platformUsername'] as String
@@ -1371,7 +1375,7 @@ Map<String, dynamic> _$UserProfileSocialMediaConnectionToJson(
 
 SocialMediaPlatform _$SocialMediaPlatformFromJson(Map<String, dynamic> json) =>
     SocialMediaPlatform()
-      ..id = json['id'] as int?
+      ..id = (json['id'] as num?)?.toInt()
       ..name = json['name'] as String
       ..icon = json['icon'] as String;
 
@@ -1389,9 +1393,9 @@ TopUser _$TopUserFromJson(Map<String, dynamic> json) {
     requiredKeys: const ['position'],
   );
   return TopUser()
-    ..position = json['position'] as int
-    ..streams = json['streams'] as int?
-    ..playedMs = json['playedMs'] as int?
+    ..position = (json['position'] as num).toInt()
+    ..streams = (json['streams'] as num?)?.toInt()
+    ..playedMs = (json['playedMs'] as num?)?.toInt()
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator'])
     ..user = json['user'] == null
         ? null
@@ -1400,16 +1404,16 @@ TopUser _$TopUserFromJson(Map<String, dynamic> json) {
 
 UserSpotifyPlaylist _$UserSpotifyPlaylistFromJson(Map<String, dynamic> json) =>
     UserSpotifyPlaylist()
-      ..id = json['id'] as int
+      ..id = (json['id'] as num).toInt()
       ..userId = json['userId'] as String
       ..createdAt =
           const LocalDateTimeConverter().fromJson(json['createdAt'] as String)
       ..syncedAt =
           const LocalDateTimeConverter().fromJson(json['syncedAt'] as String)
-      ..size = json['size'] as int
+      ..size = (json['size'] as num).toInt()
       ..spotifyId = json['spotifyId'] as String
       ..range = $enumDecodeNullable(_$RangeEnumMap, json['range'])
-      ..rangeInDays = json['rangeInDays'] as int?
+      ..rangeInDays = (json['rangeInDays'] as num?)?.toInt()
       ..error = json['error'] as String?
       ..syncEnabled = json['syncEnabled'] as bool
       ..name = json['name'] as String?
@@ -1534,7 +1538,7 @@ AppleMusicAuth _$AppleMusicAuthFromJson(Map<String, dynamic> json) =>
       ..email = json['email'] as String?
       ..emailVerified = json['emailVerified'] as bool? ?? false
       ..availableYears = (json['availableYears'] as List<dynamic>?)
-              ?.map((e) => e as int)
+              ?.map((e) => (e as num).toInt())
               .toList() ??
           []
       ..appleUserId = json['appleUserId'] as String?
