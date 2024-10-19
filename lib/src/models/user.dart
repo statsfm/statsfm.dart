@@ -118,6 +118,9 @@ class UserPublic extends Object {
   @JsonKey(name: 'recentlyActive', defaultValue: false)
   late bool recentlyActive;
 
+  @JsonKey(name: 'trial')
+  late FreeTrialDetails? trial;
+
   ///Only available on the new multi service api beta
   @JsonKey(name: 'spotifyAuth')
   late SpotifyAuth? spotifyAuth;

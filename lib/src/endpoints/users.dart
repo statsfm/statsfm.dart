@@ -541,8 +541,7 @@ class Users extends EndpointBase {
   }
 
   ///Gets a users Swipefy stats
-  Future<SwipeStats> swipefyStats(
-      String userId) async {
+  Future<SwipeStats> swipefyStats(String userId) async {
     final Map map = (await dio.get(
       '$_path/${Uri.encodeComponent(userId)}/swipefy/stats',
     ))
@@ -612,6 +611,15 @@ class Users extends EndpointBase {
     return SwipeCollection.fromJson(map['item']);
   }
 
+  Future<FreeTrial> activateFreeTrial() async {
+    final Map map = (await dio.post(
+      'v1/trial/activate',
+    ))
+        .data;
+
+    return FreeTrial.fromJson(map['item']);
+  }
+
   ///Updates a Swipefy collection that the current user owns (user id has to be the id of the current user)
   Future<SwipeCollection> swipefyUpdateCollection(
     String userId,
@@ -643,7 +651,8 @@ class Users extends EndpointBase {
   }
 
   ///Remove a Swipefy collection image that the current user owns (user id has to be the id of the current user)
-  Future<bool> swipefyCollectionRemoveImage(String userId, int collectionId) async {
+  Future<bool> swipefyCollectionRemoveImage(
+      String userId, int collectionId) async {
     return (await dio.delete(
                 '$_path/${Uri.encodeComponent(userId)}/swipefy/collections/$collectionId/image'))
             .statusCode ==

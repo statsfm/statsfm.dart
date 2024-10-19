@@ -173,6 +173,71 @@ Map<String, dynamic> _$SwipeTopAlbumToJson(SwipeTopAlbum instance) =>
       'album': instance.album.toJson(),
     };
 
+FreeTrial _$FreeTrialFromJson(Map<String, dynamic> json) => FreeTrial()
+  ..status =
+      $enumDecodeNullable(_$SubscriptionFreeTrialStatusEnumMap, json['status'])
+  ..trial = json['trial'] == null
+      ? null
+      : FreeTrialDetails.fromJson(json['trial'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$FreeTrialToJson(FreeTrial instance) => <String, dynamic>{
+      'status': _$SubscriptionFreeTrialStatusEnumMap[instance.status],
+      'trial': instance.trial,
+    };
+
+const _$SubscriptionFreeTrialStatusEnumMap = {
+  SubscriptionFreeTrialStatus.userNotEligible: 'user-not-eligible',
+  SubscriptionFreeTrialStatus.trialAlreadyEnded: 'trial-already-ended',
+  SubscriptionFreeTrialStatus.trialAlreadyActivated: 'trial-already-activated',
+  SubscriptionFreeTrialStatus.trialSuccessfullyActivated:
+      'trial-successfully-activated',
+};
+
+FreeTrialDetails _$FreeTrialDetailsFromJson(Map<String, dynamic> json) =>
+    FreeTrialDetails()
+      ..id = (json['id'] as num?)?.toInt()
+      ..userId = json['userId'] as String?
+      ..createdAt = _$JsonConverterFromJson<String, DateTime>(
+          json['createdAt'], const LocalDateTimeConverter().fromJson)
+      ..startedAt = _$JsonConverterFromJson<String, DateTime>(
+          json['startedAt'], const LocalDateTimeConverter().fromJson)
+      ..updatedAt = _$JsonConverterFromJson<String, DateTime>(
+          json['updatedAt'], const LocalDateTimeConverter().fromJson)
+      ..durationMs = (json['durationMs'] as num?)?.toDouble()
+      ..endsAt = _$JsonConverterFromJson<String, DateTime>(
+          json['endsAt'], const LocalDateTimeConverter().fromJson)
+      ..endedAt = _$JsonConverterFromJson<String, DateTime>(
+          json['endedAt'], const LocalDateTimeConverter().fromJson);
+
+Map<String, dynamic> _$FreeTrialDetailsToJson(FreeTrialDetails instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'createdAt': _$JsonConverterToJson<String, DateTime>(
+          instance.createdAt, const LocalDateTimeConverter().toJson),
+      'startedAt': _$JsonConverterToJson<String, DateTime>(
+          instance.startedAt, const LocalDateTimeConverter().toJson),
+      'updatedAt': _$JsonConverterToJson<String, DateTime>(
+          instance.updatedAt, const LocalDateTimeConverter().toJson),
+      'durationMs': instance.durationMs,
+      'endsAt': _$JsonConverterToJson<String, DateTime>(
+          instance.endsAt, const LocalDateTimeConverter().toJson),
+      'endedAt': _$JsonConverterToJson<String, DateTime>(
+          instance.endedAt, const LocalDateTimeConverter().toJson),
+    };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);
+
 Artist _$ArtistFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
@@ -294,12 +359,6 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
   ..to = json['to'] == null
       ? null
       : UserPublic.fromJson(json['to'] as Map<String, dynamic>);
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);
 
 ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) {
   $checkKeys(
@@ -1035,6 +1094,9 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
     ..recentlyActive = json['recentlyActive'] as bool? ?? false
+    ..trial = json['trial'] == null
+        ? null
+        : FreeTrialDetails.fromJson(json['trial'] as Map<String, dynamic>)
     ..spotifyAuth = json['spotifyAuth'] == null
         ? null
         : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
@@ -1077,6 +1139,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
       'recentlyActive': instance.recentlyActive,
+      'trial': instance.trial,
       'spotifyAuth': instance.spotifyAuth,
       'appleMusicAuth': instance.appleMusicAuth,
       'email': instance.email,
@@ -1152,6 +1215,9 @@ UserPublic _$UserPublicFromJson(Map<String, dynamic> json) {
         : UserBan.fromJson(json['userBan'] as Map<String, dynamic>)
     ..quarantined = json['quarantined'] as bool? ?? false
     ..recentlyActive = json['recentlyActive'] as bool? ?? false
+    ..trial = json['trial'] == null
+        ? null
+        : FreeTrialDetails.fromJson(json['trial'] as Map<String, dynamic>)
     ..spotifyAuth = json['spotifyAuth'] == null
         ? null
         : SpotifyAuth.fromJson(json['spotifyAuth'] as Map<String, dynamic>)
@@ -1183,6 +1249,7 @@ Map<String, dynamic> _$UserPublicToJson(UserPublic instance) =>
       'userBan': instance.userBan,
       'quarantined': instance.quarantined,
       'recentlyActive': instance.recentlyActive,
+      'trial': instance.trial,
       'spotifyAuth': instance.spotifyAuth,
       'appleMusicAuth': instance.appleMusicAuth,
     };
@@ -1473,12 +1540,6 @@ Map<String, dynamic> _$UserDeviceToJson(UserDevice instance) =>
       'notifications': instance.notifications,
       'fcmToken': instance.fcmToken,
     };
-
-Json? _$JsonConverterToJson<Json, Value>(
-  Value? value,
-  Json? Function(Value value) toJson,
-) =>
-    value == null ? null : toJson(value);
 
 UserDeviceNotifications _$UserDeviceNotificationsFromJson(
         Map<String, dynamic> json) =>

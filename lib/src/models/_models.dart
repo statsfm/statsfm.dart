@@ -6,6 +6,7 @@ import 'package:statsfm/statsfm.dart';
 
 part '_models.g.dart';
 part 'album.dart';
+part 'free_trial.dart';
 part 'artist.dart';
 part 'audio_feature.dart';
 part 'chat.dart';
