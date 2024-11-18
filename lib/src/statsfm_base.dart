@@ -106,7 +106,7 @@ abstract class StatsfmApiBase {
 
     dio.interceptors.addAll(
       [
-        DioCacheInterceptor(options: _cacheOptions),
+        // DioCacheInterceptor(options: _cacheOptions),
         RetryInterceptor(
           dio: dio,
           retries: 3, // retry count
