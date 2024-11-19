@@ -76,11 +76,10 @@ abstract class StatsfmApiBase {
     await getApplicationCacheDirectory().then(
       (value) async {
         _cacheOptions = CacheOptions(
-          store: null,
-          // DbCacheStore(
-          //   databasePath: value.path,
-          //   databaseName: 'statsfm_sdk_cache',
-          // ),
+          store: DbCacheStore(
+            databasePath: value.path,
+            databaseName: 'statsfm_sdk_cache',
+          ),
           policy: CachePolicy.request,
           hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
           maxStale: const Duration(hours: 2),
@@ -106,7 +105,7 @@ abstract class StatsfmApiBase {
 
     dio.interceptors.addAll(
       [
-        // DioCacheInterceptor(options: _cacheOptions),
+        DioCacheInterceptor(options: _cacheOptions),
         RetryInterceptor(
           dio: dio,
           retries: 3, // retry count
@@ -185,9 +184,7 @@ abstract class StatsfmApiBase {
 
   void _printMessage(String string) {
     if (_talker != null) {
-      _talker!.info(
-        string
-      );
+      _talker!.info(string);
     }
   }
 }
