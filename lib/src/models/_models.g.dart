@@ -946,6 +946,13 @@ TopObject _$TopObjectFromJson(Map<String, dynamic> json) {
     ..indicator = $enumDecodeNullable(_$IndicatorEnumMap, json['indicator']);
 }
 
+Map<String, dynamic> _$TopObjectToJson(TopObject instance) => <String, dynamic>{
+      'position': instance.position,
+      'streams': instance.streams,
+      'playedMs': instance.playedMs,
+      'indicator': _$IndicatorEnumMap[instance.indicator],
+    };
+
 SwipeTopObject _$SwipeTopObjectFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,

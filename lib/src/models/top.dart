@@ -17,12 +17,14 @@ enum Indicator {
   NONE,
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class TopObject extends Object {
   TopObject();
 
   factory TopObject.fromJson(Map<String, dynamic> json) =>
       _$TopObjectFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TopObjectToJson(this);
 
   @JsonKey(name: 'position', required: true)
   late int position;
