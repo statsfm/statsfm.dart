@@ -7,7 +7,8 @@ class Genre extends GenreSimple {
   factory Genre.fromJson(Map<String, dynamic> json) => _$GenreFromJson(json);
 
   @JsonKey(name: 'tag')
-  late String? tag; //TODO: make this non-nullable once added to the production api.
+  late String?
+      tag; //TODO: make this non-nullable once added to the production api.
 
   @JsonKey(name: 'artists')
   late List<Artist> artists;
@@ -19,23 +20,25 @@ class Genre extends GenreSimple {
   late List<GenreSimple> sub;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class GenreSimple extends Object {
   GenreSimple();
 
   factory GenreSimple.fromJson(Map<String, dynamic> json) =>
       _$GenreSimpleFromJson(json);
+  Map<String, dynamic> toJson() => _$GenreSimpleToJson(this);
 
   @JsonKey(name: 'tag')
   late String? tag;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(explicitToJson: true)
 class TopGenre extends TopObject {
   TopGenre();
 
   factory TopGenre.fromJson(Map<String, dynamic> json) =>
       _$TopGenreFromJson(json);
+  Map<String, dynamic> toJson() => _$TopGenreToJson(this);
 
   @JsonKey(name: 'genre')
   late GenreSimple genre;
@@ -43,6 +46,6 @@ class TopGenre extends TopObject {
   @JsonKey(name: 'artistCount')
   late int? artistCount;
 
-  @JsonKey(name: 'previewArtists', defaultValue: <TopArtist> [])
+  @JsonKey(name: 'previewArtists', defaultValue: <TopArtist>[])
   late List<TopArtist> previewArtists;
 }

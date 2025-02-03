@@ -65,12 +65,13 @@ class ExtendedStreamStatsCardinality extends Object {
   late int albums;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class StreamStats extends Object {
   StreamStats();
 
   factory StreamStats.fromJson(Map<String, dynamic> json) =>
       _$StreamStatsFromJson(json);
+  Map<String, dynamic> toJson() => _$StreamStatsToJson(this);
 
   @JsonKey(name: 'durationMs', defaultValue: 0)
   late int durationMs;
@@ -84,7 +85,7 @@ class StreamStats extends Object {
   late CumulativeStreamStats? cumulative;
 }
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(createToJson: true)
 class CumulativeStreamStats extends Object {
   CumulativeStreamStats();
 

@@ -495,6 +495,11 @@ Genre _$GenreFromJson(Map<String, dynamic> json) => Genre()
 GenreSimple _$GenreSimpleFromJson(Map<String, dynamic> json) =>
     GenreSimple()..tag = json['tag'] as String?;
 
+Map<String, dynamic> _$GenreSimpleToJson(GenreSimple instance) =>
+    <String, dynamic>{
+      'tag': instance.tag,
+    };
+
 TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
@@ -512,6 +517,16 @@ TopGenre _$TopGenreFromJson(Map<String, dynamic> json) {
             .toList() ??
         [];
 }
+
+Map<String, dynamic> _$TopGenreToJson(TopGenre instance) => <String, dynamic>{
+      'position': instance.position,
+      'streams': instance.streams,
+      'playedMs': instance.playedMs,
+      'indicator': _$IndicatorEnumMap[instance.indicator],
+      'genre': instance.genre.toJson(),
+      'artistCount': instance.artistCount,
+      'previewArtists': instance.previewArtists.map((e) => e.toJson()).toList(),
+    };
 
 LegalItems _$LegalItemsFromJson(Map<String, dynamic> json) {
   $checkKeys(
@@ -893,11 +908,25 @@ StreamStats _$StreamStatsFromJson(Map<String, dynamic> json) => StreamStats()
       : CumulativeStreamStats.fromJson(
           json['cumulative'] as Map<String, dynamic>);
 
+Map<String, dynamic> _$StreamStatsToJson(StreamStats instance) =>
+    <String, dynamic>{
+      'durationMs': instance.durationMs,
+      'count': instance.count,
+      'cumulative': instance.cumulative,
+    };
+
 CumulativeStreamStats _$CumulativeStreamStatsFromJson(
         Map<String, dynamic> json) =>
     CumulativeStreamStats()
       ..durationMs = (json['durationMs'] as num?)?.toInt() ?? 0
       ..count = (json['count'] as num?)?.toInt() ?? 0;
+
+Map<String, dynamic> _$CumulativeStreamStatsToJson(
+        CumulativeStreamStats instance) =>
+    <String, dynamic>{
+      'durationMs': instance.durationMs,
+      'count': instance.count,
+    };
 
 StreamStatsWithPrecision _$StreamStatsWithPrecisionFromJson(
         Map<String, dynamic> json) =>
