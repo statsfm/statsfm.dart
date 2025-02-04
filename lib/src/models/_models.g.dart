@@ -269,17 +269,19 @@ Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
 ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'name'],
+    requiredKeys: const ['id', 'name', 'image'],
   );
   return ArtistSimple()
     ..id = (json['id'] as num).toInt()
-    ..name = json['name'] as String;
+    ..name = json['name'] as String
+    ..image = json['image'] as String;
 }
 
 Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'image': instance.image,
     };
 
 TopArtist _$TopArtistFromJson(Map<String, dynamic> json) {

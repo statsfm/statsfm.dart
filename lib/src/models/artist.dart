@@ -37,6 +37,9 @@ class ArtistSimple extends Object {
 
   @JsonKey(name: 'name', required: true)
   late String name;
+
+  @JsonKey(name: 'image', required: true)
+  late String image;
 }
 
 @JsonSerializable(explicitToJson: true)
