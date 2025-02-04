@@ -10,9 +10,6 @@ class Artist extends ArtistSimple {
   @JsonKey(name: 'followers', defaultValue: 0)
   late int followers;
 
-  @JsonKey(name: 'image')
-  late String? image;
-
   @JsonKey(name: 'spotifyPopularity', defaultValue: 0)
   late int spotifyPopularity;
 
