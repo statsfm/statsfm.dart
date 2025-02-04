@@ -241,12 +241,12 @@ Json? _$JsonConverterToJson<Json, Value>(
 Artist _$ArtistFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'name', 'image'],
+    requiredKeys: const ['id', 'name'],
   );
   return Artist()
     ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
-    ..image = json['image'] as String
+    ..image = json['image'] as String?
     ..followers = (json['followers'] as num?)?.toInt() ?? 0
     ..spotifyPopularity = (json['spotifyPopularity'] as num?)?.toInt() ?? 0
     ..genres =
@@ -269,12 +269,12 @@ Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
 ArtistSimple _$ArtistSimpleFromJson(Map<String, dynamic> json) {
   $checkKeys(
     json,
-    requiredKeys: const ['id', 'name', 'image'],
+    requiredKeys: const ['id', 'name'],
   );
   return ArtistSimple()
     ..id = (json['id'] as num).toInt()
     ..name = json['name'] as String
-    ..image = json['image'] as String;
+    ..image = json['image'] as String?;
 }
 
 Map<String, dynamic> _$ArtistSimpleToJson(ArtistSimple instance) =>
