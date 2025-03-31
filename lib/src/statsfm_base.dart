@@ -2,15 +2,21 @@ part of statsfm;
 
 abstract class StatsfmApiBase {
   static String _baseUrl = "https://api.stats.fm/api";
+  static Dio? _staticDio;
+  static bool _isInitialized = false;
 
   late String _accessToken;
 
-  Dio _dio = Dio(
-    BaseOptions(
-      receiveTimeout: Duration(seconds: 50),
-    ),
-  );
-  Dio get dio => _dio;
+  Dio get dio {
+    if (_staticDio == null) {
+      _staticDio = Dio(
+        BaseOptions(
+          receiveTimeout: Duration(seconds: 50),
+        ),
+      );
+    }
+    return _staticDio!;
+  }
 
   late Artists _artists;
   Artists get artists => _artists;
@@ -67,91 +73,101 @@ abstract class StatsfmApiBase {
 
   Future<void> init() async {
     _printMessage('Setting up stats.fm SDK');
-    _dio.options.baseUrl = _baseUrl;
-    _dio.options.headers = {
+    if (_staticDio == null) {
+      _staticDio = Dio(
+        BaseOptions(
+          receiveTimeout: Duration(seconds: 50),
+        ),
+      );
+    }
+    _staticDio!.options.baseUrl = _baseUrl;
+    _staticDio!.options.headers = {
       'Authorization': _accessToken,
     };
 
-    // Global options
-    await getApplicationCacheDirectory().then(
-      (value) async {
-        _cacheOptions = CacheOptions(
-          store: DbCacheStore(
-            databasePath: value.path,
-            databaseName: 'statsfm_sdk_cache',
-          ),
-          policy: CachePolicy.request,
-          hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
-          maxStale: const Duration(hours: 2),
-          priority: CachePriority.normal,
-          keyBuilder: (RequestOptions request) {
-            Map<String, List<String>> queryParams =
-                request.uri.queryParametersAll;
-
-            // Sort the query parameters alphabetically
-            var sortedParams =
-                SplayTreeMap<String, List<String>>.from(queryParams);
-
-            // Reconstruct the URI with sorted query parameters
-            Uri sortedUri = request.uri.replace(queryParameters: sortedParams);
-            return sortedUri.toString();
-          },
-          allowPostMethod: false,
-        );
-      },
-    );
-
-    final myStatuses = {400, 409, 522, 523, 524, 525, 527, 598, 599};
-
-    dio.interceptors.addAll(
-      [
-        DioCacheInterceptor(options: _cacheOptions),
-        RetryInterceptor(
-          dio: dio,
-          retries: 3, // retry count
-          retryEvaluator: DefaultRetryEvaluator(myStatuses).evaluate,
-          retryDelays: const [
-            Duration(seconds: 1), // wait 1 sec before first retry
-            Duration(seconds: 2), // wait 2 sec before second retry
-            Duration(seconds: 3), // wait 3 sec before third retry
-          ],
-        ),
-        //Setup talker
-        if (_talker != null)
-          TalkerDioLogger(
-            talker: _talker,
-            settings: const TalkerDioLoggerSettings(
-              printRequestHeaders: false,
-              printResponseHeaders: false,
-              printResponseMessage: true,
-              printRequestData: false,
-              printResponseData: false,
+    if (!_isInitialized) {
+      // Global options
+      await getApplicationCacheDirectory().then(
+        (value) async {
+          _cacheOptions = CacheOptions(
+            store: DbCacheStore(
+              databasePath: value.path,
+              databaseName: 'statsfm_sdk_cache',
             ),
+            policy: CachePolicy.request,
+            hitCacheOnErrorExcept: [400, 401, 403, 500, 526],
+            maxStale: const Duration(hours: 2),
+            priority: CachePriority.normal,
+            keyBuilder: (RequestOptions request) {
+              Map<String, List<String>> queryParams =
+                  request.uri.queryParametersAll;
+
+              // Sort the query parameters alphabetically
+              var sortedParams =
+                  SplayTreeMap<String, List<String>>.from(queryParams);
+
+              // Reconstruct the URI with sorted query parameters
+              Uri sortedUri = request.uri.replace(queryParameters: sortedParams);
+              return sortedUri.toString();
+            },
+            allowPostMethod: false,
+          );
+        },
+      );
+
+      final myStatuses = {400, 409, 522, 523, 524, 525, 527, 598, 599};
+
+      _staticDio!.interceptors.addAll(
+        [
+          DioCacheInterceptor(options: _cacheOptions),
+          RetryInterceptor(
+            dio: _staticDio!,
+            retries: 3, // retry count
+            retryEvaluator: DefaultRetryEvaluator(myStatuses).evaluate,
+            retryDelays: const [
+              Duration(seconds: 1), // wait 1 sec before first retry
+              Duration(seconds: 2), // wait 2 sec before second retry
+              Duration(seconds: 3), // wait 3 sec before third retry
+            ],
           ),
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            options.queryParameters = Map<String, dynamic>.from(
-                SplayTreeMap.from(options.queryParameters));
-            return handler.next(options);
-          },
-          onResponse: (response, handler) {
-            return handler.next(response);
-          },
-          onError: (err, handler) {
-            if (err.response?.data is Map) {
-              throw StatsfmException(
-                err.response!.data['status'] ?? 500,
-                err.response!.data['message'] ?? err.response!.data.toString(),
-              );
-            } else if (err.response != null) {
-              throw StatsfmException(err.response!.statusCode ?? 400,
-                  err.response!.data.toString());
-            }
-            handler.next(err);
-          },
-        ),
-      ],
-    );
+          //Setup talker
+          if (_talker != null)
+            TalkerDioLogger(
+              talker: _talker,
+              settings: const TalkerDioLoggerSettings(
+                printRequestHeaders: false,
+                printResponseHeaders: false,
+                printResponseMessage: true,
+                printRequestData: false,
+                printResponseData: false,
+              ),
+            ),
+          InterceptorsWrapper(
+            onRequest: (options, handler) {
+              options.queryParameters = Map<String, dynamic>.from(
+                  SplayTreeMap.from(options.queryParameters));
+              return handler.next(options);
+            },
+            onResponse: (response, handler) {
+              return handler.next(response);
+            },
+            onError: (err, handler) {
+              if (err.response?.data is Map) {
+                throw StatsfmException(
+                  err.response!.data['status'] ?? 500,
+                  err.response!.data['message'] ?? err.response!.data.toString(),
+                );
+              } else if (err.response != null) {
+                throw StatsfmException(err.response!.statusCode ?? 400,
+                    err.response!.data.toString());
+              }
+              handler.next(err);
+            },
+          ),
+        ],
+      );
+      _isInitialized = true;
+    }
 
     _artists = Artists(this);
     _auth = Auth(this);
@@ -175,6 +191,8 @@ abstract class StatsfmApiBase {
     try {
       if (_cacheOptions.store != null) {
         _cacheOptions.store!.close();
+        _staticDio = null;
+        _isInitialized = false;
         _printMessage('Disposed stats.fm SDK');
       }
     } catch (e) {
