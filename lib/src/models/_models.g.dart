@@ -1152,7 +1152,8 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
         (json['acceptedTermsVersion'] as num?)?.toInt() ?? 1
     ..acceptedPrivacyPolicyVersion =
         (json['acceptedPrivacyPolicyVersion'] as num?)?.toInt() ?? 1
-    ..disabled = json['disabled'] as bool? ?? false;
+    ..disabled = json['disabled'] as bool? ?? false
+    ..weeklyRecapEnabled = json['weeklyRecapEnabled'] as bool;
 }
 
 Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
@@ -1187,6 +1188,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'acceptedTermsVersion': instance.acceptedTermsVersion,
       'acceptedPrivacyPolicyVersion': instance.acceptedPrivacyPolicyVersion,
       'disabled': instance.disabled,
+      'weeklyRecapEnabled': instance.weeklyRecapEnabled,
     };
 
 const _$GenderEnumMap = {

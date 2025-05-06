@@ -34,6 +34,9 @@ class UserPrivate extends UserPublic {
 
   @JsonKey(name: 'disabled', defaultValue: false)
   late bool disabled;
+
+  @JsonKey(name: 'weeklyRecapEnabled')
+  late bool weeklyRecapEnabled;
 }
 
 @JsonSerializable(createToJson: true)
