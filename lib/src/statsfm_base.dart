@@ -83,6 +83,7 @@ abstract class StatsfmApiBase {
     _staticDio!.options.baseUrl = _baseUrl;
     _staticDio!.options.headers = {
       'Authorization': _accessToken,
+      'X-App-Id': 'fm.stats.applemusic',
     };
 
     if (!_isInitialized) {
@@ -107,7 +108,8 @@ abstract class StatsfmApiBase {
                   SplayTreeMap<String, List<String>>.from(queryParams);
 
               // Reconstruct the URI with sorted query parameters
-              Uri sortedUri = request.uri.replace(queryParameters: sortedParams);
+              Uri sortedUri =
+                  request.uri.replace(queryParameters: sortedParams);
               return sortedUri.toString();
             },
             allowPostMethod: false,
@@ -155,7 +157,8 @@ abstract class StatsfmApiBase {
               if (err.response?.data is Map) {
                 throw StatsfmException(
                   err.response!.data['status'] ?? 500,
-                  err.response!.data['message'] ?? err.response!.data.toString(),
+                  err.response!.data['message'] ??
+                      err.response!.data.toString(),
                 );
               } else if (err.response != null) {
                 throw StatsfmException(err.response!.statusCode ?? 400,
