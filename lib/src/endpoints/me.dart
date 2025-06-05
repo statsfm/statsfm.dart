@@ -27,7 +27,7 @@ class Me extends EndpointBase {
   }
 
   Future<void> updateMeReferralLink(String referralLink) async {
-    await dio.put(
+    await dio.post(
       '$_path/referral',
       data: {'referralURL': referralLink},
     );
