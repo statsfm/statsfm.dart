@@ -37,6 +37,9 @@ class UserPrivate extends UserPublic {
 
   @JsonKey(name: 'weeklyRecapEnabled')
   late bool weeklyRecapEnabled;
+
+  @JsonKey(name: 'referralURL')
+  late String? referralURL;
 }
 
 @JsonSerializable(createToJson: true)

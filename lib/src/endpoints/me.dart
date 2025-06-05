@@ -26,6 +26,13 @@ class Me extends EndpointBase {
     return UserPrivate.fromJson(map['item']);
   }
 
+  Future<void> updateMeReferralLink(String referralLink) async {
+    await dio.put(
+      '$_path/referral',
+      data: {'referralURL': referralLink},
+    );
+  }
+
   Future<void> deleteAccount() async {
     final response = await dio.delete('$_path');
     if (response.statusCode != 200 && response.statusCode != 304) {
