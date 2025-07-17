@@ -40,6 +40,9 @@ class UserPrivate extends UserPublic {
 
   @JsonKey(name: 'referralURL')
   late String? referralURL;
+
+  @JsonKey(name: 'referralImage')
+  late String? referralImage;
 }
 
 @JsonSerializable(createToJson: true)
