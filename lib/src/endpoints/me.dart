@@ -121,21 +121,27 @@ class Me extends EndpointBase {
     return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
   }
 
-  Future<UserSpotifyPlaylist> createSpotifyPlaylist(
-    int size,
-    OrderBySetting orderBy,
-    bool syncEnabled,
-    Range? range,
-    int? rangeInDays,
-    DateTime? before,
-    DateTime? after,
-  ) async {
+  Future<UserSpotifyPlaylist> createPlaylist(
+      int size,
+      OrderBySetting orderBy,
+      bool syncEnabled,
+      Range? range,
+      int? rangeInDays,
+      DateTime? before,
+      DateTime? after,
+      {bool userHasSpotify = true}) async {
+    final formatedOrderBy = !userHasSpotify &&
+            (orderBy == OrderBySetting.PLATFORM ||
+                orderBy == OrderBySetting.SPOTIFY)
+        ? OrderBySetting.APPLEMUSIC
+        : orderBy;
     final Map map = (await dio.post(
-      '$_path/playlists/spotify',
+      '$_path/playlists/${userHasSpotify ? 'spotify' : 'applemusic'}',
       data: {
         'size': size,
-        'orderBy':
-            orderBy.toString().substring(orderBy.toString().indexOf('.') + 1),
+        'orderBy': formatedOrderBy
+            .toString()
+            .substring(orderBy.toString().indexOf('.') + 1),
         'syncEnabled': syncEnabled,
         'range': range?.toString().substring(range.toString().indexOf('.') + 1),
         'rangeInDays': rangeInDays,
