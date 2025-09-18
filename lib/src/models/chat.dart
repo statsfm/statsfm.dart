@@ -35,4 +35,10 @@ class ChatMessage extends Object {
 
   @JsonKey(name: 'to')
   late UserPublic? to;
+
+  @JsonKey(name: 'hasUnreadMessages')
+  late bool? hasUnreadMessages;
+
+  @JsonKey(name: 'earliestUnseenMessageId')
+  late int? earliestUnseenMessageId;
 }

@@ -3,6 +3,9 @@ part of statsfm.models;
 class QueryOptions {
   final int? limit;
   final int? offset;
+  final int? before;
+  final int? after;
+
   final DateTimeRange? range;
   
   ///Use Range object for Spotify today, 4 weeks, 6 months, and lifetime
@@ -18,6 +21,8 @@ class QueryOptions {
     this.rangeString,
     this.orderBy,
     this.order,
+    this.before,
+    this.after,
   });
 
   Map<String, dynamic> toQuery() {
@@ -25,7 +30,7 @@ class QueryOptions {
     if (limit is int && limit! > 0) {
       query['limit'] = limit;
     }
-    if (offset is int && offset! > 0) {
+    if (offset is int && offset! >= 0) {
       query['offset'] = offset;
     }
 
