@@ -213,9 +213,12 @@ class Me extends EndpointBase {
       },
     ))
         .data;
-
     var messagesMap = map['items'] as Iterable<dynamic>;
     return messagesMap.map((m) => ChatMessage.fromJson(m)).toList();
+  }
+
+  Future<void> seenMessage(int messageId) async {
+    await dio.post('$_path/chats/private/messages/$messageId/seen');
   }
 
   Future<List<ChatMessage>> chatMessages(

@@ -360,7 +360,10 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => ChatMessage()
   ..toId = json['toId'] as String
   ..to = json['to'] == null
       ? null
-      : UserPublic.fromJson(json['to'] as Map<String, dynamic>);
+      : UserPublic.fromJson(json['to'] as Map<String, dynamic>)
+  ..hasUnreadMessages = json['hasUnreadMessages'] as bool?
+  ..earliestUnseenMessageId =
+      (json['earliestUnseenMessageId'] as num?)?.toInt();
 
 ArtistRecord _$ArtistRecordFromJson(Map<String, dynamic> json) {
   $checkKeys(
