@@ -1,8 +1,8 @@
 library statsfm.models;
 
-import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:statsfm/statsfm.dart';
+import 'package:hive_ce/hive.dart';
 
 part '_models.g.dart';
 part 'album.dart';
