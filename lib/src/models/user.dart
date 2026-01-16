@@ -99,6 +99,9 @@ class UserPublic extends Object {
   @JsonKey(name: 'timezone')
   late String? timezone;
 
+  @JsonKey(name: 'plusSinceAt')
+  late DateTime? plusSinceAt;
+
   @JsonKey(
     name: 'orderBy',
     defaultValue: OrderBySetting.PLATFORM,
