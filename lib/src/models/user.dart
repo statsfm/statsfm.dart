@@ -460,7 +460,10 @@ class UserSpotifyPlaylist extends Object {
   late int size;
 
   @JsonKey(name: 'spotifyId')
-  late String spotifyId;
+  late String? spotifyId;
+
+  @JsonKey(name: 'appleMusicId')
+  late String? appleMusicId;
 
   @JsonKey(name: 'range')
   late Range? range;
