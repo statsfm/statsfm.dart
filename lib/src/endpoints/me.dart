@@ -114,8 +114,8 @@ class Me extends EndpointBase {
     await dio.delete('$_path/imports/$id');
   }
 
-  Future<List<UserSpotifyPlaylist>> spotifyPlaylists() async {
-    final Map map = (await dio.get('$_path/playlists/spotify')).data;
+  Future<List<UserSpotifyPlaylist>> playlists(StreamingService service) async {
+    final Map map = (await dio.get('$_path/playlists/${service.name.toLowerCase()}')).data;
 
     var importsMap = map['items'] as Iterable<dynamic>;
     return importsMap.map((m) => UserSpotifyPlaylist.fromJson(m)).toList();
@@ -154,11 +154,12 @@ class Me extends EndpointBase {
     return UserSpotifyPlaylist.fromJson(map['item']);
   }
 
-  Future<UserSpotifyPlaylist> updateSpotifyPlaylist(
+  Future<UserSpotifyPlaylist> updatePlaylist(
     UserSpotifyPlaylist playlist,
   ) async {
+    final service = playlist.spotifyId != null ? StreamingService.SPOTIFY : StreamingService.APPLEMUSIC;
     final Map map = (await dio.put(
-      '$_path/playlists/spotify/${playlist.id}',
+      '$_path/playlists/${service.name.toLowerCase()}/${playlist.id}',
       data: playlist.toJson(),
     ))
         .data;
@@ -166,10 +167,11 @@ class Me extends EndpointBase {
     return UserSpotifyPlaylist.fromJson(map['item']);
   }
 
-  Future<void> deleteSpotifyPlaylist(
+  Future<void> deletePlaylist(
     int id,
+    StreamingService service,
   ) async {
-    await dio.delete('$_path/playlists/spotify/${id}');
+    await dio.delete('$_path/playlists/${service.name.toLowerCase()}/${id}');
   }
 
   Future<List<UserDevice>> devices() async {

@@ -1635,7 +1635,8 @@ UserSpotifyPlaylist _$UserSpotifyPlaylistFromJson(Map<String, dynamic> json) =>
         json['syncedAt'] as String,
       )
       ..size = (json['size'] as num).toInt()
-      ..spotifyId = json['spotifyId'] as String
+      ..spotifyId = json['spotifyId'] as String?
+      ..appleMusicId = json['appleMusicId'] as String?
       ..range = $enumDecodeNullable(_$RangeEnumMap, json['range'])
       ..rangeInDays = (json['rangeInDays'] as num?)?.toInt()
       ..error = json['error'] as String?
@@ -1652,6 +1653,7 @@ Map<String, dynamic> _$UserSpotifyPlaylistToJson(
   'syncedAt': const LocalDateTimeConverter().toJson(instance.syncedAt),
   'size': instance.size,
   'spotifyId': instance.spotifyId,
+  'appleMusicId': instance.appleMusicId,
   'range': _$RangeEnumMap[instance.range],
   'rangeInDays': instance.rangeInDays,
   'error': instance.error,
