@@ -43,6 +43,9 @@ class UserPrivate extends UserPublic {
 
   @JsonKey(name: 'referralImage')
   late String? referralImage;
+
+  @JsonKey(name: 'recaps')
+  late UserRecaps? recaps;
 }
 
 @JsonSerializable(createToJson: true)
@@ -678,4 +681,39 @@ enum Gender {
 
   @JsonValue("OTHER")
   OTHER
+}
+
+@JsonSerializable(createToJson: true)
+class RecapAvailability extends Object {
+  RecapAvailability();
+
+  Map<String, dynamic> toJson() => _$RecapAvailabilityToJson(this);
+
+  factory RecapAvailability.fromJson(Map<String, dynamic> json) =>
+      _$RecapAvailabilityFromJson(json);
+
+  @JsonKey(name: 'isAvailable', defaultValue: false)
+  late bool isAvailable;
+}
+
+@JsonSerializable(createToJson: true)
+class UserRecaps extends Object {
+  UserRecaps();
+
+  Map<String, dynamic> toJson() => _$UserRecapsToJson(this);
+
+  factory UserRecaps.fromJson(Map<String, dynamic> json) =>
+      _$UserRecapsFromJson(json);
+
+  @JsonKey(name: 'weekly')
+  late RecapAvailability weekly;
+
+  @JsonKey(name: 'monthly')
+  late RecapAvailability monthly;
+
+  @JsonKey(name: 'seasonal')
+  late RecapAvailability seasonal;
+
+  @JsonKey(name: 'yearly')
+  late RecapAvailability yearly;
 }
