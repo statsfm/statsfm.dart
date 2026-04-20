@@ -1245,7 +1245,11 @@ UserPrivate _$UserPrivateFromJson(Map<String, dynamic> json) {
     ..disabled = json['disabled'] as bool? ?? false
     ..weeklyRecapEnabled = json['weeklyRecapEnabled'] as bool
     ..referralURL = json['referralURL'] as String?
-    ..referralImage = json['referralImage'] as String?;
+    ..referralImage = json['referralImage'] as String?
+    ..recaps =
+        json['recaps'] == null
+            ? null
+            : UserRecaps.fromJson(json['recaps'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
@@ -1284,6 +1288,7 @@ Map<String, dynamic> _$UserPrivateToJson(UserPrivate instance) =>
       'weeklyRecapEnabled': instance.weeklyRecapEnabled,
       'referralURL': instance.referralURL,
       'referralImage': instance.referralImage,
+      'recaps': instance.recaps,
     };
 
 const _$GenderEnumMap = {
@@ -1804,3 +1809,32 @@ Map<String, dynamic> _$UserBanToJson(UserBan instance) => <String, dynamic>{
   'createdAt': instance.createdAt.toIso8601String(),
   'active': instance.active,
 };
+
+RecapAvailability _$RecapAvailabilityFromJson(Map<String, dynamic> json) =>
+    RecapAvailability()..isAvailable = json['isAvailable'] as bool? ?? false;
+
+Map<String, dynamic> _$RecapAvailabilityToJson(RecapAvailability instance) =>
+    <String, dynamic>{'isAvailable': instance.isAvailable};
+
+UserRecaps _$UserRecapsFromJson(Map<String, dynamic> json) =>
+    UserRecaps()
+      ..weekly = RecapAvailability.fromJson(
+        json['weekly'] as Map<String, dynamic>,
+      )
+      ..monthly = RecapAvailability.fromJson(
+        json['monthly'] as Map<String, dynamic>,
+      )
+      ..seasonal = RecapAvailability.fromJson(
+        json['seasonal'] as Map<String, dynamic>,
+      )
+      ..yearly = RecapAvailability.fromJson(
+        json['yearly'] as Map<String, dynamic>,
+      );
+
+Map<String, dynamic> _$UserRecapsToJson(UserRecaps instance) =>
+    <String, dynamic>{
+      'weekly': instance.weekly,
+      'monthly': instance.monthly,
+      'seasonal': instance.seasonal,
+      'yearly': instance.yearly,
+    };
